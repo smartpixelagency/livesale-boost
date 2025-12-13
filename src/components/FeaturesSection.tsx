@@ -15,7 +15,7 @@ const features = [
     icon: ShoppingCart,
     title: "Echtzeit-Reservierungen",
     description:
-      "Kunden reservieren Produkte live während deines Streams. Kein Checkout, kein Warten – einfach reservieren und später bezahlen.",
+      "Kunden reservieren Produkte live während deines Streams. Über den integrierten Shopify-Checkout wird später bezahlt.",
     color: "text-primary",
   },
   {
@@ -27,9 +27,9 @@ const features = [
   },
   {
     icon: RefreshCw,
-    title: "Automatische Bestandsführung",
+    title: "Intelligente Bestandsreservierung",
     description:
-      "Der Lagerbestand wird in Echtzeit aktualisiert. Keine Überverkäufe, auch bei hohem Andrang im Livestream.",
+      "Produkte werden bei Reservierung automatisch gesperrt. Zahlt ein Kunde nicht, wird der Bestand wieder freigegeben.",
     color: "text-emerald-500",
   },
   {
@@ -48,16 +48,16 @@ const features = [
   },
   {
     icon: BarChart3,
-    title: "Gesammelte Bestellungen",
+    title: "Sonderpreise im Livestream",
     description:
-      "Alle Reservierungen eines Kunden werden gebündelt. Du entscheidest, wann die Rechnung rausgeht.",
+      "Vergib individuelle Preise während des Streams. Flexibel und ohne Einschränkungen – perfekt für Live-Aktionen.",
     color: "text-sky-500",
   },
   {
     icon: Zap,
-    title: "Nahtlose Shop-Integration",
+    title: "Nahtlose Integration",
     description:
-      "LiveDealz verbindet sich direkt mit deinem Shopify-Shop. Produkte und Bestellungen werden automatisch synchronisiert.",
+      "Dein bestehender Shop läuft weiter wie gewohnt. Verkaufe gleichzeitig im Onlineshop und im Livestream – alles synchron.",
     color: "text-rose-500",
   },
   {

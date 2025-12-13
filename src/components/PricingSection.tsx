@@ -11,7 +11,7 @@ const plans = [
       "Live-Verkauf in Echtzeit",
       "Unbegrenzte Produkte",
       "Automatische Bestandsführung",
-      "Shopify-Anbindung",
+      "Shopify-Integration",
       "50 Bestellungen pro Monat",
       "Individuelle Kundennummern",
       "Ticket-Support",
@@ -28,9 +28,9 @@ const plans = [
     features: [
       "Alle Funktionen des Starter-Pakets",
       "Unbegrenzte Bestellungen",
+      "Sonderpreise im Livestream",
       "Automatische Zahlungserinnerungen",
       "Nichtzahler-Sperre",
-      "Fraud Detection",
       "Performance Dashboards",
       "Direkter Chat-Support",
     ],
@@ -38,39 +38,20 @@ const plans = [
     popular: true,
     discount: "50% Pionier-Rabatt",
   },
-  {
-    name: "Enterprise",
-    price: "1.999",
-    description: "Die maßgeschneiderte Lösung für große Unternehmen",
-    features: [
-      "Alle Funktionen des Pro-Pakets",
-      "Priorisierte Updates",
-      "Exklusiver Zugang zu neuen Funktionen",
-      "Platin-Support",
-      "Individuelle Beratung durch Experten",
-      "Individuelle Schnittstellenanbindung",
-      "Dedizierter Account Manager",
-    ],
-    cta: "Kontakt aufnehmen",
-    popular: false,
-    discount: null,
-  },
 ];
 
 const comparisonFeatures = [
-  { name: "Echtzeit-Reservierungen", starter: true, pro: true, enterprise: true },
-  { name: "Unbegrenzte Produkte", starter: true, pro: true, enterprise: true },
-  { name: "Individuelle Kundennummern", starter: true, pro: true, enterprise: true },
-  { name: "Shopify-Integration", starter: true, pro: true, enterprise: true },
-  { name: "Unbegrenzte Bestellungen", starter: false, pro: true, enterprise: true },
-  { name: "Automatische Zahlungserinnerungen", starter: false, pro: true, enterprise: true },
-  { name: "Nichtzahler-Sperre", starter: false, pro: true, enterprise: true },
-  { name: "Fraud Detection", starter: false, pro: true, enterprise: true },
-  { name: "Performance Dashboards", starter: false, pro: true, enterprise: true },
-  { name: "Direkter Chat-Support", starter: false, pro: true, enterprise: true },
-  { name: "Priorisierter Support", starter: false, pro: false, enterprise: true },
-  { name: "Dedizierter Account Manager", starter: false, pro: false, enterprise: true },
-  { name: "Individuelle Schnittstellen", starter: false, pro: false, enterprise: true },
+  { name: "Echtzeit-Reservierungen", starter: true, pro: true },
+  { name: "Unbegrenzte Produkte", starter: true, pro: true },
+  { name: "Individuelle Kundennummern", starter: true, pro: true },
+  { name: "Shopify-Integration", starter: true, pro: true },
+  { name: "Integrierter Shopify-Checkout", starter: true, pro: true },
+  { name: "Unbegrenzte Bestellungen", starter: false, pro: true },
+  { name: "Sonderpreise im Livestream", starter: false, pro: true },
+  { name: "Automatische Zahlungserinnerungen", starter: false, pro: true },
+  { name: "Nichtzahler-Sperre", starter: false, pro: true },
+  { name: "Performance Dashboards", starter: false, pro: true },
+  { name: "Direkter Chat-Support", starter: false, pro: true },
 ];
 
 export const PricingSection = () => {
@@ -120,7 +101,7 @@ export const PricingSection = () => {
         </motion.div>
 
         {/* Pricing Cards */}
-        <div className="grid md:grid-cols-3 gap-6 md:gap-8 mb-16">
+        <div className="grid md:grid-cols-2 gap-6 md:gap-8 max-w-4xl mx-auto mb-16">
           {plans.map((plan, index) => (
             <motion.div
               key={plan.name}
@@ -204,14 +185,13 @@ export const PricingSection = () => {
           viewport={{ once: true }}
         >
           <h3 className="text-2xl font-bold text-center mb-8">Funktionen im Vergleich</h3>
-          <div className="overflow-x-auto">
+          <div className="overflow-x-auto max-w-3xl mx-auto">
             <table className="w-full">
               <thead>
                 <tr className="border-b border-border">
                   <th className="text-left py-4 px-4 font-medium text-muted-foreground">Funktion</th>
                   <th className="text-center py-4 px-4 font-semibold">Starter</th>
                   <th className="text-center py-4 px-4 font-semibold text-primary">Pro</th>
-                  <th className="text-center py-4 px-4 font-semibold">Enterprise</th>
                 </tr>
               </thead>
               <tbody>
@@ -227,13 +207,6 @@ export const PricingSection = () => {
                     </td>
                     <td className="py-3 px-4 text-center">
                       {feature.pro ? (
-                        <Check className="h-5 w-5 text-primary mx-auto" />
-                      ) : (
-                        <span className="text-muted-foreground">—</span>
-                      )}
-                    </td>
-                    <td className="py-3 px-4 text-center">
-                      {feature.enterprise ? (
                         <Check className="h-5 w-5 text-primary mx-auto" />
                       ) : (
                         <span className="text-muted-foreground">—</span>
