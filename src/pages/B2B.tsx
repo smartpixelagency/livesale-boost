@@ -5,44 +5,45 @@ import { Button } from "@/components/ui/button";
 import { 
   Building2, 
   Clock, 
-  FileSpreadsheet, 
+  Shield, 
   Users, 
-  Zap, 
+  Smartphone, 
   ShieldCheck,
   ArrowRight,
-  CheckCircle2
+  CheckCircle2,
+  AlertTriangle
 } from "lucide-react";
 
 const benefits = [
   {
-    icon: FileSpreadsheet,
-    title: "Schluss mit Excel & E-Mail-Chaos",
-    description: "Keine komplizierten Bestellanfragen per Mail oder Excel mehr. Deine Händler sehen alle Produkte in Echtzeit und bestellen selbstständig.",
+    icon: Shield,
+    title: "Atomare Reservierungsgarantie",
+    description: "Ihre Ware wird im Moment der Bestellung verbindlich aus dem Bestand ausgebucht. Kein Überverkauf mehr. Händler sehen nur, was sie garantiert bekommen.",
   },
   {
     icon: Clock,
     title: "Echtzeit-Verfügbarkeit",
-    description: "Wer zuerst bestellt, bekommt die Ware. Deine Händler können live sehen, was verfügbar ist – keine Rückfragen mehr nötig.",
+    description: "Bestand wird im Moment der Bestellung verbindlich reserviert. Sofort sichtbar, was verfügbar ist – keine Rückfragen mehr nötig.",
   },
   {
     icon: Users,
     title: "Marktplatz-Erlebnis",
-    description: "Präsentiere dein Sortiment wie auf einem digitalen Markt. Händler wählen selbst aus, was und wie viel sie kaufen wollen.",
+    description: "Präsentieren Sie Ihr Sortiment wie auf einem digitalen Markt. Händler wählen selbst aus, was und wie viel sie kaufen wollen – wer zuerst kommt, mahlt zuerst.",
   },
   {
     icon: Building2,
     title: "Flexible Rechnungsstellung",
-    description: "Beliefere erst, stelle die Rechnung später. LiveDealz sammelt alle Bestellungen und du entscheidest, wann abgerechnet wird.",
-  },
-  {
-    icon: Zap,
-    title: "Nahtlose Integration",
-    description: "Nutze dein bestehendes Shopify-System. Produkte werden normal angelegt, Bestellungen wie gewohnt verarbeitet.",
+    description: "Beliefern Sie erst, stellen Sie die Rechnung später. LiveDealz sammelt alle Bestellungen und Sie entscheiden, wann abgerechnet wird.",
   },
   {
     icon: ShieldCheck,
-    title: "Volle Kontrolle",
-    description: "Behalte den Überblick über alle Bestellungen. Sonderpreise für Live-Sessions möglich – flexibel und transparent.",
+    title: "Zukunftssichere B2B-Plattform",
+    description: "Wir nutzen Shopify als Backbone, da es die größte Schnittstellenabdeckung zu allen ERP-Systemen bietet. Nutzen Sie die bewährte und mobile Technologie für Ihren Großhandel.",
+  },
+  {
+    icon: Smartphone,
+    title: "Volle Flexibilität",
+    description: "Bestellungen können jederzeit und von überall aufgegeben werden. Durch die Shopify-Basis erhalten Ihre Händler ein natives, mobiles Kauferlebnis – ob am PC, Tablet oder Handy.",
   },
 ];
 
@@ -71,21 +72,24 @@ const B2B = () => {
             <span className="inline-block text-sm font-semibold text-primary uppercase tracking-wide mb-4 px-4 py-1.5 bg-primary/10 rounded-full">
               LiveDealz für B2B
             </span>
+            
+            {/* Pain Point Above H1 */}
+            <p className="text-muted-foreground text-lg mb-6 max-w-2xl mx-auto">
+              Schluss mit Überverkaufs-Risiko und manueller Bestell-Bremse. <span className="text-primary font-semibold">Geld liebt Speed.</span>
+            </p>
+            
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
-              Revolutioniere deinen{" "}
-              <span className="text-gradient">Großhandel</span>
+              Endlich Großhandel ohne Risiko:{" "}
+              <span className="text-gradient">Gesicherte Ware durch Echtzeit-Reservierung</span>
             </h1>
             <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-              Gib deinen Händlern ein digitales Einkaufserlebnis. Echtzeit-Bestellungen, 
-              automatische Bestandsführung und flexible Rechnungsstellung – alles in einem System.
+              Garantierte Bestandsreservierung im Moment der Bestellung. 
+              Keine Überverkäufe, keine Rückfragen, keine verlorenen Aufträge.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button variant="hero" size="lg">
-                Demo anfordern
+                Demo buchen: Warensicherheit in Echtzeit erleben
                 <ArrowRight className="ml-2 h-5 w-5" />
-              </Button>
-              <Button variant="outline" size="lg">
-                Kontakt aufnehmen
               </Button>
             </div>
           </motion.div>
@@ -100,16 +104,21 @@ const B2B = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
             viewport={{ once: true }}
-            className="bg-card border border-border rounded-2xl p-8 md:p-12 max-w-4xl mx-auto text-center"
+            className="bg-card border border-destructive/30 rounded-2xl p-8 md:p-12 max-w-4xl mx-auto"
           >
-            <h2 className="text-2xl md:text-3xl font-bold mb-6">
-              Kennst du das Problem?
-            </h2>
-            <p className="text-muted-foreground leading-relaxed text-lg">
-              Deine Händler bestellen per E-Mail oder Excel. Ständige Rückfragen zu Verfügbarkeiten, 
-              manuelle Bestandsprüfungen und chaotische Kommunikation kosten Zeit und Nerven. 
-              Am Ende weißt du nicht mehr, wer was bestellt hat – und wer die Ware wirklich bekommt, 
-              wenn mehrere Händler gleichzeitig zuschlagen wollen.
+            <div className="flex items-center gap-3 mb-6 justify-center">
+              <AlertTriangle className="h-8 w-8 text-destructive" />
+              <h2 className="text-2xl md:text-3xl font-bold">
+                Das Risiko kennen Sie
+              </h2>
+            </div>
+            <p className="text-muted-foreground leading-relaxed text-lg text-center">
+              Ihre Händler bestellen per E-Mail oder Excel. Ständige Rückfragen zu Verfügbarkeiten, 
+              manuelle Bestandsprüfungen und chaotische Kommunikation kosten Zeit und Geld. 
+              <span className="text-foreground font-semibold block mt-4">
+                Und das Schlimmste: Wenn mehrere Händler gleichzeitig zuschlagen, verkaufen Sie über – 
+                und müssen stornieren. Verlorenes Vertrauen, verlorener Umsatz.
+              </span>
             </p>
           </motion.div>
         </div>
@@ -129,11 +138,11 @@ const B2B = () => {
               Die Lösung
             </span>
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              LiveDealz macht B2B <span className="text-primary">einfach</span>
+              Garantierte Warensicherheit mit <span className="text-primary">LiveDealz</span>
             </h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              Deine Händler sehen alle Produkte wie auf einem digitalen Marktplatz und können 
-              selbstständig bestellen – wer zuerst kommt, mahlt zuerst.
+              Atomare Reservierungen im Moment der Bestellung. Ihre Händler sehen nur, 
+              was verfügbar ist – und bekommen garantiert, was sie bestellen.
             </p>
           </motion.div>
 
@@ -160,8 +169,33 @@ const B2B = () => {
         </div>
       </section>
 
-      {/* Use Cases */}
+      {/* Speed vs. Cost Section */}
       <section className="py-16 md:py-24">
+        <div className="container">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            viewport={{ once: true }}
+            className="bg-gradient-to-br from-primary/10 via-primary/5 to-transparent border border-primary/20 rounded-2xl p-8 md:p-12 max-w-4xl mx-auto text-center"
+          >
+            <h2 className="text-2xl md:text-3xl font-bold mb-6">
+              Der Speed-Gewinn zählt
+            </h2>
+            <p className="text-muted-foreground text-lg leading-relaxed mb-6">
+              Ja, Shopify kostet ca. 30–40 €/Monat. Aber wie viel Geld verlieren Sie 
+              pro Monat durch manuelles Chaos, ineffiziente Rückfragen und stornierte Überverkäufe?
+            </p>
+            <p className="text-foreground font-semibold text-xl">
+              LiveDealz nutzt Shopify, um Ihnen den Speed und die Sicherheit zu geben, 
+              die Ihr Großhandel braucht.
+            </p>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Use Cases */}
+      <section className="py-16 md:py-24 bg-muted/30">
         <div className="container">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <motion.div
@@ -174,11 +208,11 @@ const B2B = () => {
                 Anwendungsfälle
               </span>
               <h2 className="text-3xl md:text-4xl font-bold mb-6">
-                Perfekt für deinen <span className="text-primary">B2B-Vertrieb</span>
+                Perfekt für Ihren <span className="text-primary">B2B-Vertrieb</span>
               </h2>
               <p className="text-muted-foreground mb-8">
                 Egal ob Großhandel, Hersteller oder Importeur – LiveDealz passt sich 
-                deinem Geschäftsmodell an und macht B2B-Bestellungen so einfach wie nie.
+                Ihrem Geschäftsmodell an und macht B2B-Bestellungen sicher und effizient.
               </p>
               <ul className="space-y-4">
                 {useCases.map((useCase, index) => (
@@ -202,7 +236,7 @@ const B2B = () => {
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5 }}
               viewport={{ once: true }}
-              className="bg-gradient-to-br from-primary/10 via-primary/5 to-transparent border border-primary/20 rounded-2xl p-8 md:p-12"
+              className="bg-card border border-border rounded-2xl p-8 md:p-12"
             >
               <h3 className="text-2xl font-bold mb-4">So funktioniert's</h3>
               <ol className="space-y-6">
@@ -210,28 +244,28 @@ const B2B = () => {
                   <span className="flex items-center justify-center w-8 h-8 rounded-full bg-primary text-primary-foreground text-sm font-bold shrink-0">1</span>
                   <div>
                     <p className="font-semibold">Produkte präsentieren</p>
-                    <p className="text-muted-foreground text-sm">Zeige dein Sortiment live oder auf einer permanenten Bestellseite.</p>
+                    <p className="text-muted-foreground text-sm">Zeigen Sie Ihr Sortiment live oder auf einer permanenten Bestellseite.</p>
                   </div>
                 </li>
                 <li className="flex gap-4">
                   <span className="flex items-center justify-center w-8 h-8 rounded-full bg-primary text-primary-foreground text-sm font-bold shrink-0">2</span>
                   <div>
                     <p className="font-semibold">Händler bestellen selbst</p>
-                    <p className="text-muted-foreground text-sm">Deine Händler wählen Produkte und Mengen – in Echtzeit und selbstständig.</p>
+                    <p className="text-muted-foreground text-sm">Ihre Händler wählen Produkte und Mengen – in Echtzeit und selbstständig.</p>
                   </div>
                 </li>
                 <li className="flex gap-4">
                   <span className="flex items-center justify-center w-8 h-8 rounded-full bg-primary text-primary-foreground text-sm font-bold shrink-0">3</span>
                   <div>
-                    <p className="font-semibold">Bestand wird reserviert</p>
-                    <p className="text-muted-foreground text-sm">Der Bestand ist sofort blockiert – keine Doppelverkäufe möglich.</p>
+                    <p className="font-semibold">Bestand wird garantiert reserviert</p>
+                    <p className="text-muted-foreground text-sm">Im Moment der Bestellung wird die Ware verbindlich ausgebucht – keine Doppelverkäufe möglich.</p>
                   </div>
                 </li>
                 <li className="flex gap-4">
                   <span className="flex items-center justify-center w-8 h-8 rounded-full bg-primary text-primary-foreground text-sm font-bold shrink-0">4</span>
                   <div>
                     <p className="font-semibold">Rechnung nach Lieferung</p>
-                    <p className="text-muted-foreground text-sm">Du entscheidest, wann die Bestellung abgerechnet wird.</p>
+                    <p className="text-muted-foreground text-sm">Sie entscheiden, wann die Bestellung abgerechnet wird.</p>
                   </div>
                 </li>
               </ol>
@@ -251,15 +285,15 @@ const B2B = () => {
             className="max-w-3xl mx-auto text-center"
           >
             <h2 className="text-3xl md:text-4xl font-bold mb-6">
-              Bereit für effizienteren B2B-Vertrieb?
+              Bereit für risikofreien B2B-Vertrieb?
             </h2>
             <p className="text-muted-foreground text-lg mb-8">
-              Vereinbare jetzt eine kostenlose Demo und erfahre, wie LiveDealz 
-              deinen Großhandel revolutionieren kann.
+              Erleben Sie, wie LiveDealz Überverkäufe eliminiert und Ihren 
+              Großhandel mit garantierter Echtzeit-Reservierung revolutioniert.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button variant="hero" size="lg">
-                Kostenlose Demo buchen
+                Demo buchen: Warensicherheit jetzt in Echtzeit erleben
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
             </div>
