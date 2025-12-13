@@ -1,70 +1,70 @@
 import { motion } from "framer-motion";
 import { 
   ShoppingCart, 
-  Scan, 
+  Users, 
   Zap, 
-  Database, 
+  BarChart3, 
   ShieldCheck, 
   Bell,
   RefreshCw,
-  Lock
+  Smartphone
 } from "lucide-react";
 
 const features = [
   {
     icon: ShoppingCart,
-    title: "Nahtlose Shopify-Integration",
+    title: "Echtzeit-Reservierungen",
     description:
-      "Arbeite direkt mit Shopify Bestellentwürfen – kein separater Checkout nötig. Produkte werden automatisch mit deinem Shopify-Katalog synchronisiert.",
+      "Kunden reservieren Produkte live während deines Streams. Kein Checkout, kein Warten – einfach reservieren und später bezahlen.",
     color: "text-primary",
   },
   {
-    icon: Scan,
-    title: "Interaktive Barcode-Reservierung",
+    icon: Users,
+    title: "Individuelle Kundennummern",
     description:
-      "Scanne Artikel per Barcode und ordne sie direkt der Kundennummer zu. Perfekt für schnelle, interaktive Livestreams ohne Verzögerung.",
+      "Jeder Kunde erhält automatisch eine eigene Nummer. Reservierungen werden eindeutig zugeordnet – ohne Verwechslungen.",
     color: "text-amber-500",
   },
   {
     icon: RefreshCw,
-    title: "Gesammelte Bestellentwürfe",
+    title: "Automatische Bestandsführung",
     description:
-      "Alle Reservierungen werden pro Kunde gesammelt. Du entscheidest, wann die Entwürfe abgeschickt werden – maximale Flexibilität für deinen Workflow.",
+      "Der Lagerbestand wird in Echtzeit aktualisiert. Keine Überverkäufe, auch bei hohem Andrang im Livestream.",
     color: "text-emerald-500",
   },
   {
-    icon: Database,
-    title: "AWS-Infrastruktur ohne Überverkäufe",
+    icon: Smartphone,
+    title: "Einfache Bedienung",
     description:
-      "Mit SQS, CloudFront und DynamoDB werden alle Reservierungen in Echtzeit getaktet. Keine Überverkäufe, auch bei hohem Andrang.",
+      "Scanne Produkte per Barcode und ordne sie der Kundennummer zu. Reservierung in Sekunden – direkt vom Smartphone.",
     color: "text-primary",
   },
   {
-    icon: Lock,
-    title: "DSGVO-konform ohne Personendaten",
+    icon: Bell,
+    title: "Automatische Erinnerungen",
     description:
-      "Wir speichern keine personenbezogenen Daten – nur Shopify Customer IDs und anonymisierte Kundennummern pro Shop.",
+      "Kunden werden an offene Bestellungen erinnert. Bei Bedarf werden Nichtzahler automatisch für künftige Reservierungen gesperrt.",
     color: "text-violet-500",
   },
   {
-    icon: Bell,
-    title: "Automatische Zahlungserinnerungen",
+    icon: BarChart3,
+    title: "Gesammelte Bestellungen",
     description:
-      "Kunden werden automatisch an offene Bestellentwürfe erinnert. Bei Bedarf werden Nichtzahler für künftige Reservierungen gesperrt.",
+      "Alle Reservierungen eines Kunden werden gebündelt. Du entscheidest, wann die Rechnung rausgeht.",
     color: "text-sky-500",
   },
   {
     icon: Zap,
-    title: "Flexibel einbettbar",
+    title: "Nahtlose Shop-Integration",
     description:
-      "Nutze LiveDealz auf einer separaten Stream-Seite oder bette es direkt in deinen Shop ein – ganz wie es zu dir passt.",
+      "LiveDealz verbindet sich direkt mit deinem Shopify-Shop. Produkte und Bestellungen werden automatisch synchronisiert.",
     color: "text-rose-500",
   },
   {
     icon: ShieldCheck,
-    title: "Sichere Server in Deutschland",
+    title: "DSGVO-konform & sicher",
     description:
-      "Unsere Infrastruktur skaliert automatisch und garantiert schnelle Ladezeiten. Höchste Sicherheit für dein Business.",
+      "Deine Daten sind bei uns sicher. Server in Deutschland, höchste Sicherheitsstandards und vollständige DSGVO-Konformität.",
     color: "text-teal-500",
   },
 ];
@@ -81,14 +81,14 @@ export const FeaturesSection = () => {
           className="text-center mb-12 md:mb-16"
         >
           <span className="text-sm font-semibold text-primary uppercase tracking-wide mb-3 block">
-            Warum LiveDealz?
+            Funktionen
           </span>
           <h2 className="text-3xl md:text-4xl font-bold">
-            Die einzige Lösung mit{" "}
-            <span className="text-primary">echter Shopify-Integration</span>
+            Alles was du für erfolgreichen{" "}
+            <span className="text-primary">Live-Verkauf</span> brauchst
           </h2>
           <p className="text-muted-foreground mt-4 max-w-2xl mx-auto">
-            Keine Workarounds, keine Plugins – LiveDealz arbeitet direkt mit Shopify Bestellentwürfen für ein nahtloses Erlebnis.
+            Von der Reservierung bis zur Zahlung – LiveDealz automatisiert deinen gesamten Verkaufsprozess.
           </p>
         </motion.div>
 
