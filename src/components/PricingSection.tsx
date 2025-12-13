@@ -1,39 +1,42 @@
 import { motion } from "framer-motion";
-import { Check } from "lucide-react";
+import { Check, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const plans = [
   {
     name: "Starter",
-    price: "299",
+    price: "99",
     description: "Der Einstieg in erfolgreiches Live-Shopping",
     features: [
       "Live-Verkauf in Echtzeit",
-      "Produktverwaltung",
-      "Lagerbestandsmanagement",
+      "Unbegrenzte Produkte",
+      "Automatische Bestandsführung",
       "Shopify-Anbindung",
-      "500 Bestellungen pro Monat",
-      "100 Produkte pro Monat",
-      "Standard-Support",
+      "50 Bestellungen pro Monat",
+      "Individuelle Kundennummern",
+      "Ticket-Support",
     ],
     cta: "Jetzt starten",
     popular: false,
+    discount: null,
   },
   {
     name: "Pro",
     price: "899",
+    discountedPrice: "449",
     description: "Die umfassende Lösung für wachsende Shops",
     features: [
       "Alle Funktionen des Starter-Pakets",
-      "Unbegrenzte Artikelanzahl",
       "Unbegrenzte Bestellungen",
-      "Exklusive Premium-Funktionen",
+      "Automatische Zahlungserinnerungen",
+      "Nichtzahler-Sperre",
       "Fraud Detection",
       "Performance Dashboards",
-      "Premium Support",
+      "Direkter Chat-Support",
     ],
-    cta: "Kostenlose Beratung",
+    cta: "Jetzt Pionier werden",
     popular: true,
+    discount: "50% Pionier-Rabatt",
   },
   {
     name: "Enterprise",
@@ -46,24 +49,27 @@ const plans = [
       "Platin-Support",
       "Individuelle Beratung durch Experten",
       "Individuelle Schnittstellenanbindung",
-      "Dedizierte Live-Verkäufer Support",
+      "Dedizierter Account Manager",
     ],
     cta: "Kontakt aufnehmen",
     popular: false,
+    discount: null,
   },
 ];
 
 const comparisonFeatures = [
   { name: "Echtzeit-Reservierungen", starter: true, pro: true, enterprise: true },
-  { name: "Produkt- und Bestandsverwaltung", starter: true, pro: true, enterprise: true },
-  { name: "Unlimitierte Reservierungen", starter: false, pro: true, enterprise: true },
-  { name: "Unlimitierte Artikel", starter: false, pro: true, enterprise: true },
-  { name: "Automated Rewards", starter: false, pro: true, enterprise: true },
+  { name: "Unbegrenzte Produkte", starter: true, pro: true, enterprise: true },
+  { name: "Individuelle Kundennummern", starter: true, pro: true, enterprise: true },
+  { name: "Shopify-Integration", starter: true, pro: true, enterprise: true },
+  { name: "Unbegrenzte Bestellungen", starter: false, pro: true, enterprise: true },
+  { name: "Automatische Zahlungserinnerungen", starter: false, pro: true, enterprise: true },
+  { name: "Nichtzahler-Sperre", starter: false, pro: true, enterprise: true },
   { name: "Fraud Detection", starter: false, pro: true, enterprise: true },
-  { name: "Multi-Channel Support", starter: false, pro: true, enterprise: true },
   { name: "Performance Dashboards", starter: false, pro: true, enterprise: true },
+  { name: "Direkter Chat-Support", starter: false, pro: true, enterprise: true },
   { name: "Priorisierter Support", starter: false, pro: false, enterprise: true },
-  { name: "Dedizierte Live-Verkäufer Support", starter: false, pro: false, enterprise: true },
+  { name: "Dedizierter Account Manager", starter: false, pro: false, enterprise: true },
   { name: "Individuelle Schnittstellen", starter: false, pro: false, enterprise: true },
 ];
 
@@ -71,6 +77,30 @@ export const PricingSection = () => {
   return (
     <section id="pricing" className="py-16 md:py-24 bg-muted/30">
       <div className="container">
+        {/* Pioneer Banner */}
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          viewport={{ once: true }}
+          className="bg-gradient-to-r from-primary/10 via-primary/5 to-primary/10 border border-primary/20 rounded-2xl p-6 md:p-8 text-center mb-12"
+        >
+          <div className="flex items-center justify-center gap-2 mb-2">
+            <Sparkles className="h-5 w-5 text-primary" />
+            <span className="text-sm font-semibold text-primary uppercase tracking-wide">
+              Exklusives Angebot
+            </span>
+            <Sparkles className="h-5 w-5 text-primary" />
+          </div>
+          <h3 className="text-xl md:text-2xl font-bold mb-2">
+            Werde einer unserer Pionier-Kunden!
+          </h3>
+          <p className="text-muted-foreground max-w-xl mx-auto">
+            Wir sind neu am Markt und suchen engagierte Partner. Sichere dir jetzt{" "}
+            <span className="text-primary font-semibold">50% Rabatt</span> auf das Pro-Paket – nur für kurze Zeit!
+          </p>
+        </motion.div>
+
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -82,10 +112,10 @@ export const PricingSection = () => {
             Preise
           </span>
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Unsere Pläne für Ihr Wachstum
+            Transparente Preise für jedes Business
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            Wählen Sie den passenden Plan für Ihr Live-Shopping-Business.
+            Wähle den passenden Plan für dein Live-Shopping-Business. Keine versteckten Kosten.
           </p>
         </motion.div>
 
@@ -104,10 +134,10 @@ export const PricingSection = () => {
                   : "border-border"
               }`}
             >
-              {plan.popular && (
+              {plan.discount && (
                 <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-                  <span className="bg-primary text-primary-foreground text-xs font-semibold px-3 py-1 rounded-full">
-                    Am beliebtesten
+                  <span className="bg-primary text-primary-foreground text-xs font-semibold px-3 py-1 rounded-full whitespace-nowrap">
+                    {plan.discount}
                   </span>
                 </div>
               )}
@@ -116,8 +146,18 @@ export const PricingSection = () => {
                 <p className="text-muted-foreground text-sm">{plan.description}</p>
               </div>
               <div className="mb-6">
-                <span className="text-4xl font-bold">€{plan.price}</span>
-                <span className="text-muted-foreground"> / pro Monat</span>
+                {plan.discountedPrice ? (
+                  <div className="flex items-baseline gap-2">
+                    <span className="text-4xl font-bold">€{plan.discountedPrice}</span>
+                    <span className="text-xl text-muted-foreground line-through">€{plan.price}</span>
+                    <span className="text-muted-foreground">/ Monat</span>
+                  </div>
+                ) : (
+                  <>
+                    <span className="text-4xl font-bold">€{plan.price}</span>
+                    <span className="text-muted-foreground"> / Monat</span>
+                  </>
+                )}
               </div>
               <Button
                 variant={plan.popular ? "hero" : "outline"}
