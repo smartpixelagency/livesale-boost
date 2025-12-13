@@ -1,10 +1,11 @@
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import heroImage from "@/assets/hero-livestream.jpg";
+import { ArrowRight, Play } from "lucide-react";
 
 export const HeroSection = () => {
   return (
-    <section className="pt-24 md:pt-32 pb-16 md:pb-24 bg-gradient-hero">
+    <section className="pt-24 md:pt-32 pb-16 md:pb-24 bg-gradient-hero overflow-hidden">
       <div className="container">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Text Content */}
@@ -14,31 +15,73 @@ export const HeroSection = () => {
             transition={{ duration: 0.6 }}
             className="order-2 lg:order-1"
           >
-            <div className="flex items-center gap-2 mb-4">
-              <div className="w-1 h-6 bg-primary rounded-full" />
-              <span className="text-sm font-semibold text-primary uppercase tracking-wide">
-                Reservieren. Sammeln. Bezahlen.
+            {/* Badge */}
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.4, delay: 0.1 }}
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent border border-primary/20 mb-6"
+            >
+              <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
+              <span className="text-sm font-medium text-accent-foreground">
+                Community Commerce Engine
               </span>
-            </div>
+            </motion.div>
             
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
-              Maximale Verkäufe.{" "}
-              <span className="block">Minimaler Aufwand.</span>
+            {/* Main Headline */}
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.1] mb-4">
+              <span className="text-gradient">Reservieren.</span>{" "}
+              <span className="text-gradient">Sammeln.</span>{" "}
+              <span className="text-gradient">Bezahlen.</span>
             </h1>
             
-            <p className="text-lg text-muted-foreground mb-8 max-w-xl">
-              Biete deinen Kunden eine einzigartige Live-Shopping-Erfahrung. 
-              Produkte in Echtzeit reservieren, sammeln und mit einem Klick 
-              bezahlen – vollständig in dein System integriert.
+            <p className="text-2xl md:text-3xl font-semibold text-foreground mb-4">
+              Maximale Verkäufe. Minimaler Aufwand.
+            </p>
+            
+            <p className="text-lg text-muted-foreground mb-4 max-w-xl leading-relaxed">
+              Egal ob Live-Stream, WhatsApp-Story oder Sammelaktion – 
+              <span className="font-semibold text-foreground"> ein System, ein Bestand, kein Chaos.</span>
+            </p>
+            
+            <p className="text-base text-muted-foreground mb-8 max-w-xl">
+              LiveDealz verbindet Live-Shopping, Stories und Sammelaktionen. 
+              Kunden reservieren Produkte während des Streams oder der Stories, 
+              sammeln über mehrere Tage und bezahlen später mit einem Klick im nativen Shopify-Checkout.
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4">
-              <Button variant="hero" size="xl">
-                Jetzt Demo anfragen
+              <Button variant="hero" size="xl" className="group">
+                Jetzt Demo buchen
+                <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
               </Button>
-              <Button variant="heroOutline" size="xl">
-                Mehr erfahren
+              <Button variant="heroOutline" size="xl" className="group">
+                <Play className="mr-2 h-5 w-5" />
+                Funktionsübersicht ansehen
               </Button>
+            </div>
+            
+            {/* Trust Indicators */}
+            <div className="flex items-center gap-6 mt-8 pt-6 border-t border-border">
+              <div className="flex items-center gap-2">
+                <div className="flex -space-x-2">
+                  {[1,2,3,4].map((i) => (
+                    <div key={i} className="w-8 h-8 rounded-full bg-gradient-primary border-2 border-background" />
+                  ))}
+                </div>
+                <span className="text-sm text-muted-foreground">100+ aktive Händler</span>
+              </div>
+              <div className="h-8 w-px bg-border" />
+              <div className="flex items-center gap-1">
+                <span className="text-sm font-semibold text-foreground">4.9</span>
+                <div className="flex">
+                  {[1,2,3,4,5].map((i) => (
+                    <svg key={i} className="w-4 h-4 text-primary fill-primary" viewBox="0 0 20 20">
+                      <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
+                    </svg>
+                  ))}
+                </div>
+              </div>
             </div>
           </motion.div>
 
@@ -50,12 +93,51 @@ export const HeroSection = () => {
             className="order-1 lg:order-2"
           >
             <div className="relative">
-              <div className="absolute inset-0 bg-gradient-primary opacity-10 rounded-2xl blur-3xl" />
-              <img
-                src={heroImage}
-                alt="Frau beim TikTok Live-Shopping mit LiveDealz"
-                className="relative rounded-2xl shadow-card-hover w-full object-cover aspect-[4/3]"
-              />
+              {/* Decorative Elements */}
+              <div className="absolute -top-4 -right-4 w-24 h-24 bg-primary/20 rounded-full blur-2xl" />
+              <div className="absolute -bottom-4 -left-4 w-32 h-32 bg-primary/10 rounded-full blur-3xl" />
+              
+              {/* Main Image */}
+              <div className="relative rounded-2xl overflow-hidden shadow-card-hover">
+                <img
+                  src={heroImage}
+                  alt="Händlerin beim Live-Shopping mit LiveDealz"
+                  className="w-full object-cover aspect-[4/3]"
+                />
+                
+                {/* Floating Cards */}
+                <motion.div 
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.6, duration: 0.4 }}
+                  className="absolute bottom-4 left-4 bg-card/95 backdrop-blur-sm rounded-xl p-3 shadow-lg border border-border"
+                >
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-full bg-green-500/20 flex items-center justify-center">
+                      <svg className="w-5 h-5 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      </svg>
+                    </div>
+                    <div>
+                      <p className="text-xs text-muted-foreground">Reservierung bestätigt</p>
+                      <p className="text-sm font-semibold">Bestand gesichert ✓</p>
+                    </div>
+                  </div>
+                </motion.div>
+                
+                <motion.div 
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.8, duration: 0.4 }}
+                  className="absolute top-4 right-4 bg-card/95 backdrop-blur-sm rounded-xl p-3 shadow-lg border border-border"
+                >
+                  <div className="flex items-center gap-2">
+                    <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
+                    <span className="text-sm font-medium">LIVE</span>
+                    <span className="text-xs text-muted-foreground">• 1.247 Zuschauer</span>
+                  </div>
+                </motion.div>
+              </div>
             </div>
           </motion.div>
         </div>

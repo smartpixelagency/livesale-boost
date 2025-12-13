@@ -1,11 +1,13 @@
 import { Navbar } from "@/components/Navbar";
 import { HeroSection } from "@/components/HeroSection";
-import { StatsSection } from "@/components/StatsSection";
+import { ProblemSection } from "@/components/ProblemSection";
+import { SolutionSection } from "@/components/SolutionSection";
 import { FeaturesSection } from "@/components/FeaturesSection";
-import { HowItWorksSection } from "@/components/HowItWorksSection";
+import { UseCasesSection } from "@/components/UseCasesSection";
 import { OriginStorySection } from "@/components/OriginStorySection";
 import { PricingSection } from "@/components/PricingSection";
 import { FAQSection } from "@/components/FAQSection";
+import { TechTrustSection } from "@/components/TechTrustSection";
 import { CTASection } from "@/components/CTASection";
 import { Footer } from "@/components/Footer";
 
@@ -15,12 +17,14 @@ const Index = () => {
       <Navbar />
       <main>
         <HeroSection />
-        <StatsSection />
+        <ProblemSection />
+        <SolutionSection />
         <FeaturesSection />
-        <HowItWorksSection />
+        <UseCasesSection />
         <OriginStorySection />
         <PricingSection />
         <FAQSection />
+        <TechTrustSection />
         <CTASection />
       </main>
       <Footer />
