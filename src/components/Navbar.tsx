@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import Logo from "@/assets/logo.svg";
 
 const navLinks = [
   { label: "Funktionen", href: "#features", isRoute: false },
@@ -26,11 +27,8 @@ export const Navbar = () => {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border/50">
       <nav className="container flex items-center justify-between h-16 md:h-20">
-        <Link to="/" className="flex items-center gap-2">
-          <span className="text-xl md:text-2xl font-bold">
-            Live<span className="text-gradient">Dealz</span>
-            <span className="text-primary">+</span>
-          </span>
+        <Link to="/" className="flex items-center">
+          <img src={Logo} alt="LiveDealz" className="h-8 md:h-10 w-auto" />
         </Link>
 
         {/* Desktop Navigation */}
