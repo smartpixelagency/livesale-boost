@@ -1,4 +1,5 @@
 import { Twitter, Instagram, Youtube, Linkedin } from "lucide-react";
+import LogoWhite from "@/assets/logo-white.png";
 
 const footerLinks = {
   produkt: [
@@ -33,9 +34,7 @@ export const Footer = () => {
           {/* Brand */}
           <div className="lg:col-span-2">
             <a href="#" className="inline-block mb-4">
-              <span className="text-2xl font-bold">
-                Live<span className="text-primary">Dealz</span>
-              </span>
+              <img src={LogoWhite} alt="LiveDealz" className="h-8 w-auto" />
             </a>
             <p className="text-background/70 text-sm leading-relaxed mb-4 max-w-sm">
               Die Plattform für Live-, Story- und Sammelverkäufe ohne Chaos.

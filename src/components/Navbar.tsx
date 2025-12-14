@@ -3,7 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import Logo from "@/assets/logo.svg";
+import Logo from "@/assets/logo.png";
 
 const navLinks = [
   { label: "Funktionen", href: "#features", isRoute: false },
