@@ -1,23 +1,7 @@
 import { Twitter, Instagram, Youtube, Linkedin } from "lucide-react";
+import { Link } from "react-router-dom";
 import LogoWhite from "@/assets/logo-white.png";
-
-const footerLinks = {
-  produkt: [
-    { label: "Funktionen", href: "#features" },
-    { label: "Anwendungsfälle", href: "#use-cases" },
-    { label: "Preise", href: "#pricing" },
-    { label: "FAQ", href: "#faq" },
-  ],
-  ressourcen: [
-    { label: "Demo buchen", href: "#" },
-    { label: "Kontakt", href: "#" },
-  ],
-  rechtliches: [
-    { label: "Impressum", href: "#" },
-    { label: "Datenschutz", href: "#" },
-    { label: "AGB", href: "#" },
-  ],
-};
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const socialLinks = [
   { icon: Instagram, href: "#", label: "Instagram" },
@@ -27,21 +11,40 @@ const socialLinks = [
 ];
 
 export const Footer = () => {
+  const { t } = useLanguage();
+
+  const footerLinks = {
+    produkt: [
+      { label: t("footer.features"), href: "#features" },
+      { label: t("footer.useCases"), href: "#use-cases" },
+      { label: t("footer.pricing"), href: "#pricing" },
+      { label: t("footer.faq"), href: "#faq" },
+    ],
+    ressourcen: [
+      { label: t("footer.bookDemo"), href: "#" },
+      { label: t("footer.contact"), href: "#" },
+    ],
+    rechtliches: [
+      { label: t("footer.imprint"), href: "/impressum", isRoute: true },
+      { label: t("footer.privacy"), href: "/datenschutz", isRoute: true },
+      { label: t("footer.terms"), href: "#" },
+    ],
+  };
+
   return (
     <footer id="contact" className="bg-foreground text-background py-16">
       <div className="container">
         <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-12 mb-12">
           {/* Brand */}
           <div className="lg:col-span-2">
-            <a href="#" className="inline-block mb-4">
+            <Link to="/" className="inline-block mb-4">
               <img src={LogoWhite} alt="LiveDealz" className="h-8 w-auto" />
-            </a>
+            </Link>
             <p className="text-background/70 text-sm leading-relaxed mb-4 max-w-sm">
-              Die Plattform für Live-, Story- und Sammelverkäufe ohne Chaos.
+              {t("footer.tagline")}
             </p>
             <p className="text-background/50 text-xs mb-6 max-w-sm">
-              Reservieren. Sammeln. Bezahlen. Ein System, ein Bestand – 
-              für TikTok, Instagram, WhatsApp und Community-Verkäufe.
+              {t("footer.description")}
             </p>
             <div className="flex gap-3">
               {socialLinks.map((social) => (
@@ -59,7 +62,7 @@ export const Footer = () => {
 
           {/* Links */}
           <div>
-            <h3 className="font-semibold mb-4">Produkt</h3>
+            <h3 className="font-semibold mb-4">{t("footer.product")}</h3>
             <ul className="space-y-3">
               {footerLinks.produkt.map((link) => (
                 <li key={link.label}>
@@ -75,7 +78,7 @@ export const Footer = () => {
           </div>
 
           <div>
-            <h3 className="font-semibold mb-4">Ressourcen</h3>
+            <h3 className="font-semibold mb-4">{t("footer.resources")}</h3>
             <ul className="space-y-3">
               {footerLinks.ressourcen.map((link) => (
                 <li key={link.label}>
@@ -91,16 +94,25 @@ export const Footer = () => {
           </div>
 
           <div>
-            <h3 className="font-semibold mb-4">Rechtliches</h3>
+            <h3 className="font-semibold mb-4">{t("footer.legal")}</h3>
             <ul className="space-y-3">
               {footerLinks.rechtliches.map((link) => (
                 <li key={link.label}>
-                  <a
-                    href={link.href}
-                    className="text-sm text-background/70 hover:text-background transition-colors"
-                  >
-                    {link.label}
-                  </a>
+                  {link.isRoute ? (
+                    <Link
+                      to={link.href}
+                      className="text-sm text-background/70 hover:text-background transition-colors"
+                    >
+                      {link.label}
+                    </Link>
+                  ) : (
+                    <a
+                      href={link.href}
+                      className="text-sm text-background/70 hover:text-background transition-colors"
+                    >
+                      {link.label}
+                    </a>
+                  )}
                 </li>
               ))}
             </ul>
@@ -111,11 +123,10 @@ export const Footer = () => {
         <div className="border-t border-background/10 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-sm text-background/60">
-              © {new Date().getFullYear()} LiveDealz. Alle Rechte vorbehalten.
+              © {new Date().getFullYear()} LiveDealz. {t("footer.copyright")}
             </p>
             <p className="text-xs text-background/40 text-center md:text-right max-w-md">
-              Hinweis: Die Angebote und Inhalte auf dieser Webseite richten sich 
-              ausschließlich an Unternehmer und gewerbliche Kunden.
+              {t("footer.businessOnly")}
             </p>
           </div>
         </div>
