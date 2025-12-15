@@ -17,14 +17,52 @@
     <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
     
     <link rel="canonical" href="https://livedealz.com" />
+    
+    <!-- Preconnect to critical origins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    
+    <!-- Optimized font loading with font-display: swap for better FCP -->
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'" />
+    <noscript>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700&display=swap" />
+    </noscript>
+    
+    <!-- Preload LCP image -->
+    <link rel="preload" as="image" href="/src/assets/hero-livestream.jpg" type="image/jpeg" fetchpriority="high" />
   </head>
 
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
     
-    <!-- Odoo Live Chat Widget -->
-    <script defer="defer" type="text/javascript" src="https://smartpixel.odoo.com/im_livechat/loader/2"></script>
-    <script defer="defer" type="text/javascript" src="https://smartpixel.odoo.com/im_livechat/assets_embed.js"></script>
+    <!-- Odoo Live Chat Widget - Lazy loaded after page interaction -->
+    <script>
+      // Load Odoo chat only after user interaction or after 5 seconds
+      function loadOdooChat() {
+        if (window.odooLoaded) return;
+        window.odooLoaded = true;
+        
+        var s1 = document.createElement('script');
+        s1.src = 'https://smartpixel.odoo.com/im_livechat/loader/2';
+        s1.async = true;
+        document.body.appendChild(s1);
+        
+        var s2 = document.createElement('script');
+        s2.src = 'https://smartpixel.odoo.com/im_livechat/assets_embed.js';
+        s2.async = true;
+        document.body.appendChild(s2);
+      }
+      
+      // Load after 5 seconds or on first user interaction
+      var loadTimer = setTimeout(loadOdooChat, 5000);
+      ['scroll', 'mousemove', 'touchstart', 'keydown'].forEach(function(event) {
+        document.addEventListener(event, function() {
+          clearTimeout(loadTimer);
+          loadOdooChat();
+        }, { once: true, passive: true });
+      });
+    </script>
   </body>
 </html>

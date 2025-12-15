@@ -94,7 +94,15 @@ export const HeroSection = () => {
               <div className="absolute -bottom-4 -left-4 w-32 h-32 bg-primary/10 rounded-full blur-3xl" />
               
               <div className="relative rounded-2xl overflow-hidden shadow-card-hover">
-                <img src={heroImage} alt={t("hero.imageAlt")} className="w-full object-cover aspect-[4/3]" />
+                <img 
+                  src={heroImage} 
+                  alt={t("hero.imageAlt")} 
+                  className="w-full object-cover aspect-[4/3]"
+                  width={1024}
+                  height={768}
+                  fetchPriority="high"
+                  loading="eager"
+                />
                 
                 <motion.div 
                   initial={{ opacity: 0, x: -20 }}
