@@ -9,7 +9,7 @@ const Datenschutz = () => {
         <div className="container max-w-4xl">
           <h1 className="text-3xl md:text-4xl font-bold mb-8">Datenschutzerklärung</h1>
           
-          <div className="prose prose-lg max-w-none space-y-8 text-muted-foreground">
+          <div className="prose prose-lg max-w-none space-y-8 text-muted-foreground break-words overflow-hidden [&_h2]:hyphens-auto [&_h3]:hyphens-auto [&_a]:break-all" lang="de">
             <section>
               <h2 className="text-xl font-semibold mb-4 text-foreground">1. Datenschutz auf einen Blick</h2>
               
