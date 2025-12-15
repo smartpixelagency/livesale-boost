@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import heroImage from "@/assets/hero-livestream.jpg";
 import { ArrowRight, Play } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { ContactDialog } from "@/components/ContactDialog";
 
 export const HeroSection = () => {
   const { t } = useLanguage();
@@ -43,13 +44,19 @@ export const HeroSection = () => {
             <p className="text-base text-muted-foreground mb-8 max-w-xl">{t("hero.description2")}</p>
             
             <div className="flex flex-col sm:flex-row gap-4">
-              <Button variant="hero" size="xl" className="group">
-                {t("hero.cta1")}
-                <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
-              </Button>
-              <Button variant="heroOutline" size="xl" className="group">
-                <Play className="mr-2 h-5 w-5" />
-                {t("hero.cta2")}
+              <ContactDialog 
+                trigger={
+                  <Button variant="hero" size="xl" className="group">
+                    {t("hero.cta1")}
+                    <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+                  </Button>
+                }
+              />
+              <Button variant="heroOutline" size="xl" className="group" asChild>
+                <a href="#features">
+                  <Play className="mr-2 h-5 w-5" />
+                  {t("hero.cta2")}
+                </a>
               </Button>
             </div>
             

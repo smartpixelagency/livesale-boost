@@ -5,6 +5,7 @@ import { Menu, X, ChevronDown } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import Logo from "@/assets/logo.png";
 import { useLanguage, Language } from "@/contexts/LanguageContext";
+import { ContactDialog } from "@/components/ContactDialog";
 
 const languages: { code: Language; label: string; flag: string }[] = [
   { code: "de", label: "Deutsch", flag: "🇩🇪" },
@@ -133,15 +134,14 @@ export const Navbar = () => {
             </AnimatePresence>
           </div>
           
-          <a 
-            href={getHomeHref("#contact")} 
-            className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
-          >
-            {t("nav.contact")}
-          </a>
-          <Button variant="hero" size="default">
-            {t("nav.bookDemo")}
-          </Button>
+          <ContactDialog 
+            trigger={
+              <button className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
+                {t("nav.contact")}
+              </button>
+            }
+          />
+          <ContactDialog />
         </div>
 
         {/* Mobile Menu Button */}
@@ -221,16 +221,19 @@ export const Navbar = () => {
                   </a>
                 )
               ))}
-              <a 
-                href={getHomeHref("#contact")}
-                className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors py-2"
-                onClick={() => setIsOpen(false)}
-              >
-                {t("nav.contact")}
-              </a>
-              <Button variant="hero" size="lg" className="mt-2">
-                {t("nav.bookDemo")}
-              </Button>
+              <ContactDialog 
+                trigger={
+                  <button 
+                    className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors py-2 text-left"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    {t("nav.contact")}
+                  </button>
+                }
+              />
+              <ContactDialog 
+                trigger={<Button variant="hero" size="lg" className="mt-2">{t("nav.bookDemo")}</Button>}
+              />
             </div>
           </motion.div>
         )}

@@ -5,6 +5,7 @@ interface SEOHeadProps {
   title?: string;
   description?: string;
   path?: string;
+  image?: string;
 }
 
 const seoContent: Record<Language, { title: string; description: string }> = {
@@ -22,28 +23,58 @@ const seoContent: Record<Language, { title: string; description: string }> = {
   },
 };
 
-export const SEOHead = ({ title, description, path = "" }: SEOHeadProps) => {
+export const SEOHead = ({ title, description, path = "", image }: SEOHeadProps) => {
   const { language } = useLanguage();
   const baseUrl = "https://livedealz.de";
+  const defaultImage = `${baseUrl}/og-image.png`;
   
   const currentTitle = title || seoContent[language].title;
   const currentDescription = description || seoContent[language].description;
+  const currentImage = image || defaultImage;
+  const currentUrl = `${baseUrl}/${language}${path}`;
 
   useEffect(() => {
     // Update document title
     document.title = currentTitle;
 
-    // Update or create meta description
-    let metaDescription = document.querySelector('meta[name="description"]');
-    if (!metaDescription) {
-      metaDescription = document.createElement("meta");
-      metaDescription.setAttribute("name", "description");
-      document.head.appendChild(metaDescription);
-    }
-    metaDescription.setAttribute("content", currentDescription);
+    // Helper to set meta tag
+    const setMetaTag = (property: string, content: string, isOg = false) => {
+      const selector = isOg ? `meta[property="${property}"]` : `meta[name="${property}"]`;
+      let meta = document.querySelector(selector) as HTMLMetaElement | null;
+      if (!meta) {
+        meta = document.createElement("meta");
+        if (isOg) {
+          meta.setAttribute("property", property);
+        } else {
+          meta.setAttribute("name", property);
+        }
+        document.head.appendChild(meta);
+      }
+      meta.setAttribute("content", content);
+    };
 
-    // Update or create lang attribute
+    // Update lang attribute
     document.documentElement.lang = language;
+
+    // Standard meta tags
+    setMetaTag("description", currentDescription);
+    setMetaTag("robots", "index, follow");
+
+    // Open Graph meta tags
+    setMetaTag("og:type", "website", true);
+    setMetaTag("og:url", currentUrl, true);
+    setMetaTag("og:title", currentTitle, true);
+    setMetaTag("og:description", currentDescription, true);
+    setMetaTag("og:image", currentImage, true);
+    setMetaTag("og:locale", language === "de" ? "de_DE" : language === "no" ? "nb_NO" : "en_US", true);
+    setMetaTag("og:site_name", "LiveDealz", true);
+
+    // Twitter Card meta tags
+    setMetaTag("twitter:card", "summary_large_image");
+    setMetaTag("twitter:url", currentUrl);
+    setMetaTag("twitter:title", currentTitle);
+    setMetaTag("twitter:description", currentDescription);
+    setMetaTag("twitter:image", currentImage);
 
     // Remove existing hreflang links
     document.querySelectorAll('link[hreflang]').forEach(el => el.remove());
@@ -72,12 +103,12 @@ export const SEOHead = ({ title, description, path = "" }: SEOHeadProps) => {
       canonical.setAttribute("rel", "canonical");
       document.head.appendChild(canonical);
     }
-    canonical.setAttribute("href", `${baseUrl}/${language}${path}`);
+    canonical.setAttribute("href", currentUrl);
 
     return () => {
       document.querySelectorAll('link[hreflang]').forEach(el => el.remove());
     };
-  }, [language, currentTitle, currentDescription, path]);
+  }, [language, currentTitle, currentDescription, currentImage, currentUrl, path]);
 
   return null;
 };

@@ -4,10 +4,12 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
+import { Checkbox } from "@/components/ui/checkbox";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useToast } from "@/hooks/use-toast";
 import { Send, Loader2, CheckCircle2 } from "lucide-react";
 import { z } from "zod";
+import { Link } from "react-router-dom";
 
 // Webhook URL - set this to your webhook endpoint
 const WEBHOOK_URL = ""; // Add your webhook URL here
@@ -18,6 +20,7 @@ const contactSchema = z.object({
   email: z.string().trim().email("Invalid email").max(255, "Email too long"),
   company: z.string().trim().max(100, "Company name too long").optional(),
   message: z.string().trim().min(1, "Message is required").max(2000, "Message too long"),
+  privacyAccepted: z.boolean().refine(val => val === true, "Privacy policy must be accepted"),
 });
 
 type ContactFormData = z.infer<typeof contactSchema>;
@@ -45,6 +48,7 @@ export const ContactForm = () => {
     email: "",
     company: "",
     message: "",
+    privacyAccepted: false,
   });
   const [errors, setErrors] = useState<Partial<Record<keyof ContactFormData, string>>>({});
 
@@ -82,6 +86,10 @@ export const ContactForm = () => {
       emailPlaceholder: "ihre@email.de",
       companyPlaceholder: "Ihr Unternehmen",
       messagePlaceholder: "Wie können wir Ihnen helfen?",
+      privacyLabel: "Ich habe die",
+      privacyLink: "Datenschutzerklärung",
+      privacyLabelEnd: "gelesen und akzeptiere diese.",
+      privacyRequired: "Bitte akzeptieren Sie die Datenschutzerklärung.",
     },
     en: {
       title: "Contact Us",
@@ -97,6 +105,10 @@ export const ContactForm = () => {
       emailPlaceholder: "your@email.com",
       companyPlaceholder: "Your company",
       messagePlaceholder: "How can we help you?",
+      privacyLabel: "I have read and accept the",
+      privacyLink: "Privacy Policy",
+      privacyLabelEnd: ".",
+      privacyRequired: "Please accept the privacy policy.",
     },
     no: {
       title: "Kontakt oss",
@@ -112,6 +124,10 @@ export const ContactForm = () => {
       emailPlaceholder: "din@epost.no",
       companyPlaceholder: "Ditt selskap",
       messagePlaceholder: "Hvordan kan vi hjelpe deg?",
+      privacyLabel: "Jeg har lest og aksepterer",
+      privacyLink: "personvernerklæringen",
+      privacyLabelEnd: ".",
+      privacyRequired: "Vennligst aksepter personvernerklæringen.",
     },
   };
 
@@ -125,6 +141,13 @@ export const ContactForm = () => {
     }
   };
 
+  const handlePrivacyChange = (checked: boolean) => {
+    setFormData((prev) => ({ ...prev, privacyAccepted: checked }));
+    if (errors.privacyAccepted) {
+      setErrors((prev) => ({ ...prev, privacyAccepted: undefined }));
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
@@ -134,7 +157,12 @@ export const ContactForm = () => {
       const fieldErrors: Partial<Record<keyof ContactFormData, string>> = {};
       result.error.errors.forEach((err) => {
         if (err.path[0]) {
-          fieldErrors[err.path[0] as keyof ContactFormData] = err.message;
+          const field = err.path[0] as keyof ContactFormData;
+          if (field === "privacyAccepted") {
+            fieldErrors[field] = l.privacyRequired;
+          } else {
+            fieldErrors[field] = err.message;
+          }
         }
       });
       setErrors(fieldErrors);
@@ -170,7 +198,10 @@ export const ContactForm = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          ...result.data,
+          name: result.data.name,
+          email: result.data.email,
+          company: result.data.company,
+          message: result.data.message,
           language,
           recaptchaToken: recaptchaToken || undefined,
           timestamp: new Date().toISOString(),
@@ -279,6 +310,33 @@ export const ContactForm = () => {
           />
           {errors.message && <p className="text-destructive text-sm mt-1">{errors.message}</p>}
         </div>
+
+        {/* Privacy Policy Checkbox */}
+        <div className="flex items-start space-x-3">
+          <Checkbox
+            id="privacyAccepted"
+            checked={formData.privacyAccepted}
+            onCheckedChange={handlePrivacyChange}
+            className={errors.privacyAccepted ? "border-destructive" : ""}
+          />
+          <label
+            htmlFor="privacyAccepted"
+            className="text-sm text-muted-foreground leading-relaxed cursor-pointer"
+          >
+            {l.privacyLabel}{" "}
+            <Link
+              to={`/${language}/datenschutz`}
+              target="_blank"
+              className="text-primary hover:underline"
+            >
+              {l.privacyLink}
+            </Link>{" "}
+            {l.privacyLabelEnd}
+          </label>
+        </div>
+        {errors.privacyAccepted && (
+          <p className="text-destructive text-sm -mt-2">{errors.privacyAccepted}</p>
+        )}
 
         {/* reCAPTCHA widget container - only shows if site key is configured */}
         {RECAPTCHA_SITE_KEY && (

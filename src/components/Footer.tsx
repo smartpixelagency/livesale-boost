@@ -2,6 +2,8 @@ import { Twitter, Instagram, Youtube, Linkedin } from "lucide-react";
 import { Link } from "react-router-dom";
 import LogoWhite from "@/assets/logo-white.png";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { ContactDialog } from "@/components/ContactDialog";
+import { Button } from "@/components/ui/button";
 
 const socialLinks = [
   { icon: Instagram, href: "#", label: "Instagram" },
@@ -80,16 +82,24 @@ export const Footer = () => {
           <div>
             <h3 className="font-semibold mb-4">{t("footer.resources")}</h3>
             <ul className="space-y-3">
-              {footerLinks.ressourcen.map((link) => (
-                <li key={link.label}>
-                  <a
-                    href={link.href}
-                    className="text-sm text-background/70 hover:text-background transition-colors"
-                  >
-                    {link.label}
-                  </a>
-                </li>
-              ))}
+              <li>
+                <ContactDialog 
+                  trigger={
+                    <button className="text-sm text-background/70 hover:text-background transition-colors">
+                      {t("footer.bookDemo")}
+                    </button>
+                  }
+                />
+              </li>
+              <li>
+                <ContactDialog 
+                  trigger={
+                    <button className="text-sm text-background/70 hover:text-background transition-colors">
+                      {t("footer.contact")}
+                    </button>
+                  }
+                />
+              </li>
             </ul>
           </div>
 
