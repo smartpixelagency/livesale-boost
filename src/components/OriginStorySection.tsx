@@ -1,30 +1,33 @@
 import { motion } from "framer-motion";
 import { Flame, TrendingDown, AlertTriangle, Lightbulb } from "lucide-react";
-
-const storySteps = [
-  {
-    icon: Flame,
-    title: "Der Ansturm",
-    description: "LSQ24, ein auf Live-Shopping spezialisierter Händler, erlebte explosives Wachstum. Doch mit dem Erfolg kamen die Probleme.",
-  },
-  {
-    icon: TrendingDown,
-    title: "Die Überlastung",
-    description: "Das System brach unter der Last neuer Reservierungen zusammen. Excel-Tabellen, WhatsApp-Nachrichten und manuelle Prozesse führten zu Chaos.",
-  },
-  {
-    icon: AlertTriangle,
-    title: "Die Nichtzahler",
-    description: "Kunden reservierten, zahlten aber nicht. Der Bestand war blockiert, der Umsatz verloren. Der Überblick ging komplett verloren.",
-  },
-  {
-    icon: Lightbulb,
-    title: "Die Lösung",
-    description: "Aus dieser Not entstand LiveDealz – entwickelt von Händlern für Händler. Eine Lösung, die alle Probleme auf einmal löst.",
-  },
-];
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export const OriginStorySection = () => {
+  const { t } = useLanguage();
+
+  const storySteps = [
+    {
+      icon: Flame,
+      title: t("origin.step1.title"),
+      description: t("origin.step1.description"),
+    },
+    {
+      icon: TrendingDown,
+      title: t("origin.step2.title"),
+      description: t("origin.step2.description"),
+    },
+    {
+      icon: AlertTriangle,
+      title: t("origin.step3.title"),
+      description: t("origin.step3.description"),
+    },
+    {
+      icon: Lightbulb,
+      title: t("origin.step4.title"),
+      description: t("origin.step4.description"),
+    },
+  ];
+
   return (
     <section className="py-16 md:py-24 bg-muted/30">
       <div className="container">
@@ -36,13 +39,13 @@ export const OriginStorySection = () => {
           className="text-center mb-12 md:mb-16"
         >
           <span className="text-sm font-semibold text-primary uppercase tracking-wide mb-3 block">
-            Unsere Geschichte
+            {t("origin.badge")}
           </span>
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Geboren aus der <span className="text-primary">Praxis</span>
+            {t("origin.headline")} <span className="text-primary">{t("origin.headlineBold")}</span>
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            LiveDealz ist keine Theorie – es ist die Antwort auf echte Probleme, die wir selbst erlebt haben.
+            {t("origin.description")}
           </p>
         </motion.div>
 
@@ -64,7 +67,7 @@ export const OriginStorySection = () => {
                   <step.icon size={24} />
                 </div>
                 <span className="text-xs font-semibold text-muted-foreground mb-2 block">
-                  Schritt {index + 1}
+                  {t("origin.step")} {index + 1}
                 </span>
                 <h3 className="text-lg font-semibold mb-2">{step.title}</h3>
                 <p className="text-muted-foreground text-sm leading-relaxed">
@@ -84,18 +87,13 @@ export const OriginStorySection = () => {
         >
           <div className="max-w-3xl mx-auto text-center">
             <h3 className="text-xl md:text-2xl font-bold mb-4">
-              Von Händlern. Für Händler.
+              {t("origin.conclusion.title")}
             </h3>
             <p className="text-muted-foreground leading-relaxed mb-6">
-              Wir wissen genau, was du brauchst – weil wir selbst im Live-Shopping tätig waren. 
-              LiveDealz nutzt die native Reservierungsfunktion von Shopify, um Bestände für einen 
-              bestimmten Zeitraum zu sperren. Zahlt ein Kunde nicht, wird der Bestand automatisch 
-              wieder freigegeben und der Kunde für künftige Reservierungen gesperrt.
+              {t("origin.conclusion.description1")}
             </p>
             <p className="text-muted-foreground leading-relaxed">
-              Das Beste: Dein bestehender Shop läuft weiter wie gewohnt. Keine Störung von ERP-Systemen, 
-              keine komplizierten Änderungen. Verkaufe gleichzeitig über deinen Onlineshop und im Livestream – 
-              alles perfekt synchronisiert.
+              {t("origin.conclusion.description2")}
             </p>
           </div>
         </motion.div>

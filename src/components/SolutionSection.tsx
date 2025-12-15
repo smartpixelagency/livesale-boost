@@ -7,8 +7,48 @@ import {
   Clock,
   Shield
 } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export const SolutionSection = () => {
+  const { t } = useLanguage();
+
+  const storefrontItems = [
+    t("solution.storefront.item1"),
+    t("solution.storefront.item2"),
+    t("solution.storefront.item3"),
+    t("solution.storefront.item4"),
+  ];
+
+  const dashboardItems = [
+    t("solution.dashboard.item1"),
+    t("solution.dashboard.item2"),
+    t("solution.dashboard.item3"),
+    t("solution.dashboard.item4"),
+  ];
+
+  const keyProperties = [
+    {
+      icon: Zap,
+      title: t("solution.atomic.title"),
+      description: t("solution.atomic.description"),
+    },
+    {
+      icon: Clock,
+      title: t("solution.collect.title"),
+      description: t("solution.collect.description"),
+    },
+    {
+      icon: ShoppingCart,
+      title: t("solution.shopify.title"),
+      description: t("solution.shopify.description"),
+    },
+    {
+      icon: Shield,
+      title: t("solution.release.title"),
+      description: t("solution.release.description"),
+    },
+  ];
+
   return (
     <section className="py-20 bg-background">
       <div className="container">
@@ -20,14 +60,13 @@ export const SolutionSection = () => {
           className="text-center max-w-3xl mx-auto mb-16"
         >
           <span className="inline-block px-4 py-1.5 rounded-full bg-accent text-accent-foreground text-sm font-medium mb-4">
-            Die Lösung
+            {t("solution.badge")}
           </span>
           <h2 className="text-3xl md:text-4xl font-bold mb-6">
-            Was LiveDealz genau macht
+            {t("solution.headline")}
           </h2>
           <p className="text-lg text-muted-foreground leading-relaxed">
-            LiveDealz verbindet deinen Shopify-Shop mit deinen Live- und Social-Kanälen. 
-            Ein System für alles – TikTok, Instagram, WhatsApp, Discord, Telegram.
+            {t("solution.description")}
           </p>
         </motion.div>
 
@@ -44,18 +83,12 @@ export const SolutionSection = () => {
             <div className="w-14 h-14 rounded-xl bg-gradient-primary flex items-center justify-center mb-6">
               <Store className="w-7 h-7 text-primary-foreground" />
             </div>
-            <h3 className="text-2xl font-bold mb-4">Storefront-Modus</h3>
+            <h3 className="text-2xl font-bold mb-4">{t("solution.storefront.title")}</h3>
             <p className="text-muted-foreground mb-6 leading-relaxed">
-              Kunden gehen während des Streams oder nach Stories selbstständig in deinen Shop 
-              und sehen eine spezielle LiveDealz- oder Aktions-Collection.
+              {t("solution.storefront.description")}
             </p>
             <ul className="space-y-3">
-              {[
-                "Eigene Collection im Shopify-Shop",
-                "Kunden können selbst stöbern und bestellen",
-                "Bestand wird in Echtzeit reserviert",
-                "Parallel zum Stream oder asynchron nutzbar"
-              ].map((item, i) => (
+              {storefrontItems.map((item, i) => (
                 <li key={i} className="flex items-start gap-3">
                   <div className="w-5 h-5 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0 mt-0.5">
                     <svg className="w-3 h-3 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -79,18 +112,12 @@ export const SolutionSection = () => {
             <div className="w-14 h-14 rounded-xl bg-gradient-primary flex items-center justify-center mb-6">
               <LayoutDashboard className="w-7 h-7 text-primary-foreground" />
             </div>
-            <h3 className="text-2xl font-bold mb-4">Seller-Dashboard-Modus</h3>
+            <h3 className="text-2xl font-bold mb-4">{t("solution.dashboard.title")}</h3>
             <p className="text-muted-foreground mb-6 leading-relaxed">
-              Du bist live auf TikTok oder bekommst Kommentare auf WhatsApp-Stories. 
-              Kunden haben eine Kundennummer – du reservierst per Scan oder Klick.
+              {t("solution.dashboard.description")}
             </p>
             <ul className="space-y-3">
-              {[
-                "Kundennummer eingeben, Barcode scannen",
-                "Reservierung wird sofort angelegt",
-                "Bestand wird automatisch blockiert",
-                "Ideal für interaktive Livestreams"
-              ].map((item, i) => (
+              {dashboardItems.map((item, i) => (
                 <li key={i} className="flex items-start gap-3">
                   <div className="w-5 h-5 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0 mt-0.5">
                     <svg className="w-3 h-3 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -106,28 +133,7 @@ export const SolutionSection = () => {
 
         {/* Key Properties */}
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {[
-            {
-              icon: Zap,
-              title: "Atomare Bestandslogik",
-              description: "Sobald reserviert wird, ist die Variante gesperrt. Keine Doppelverkäufe, kein Überbuchen."
-            },
-            {
-              icon: Clock,
-              title: "Collect Now, Pay Later",
-              description: "Kunden sammeln von Montag bis Freitag, am Samstag gehen alle Checkout-Links raus."
-            },
-            {
-              icon: ShoppingCart,
-              title: "Nahtlose Shopify-Integration",
-              description: "Nativer Checkout, Draft Orders in Shopify. Dein Shop läuft weiter wie gewohnt."
-            },
-            {
-              icon: Shield,
-              title: "Automatische Freigabe",
-              description: "Zahlt ein Kunde nicht, wird die Reservierung nach definierter Zeit freigegeben."
-            }
-          ].map((item, index) => (
+          {keyProperties.map((item, index) => (
             <motion.div
               key={item.title}
               initial={{ opacity: 0, y: 20 }}
@@ -155,13 +161,10 @@ export const SolutionSection = () => {
         >
           <div className="max-w-3xl mx-auto text-center">
             <h3 className="text-2xl font-bold mb-4">
-              Perfekt für WhatsApp & Instagram Stories
+              {t("solution.whatsapp.title")}
             </h3>
             <p className="text-muted-foreground leading-relaxed">
-              Nutze WhatsApp-Storys als deinen Showroom. Jeder Kontakt hat quasi eine Kundennummer. 
-              Kommentare und Anfragen wandelst du im Dashboard in Reservierungen um. 
-              Kunden können auch nach dem Stream oder den Stories weiter shoppen – 
-              alles läuft im gleichen System zusammen.
+              {t("solution.whatsapp.description")}
             </p>
           </div>
         </motion.div>

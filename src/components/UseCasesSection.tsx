@@ -6,55 +6,58 @@ import {
   Building2,
   ArrowRight
 } from "lucide-react";
-
-const useCases = [
-  {
-    icon: Video,
-    title: "TikTok- & Instagram-Live-Seller",
-    color: "from-pink-500 to-rose-500",
-    story: [
-      "Du präsentierst Produkte im Livestream",
-      "Zuschauer nennen ihre Kundennummer, du scannst Produkte",
-      "Parallel können andere Zuschauer im Shop kaufen",
-      "Keine Überverkäufe, weniger Stress, mehr Umsatz"
-    ]
-  },
-  {
-    icon: MessageCircle,
-    title: "WhatsApp-Story-Händler",
-    color: "from-green-500 to-emerald-500",
-    story: [
-      "Produkte werden in WhatsApp-Status/Stories gezeigt",
-      "Kunden antworten mit 'Ich will' auf die Story",
-      "Du trägst das Produkt mit Kundennummer im Dashboard ein",
-      "Sammelaktion über mehrere Tage, am Ende gehen alle Checkout-Links raus"
-    ]
-  },
-  {
-    icon: Users,
-    title: "Community-Sammelaktionen",
-    color: "from-blue-500 to-indigo-500",
-    story: [
-      "Du hast eine Discord-, Telegram- oder WhatsApp-Gruppe",
-      "Aktion: 'Bis Freitag sammeln wir Bestellungen'",
-      "LiveDealz führt alle Reservierungen zusammen",
-      "Am Ende werden alle Bestellentwürfe automatisch generiert"
-    ]
-  },
-  {
-    icon: Building2,
-    title: "B2B- & Großhandels-Szenario",
-    color: "from-amber-500 to-orange-500",
-    story: [
-      "Mehrere Händler können gleichzeitig reservieren",
-      "Echtzeit-Bestandsanzeige – wer zuerst kommt, mahlt zuerst",
-      "Flexible Rechnungsstellung: erst beliefern, später abrechnen",
-      "Kein kompliziertes Anfragen per Mail oder Excel"
-    ]
-  }
-];
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export const UseCasesSection = () => {
+  const { t } = useLanguage();
+
+  const useCases = [
+    {
+      icon: Video,
+      title: t("useCases.case1.title"),
+      color: "from-pink-500 to-rose-500",
+      story: [
+        t("useCases.case1.step1"),
+        t("useCases.case1.step2"),
+        t("useCases.case1.step3"),
+        t("useCases.case1.step4"),
+      ]
+    },
+    {
+      icon: MessageCircle,
+      title: t("useCases.case2.title"),
+      color: "from-green-500 to-emerald-500",
+      story: [
+        t("useCases.case2.step1"),
+        t("useCases.case2.step2"),
+        t("useCases.case2.step3"),
+        t("useCases.case2.step4"),
+      ]
+    },
+    {
+      icon: Users,
+      title: t("useCases.case3.title"),
+      color: "from-blue-500 to-indigo-500",
+      story: [
+        t("useCases.case3.step1"),
+        t("useCases.case3.step2"),
+        t("useCases.case3.step3"),
+        t("useCases.case3.step4"),
+      ]
+    },
+    {
+      icon: Building2,
+      title: t("useCases.case4.title"),
+      color: "from-amber-500 to-orange-500",
+      story: [
+        t("useCases.case4.step1"),
+        t("useCases.case4.step2"),
+        t("useCases.case4.step3"),
+        t("useCases.case4.step4"),
+      ]
+    }
+  ];
+
   return (
     <section id="use-cases" className="py-20 bg-background">
       <div className="container">
@@ -66,13 +69,13 @@ export const UseCasesSection = () => {
           className="text-center max-w-3xl mx-auto mb-16"
         >
           <span className="inline-block px-4 py-1.5 rounded-full bg-accent text-accent-foreground text-sm font-medium mb-4">
-            Anwendungsfälle
+            {t("useCases.badge")}
           </span>
           <h2 className="text-3xl md:text-4xl font-bold mb-6">
-            Für jeden Verkaufskanal die richtige Lösung
+            {t("useCases.headline")}
           </h2>
           <p className="text-lg text-muted-foreground">
-            Egal wie du verkaufst – LiveDealz passt sich an deinen Workflow an.
+            {t("useCases.description")}
           </p>
         </motion.div>
 
