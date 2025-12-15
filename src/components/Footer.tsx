@@ -11,22 +11,22 @@ const socialLinks = [
 ];
 
 export const Footer = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
 
   const footerLinks = {
     produkt: [
-      { label: t("footer.features"), href: "#features" },
-      { label: t("footer.useCases"), href: "#use-cases" },
-      { label: t("footer.pricing"), href: "#pricing" },
-      { label: t("footer.faq"), href: "#faq" },
+      { label: t("footer.features"), href: `/${language}#features` },
+      { label: t("footer.useCases"), href: `/${language}#use-cases` },
+      { label: t("footer.pricing"), href: `/${language}#pricing` },
+      { label: t("footer.faq"), href: `/${language}#faq` },
     ],
     ressourcen: [
       { label: t("footer.bookDemo"), href: "#" },
-      { label: t("footer.contact"), href: "#" },
+      { label: t("footer.contact"), href: `/${language}#contact` },
     ],
     rechtliches: [
-      { label: t("footer.imprint"), href: "/impressum", isRoute: true },
-      { label: t("footer.privacy"), href: "/datenschutz", isRoute: true },
+      { label: t("footer.imprint"), href: `/${language}/impressum`, isRoute: true },
+      { label: t("footer.privacy"), href: `/${language}/datenschutz`, isRoute: true },
       { label: t("footer.terms"), href: "#" },
     ],
   };
@@ -37,7 +37,7 @@ export const Footer = () => {
         <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-12 mb-12">
           {/* Brand */}
           <div className="lg:col-span-2">
-            <Link to="/" className="inline-block mb-4">
+            <Link to={`/${language}`} className="inline-block mb-4">
               <img src={LogoWhite} alt="LiveDealz" className="h-8 w-auto" />
             </Link>
             <p className="text-background/70 text-sm leading-relaxed mb-4 max-w-sm">
