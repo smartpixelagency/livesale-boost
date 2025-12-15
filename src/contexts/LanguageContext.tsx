@@ -228,6 +228,14 @@ const translations = {
     "cta.button1": "Jetzt Probemonat sichern",
     "cta.button2": "Kontakt aufnehmen",
 
+    // Contact Section
+    "contact.badge": "Kontakt",
+    "contact.headline": "Bereit durchzustarten?",
+    "contact.description": "Lass uns gemeinsam besprechen, wie LiveDealz dein Live-Shopping-Business auf das nächste Level bringt. Buche eine unverbindliche Demo oder schreib uns direkt.",
+    "contact.emailLabel": "E-Mail",
+    "contact.responseLabel": "Antwortzeit",
+    "contact.responseTime": "Innerhalb von 24 Stunden",
+
     // Footer
     "footer.tagline": "Die Plattform für Live-, Story- und Sammelverkäufe ohne Chaos.",
     "footer.description": "Reservieren. Sammeln. Bezahlen. Ein System, ein Bestand – für TikTok, Instagram, WhatsApp und Community-Verkäufe.",
@@ -515,6 +523,14 @@ const translations = {
     "cta.button1": "Get Your Trial Month",
     "cta.button2": "Contact Us",
 
+    // Contact Section
+    "contact.badge": "Contact",
+    "contact.headline": "Ready to Get Started?",
+    "contact.description": "Let's discuss how LiveDealz can take your live shopping business to the next level. Book a free demo or contact us directly.",
+    "contact.emailLabel": "Email",
+    "contact.responseLabel": "Response Time",
+    "contact.responseTime": "Within 24 hours",
+
     // Footer
     "footer.tagline": "The platform for live, story, and collection sales without chaos.",
     "footer.description": "Reserve. Collect. Pay. One system, one inventory – for TikTok, Instagram, WhatsApp, and community sales.",
@@ -801,6 +817,14 @@ const translations = {
     "cta.description": "Med LiveDealz tar du bedriften din til neste nivå. Øk omsetningen gjennom sanntidsreservasjoner, automatiser prosessene dine og skap en sømløs handleopplevelse for kundene dine.",
     "cta.button1": "Få din prøvemåned",
     "cta.button2": "Kontakt oss",
+
+    // Contact Section
+    "contact.badge": "Kontakt",
+    "contact.headline": "Klar til å komme i gang?",
+    "contact.description": "La oss diskutere hvordan LiveDealz kan ta live-shopping-bedriften din til neste nivå. Bestill en gratis demo eller kontakt oss direkte.",
+    "contact.emailLabel": "E-post",
+    "contact.responseLabel": "Svartid",
+    "contact.responseTime": "Innen 24 timer",
 
     // Footer
     "footer.tagline": "Plattformen for live-, story- og samlesalg uten kaos.",
