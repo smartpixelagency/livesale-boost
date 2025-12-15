@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -17,23 +17,43 @@ export const Navbar = () => {
   const [langOpen, setLangOpen] = useState(false);
   const langRef = useRef<HTMLDivElement>(null);
   const location = useLocation();
-  const isHomePage = location.pathname === "/";
+  const navigate = useNavigate();
   const { language, setLanguage, t } = useLanguage();
 
+  // Check if we're on the home page (any language variant)
+  const isHomePage = location.pathname === `/${language}` || location.pathname === "/" || location.pathname === `/${language}/`;
   const currentLang = languages.find((l) => l.code === language) || languages[0];
 
   const navLinks = [
     { label: t("nav.features"), href: "#features", isRoute: false },
     { label: t("nav.benefits"), href: "#stats", isRoute: false },
     { label: t("nav.pricing"), href: "#pricing", isRoute: false },
-    { label: t("nav.b2b"), href: "/b2b", isRoute: true },
+    { label: t("nav.b2b"), href: `/${language}/b2b`, isRoute: true },
     { label: t("nav.faq"), href: "#faq", isRoute: false },
   ];
 
-  const handleAnchorClick = (href: string) => {
-    if (!isHomePage && href.startsWith("#")) {
-      window.location.href = "/" + href;
+  const handleLanguageChange = (newLang: Language) => {
+    // Get current path without language prefix
+    const pathParts = location.pathname.split("/");
+    let currentPath = "";
+    
+    if (pathParts.length > 2) {
+      // Path like /de/b2b -> extract /b2b
+      currentPath = "/" + pathParts.slice(2).join("/");
     }
+    
+    setLanguage(newLang);
+    setLangOpen(false);
+    
+    // Navigate to the same page in the new language
+    navigate(`/${newLang}${currentPath}`);
+  };
+
+  const getHomeHref = (anchor: string) => {
+    if (isHomePage) {
+      return anchor;
+    }
+    return `/${language}${anchor}`;
   };
 
   useEffect(() => {
@@ -49,7 +69,7 @@ export const Navbar = () => {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border/50">
       <nav className="container flex items-center justify-between h-16 md:h-20">
-        <Link to="/" className="flex items-center">
+        <Link to={`/${language}`} className="flex items-center">
           <img src={Logo} alt="LiveDealz" className="h-8 md:h-10 w-auto" />
         </Link>
 
@@ -67,8 +87,7 @@ export const Navbar = () => {
             ) : (
               <a
                 key={link.href}
-                href={isHomePage ? link.href : "/" + link.href}
-                onClick={() => handleAnchorClick(link.href)}
+                href={getHomeHref(link.href)}
                 className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
               >
                 {link.label}
@@ -100,10 +119,7 @@ export const Navbar = () => {
                   {languages.map((lang) => (
                     <button
                       key={lang.code}
-                      onClick={() => {
-                        setLanguage(lang.code);
-                        setLangOpen(false);
-                      }}
+                      onClick={() => handleLanguageChange(lang.code)}
                       className={`w-full flex items-center gap-3 px-4 py-3 text-sm hover:bg-accent transition-colors ${
                         language === lang.code ? "bg-accent font-medium" : ""
                       }`}
@@ -118,7 +134,7 @@ export const Navbar = () => {
           </div>
           
           <a 
-            href={isHomePage ? "#contact" : "/#contact"} 
+            href={getHomeHref("#contact")} 
             className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
           >
             {t("nav.contact")}
@@ -131,7 +147,7 @@ export const Navbar = () => {
         {/* Mobile Menu Button */}
         <div className="md:hidden flex items-center gap-2">
           {/* Mobile Language Dropdown */}
-          <div className="relative" ref={langRef}>
+          <div className="relative">
             <button
               onClick={() => setLangOpen(!langOpen)}
               className="flex items-center gap-1 p-2 text-muted-foreground hover:text-foreground"
@@ -151,10 +167,7 @@ export const Navbar = () => {
                   {languages.map((lang) => (
                     <button
                       key={lang.code}
-                      onClick={() => {
-                        setLanguage(lang.code);
-                        setLangOpen(false);
-                      }}
+                      onClick={() => handleLanguageChange(lang.code)}
                       className={`w-full flex items-center gap-3 px-4 py-3 text-sm hover:bg-accent transition-colors ${
                         language === lang.code ? "bg-accent font-medium" : ""
                       }`}
@@ -200,7 +213,7 @@ export const Navbar = () => {
                 ) : (
                   <a
                     key={link.href}
-                    href={isHomePage ? link.href : "/" + link.href}
+                    href={getHomeHref(link.href)}
                     className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors py-2"
                     onClick={() => setIsOpen(false)}
                   >
@@ -209,7 +222,7 @@ export const Navbar = () => {
                 )
               ))}
               <a 
-                href={isHomePage ? "#contact" : "/#contact"}
+                href={getHomeHref("#contact")}
                 className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors py-2"
                 onClick={() => setIsOpen(false)}
               >

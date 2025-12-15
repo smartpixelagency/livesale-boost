@@ -10,10 +10,12 @@ import { FAQSection } from "@/components/FAQSection";
 import { TechTrustSection } from "@/components/TechTrustSection";
 import { CTASection } from "@/components/CTASection";
 import { Footer } from "@/components/Footer";
+import { SEOHead } from "@/components/SEOHead";
 
 const Index = () => {
   return (
     <div className="min-h-screen">
+      <SEOHead />
       <Navbar />
       <main>
         <HeroSection />

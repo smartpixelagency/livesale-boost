@@ -2,6 +2,9 @@ import { motion } from "framer-motion";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { Button } from "@/components/ui/button";
+import { SEOHead } from "@/components/SEOHead";
+import { ContactForm } from "@/components/ContactForm";
+import { useLanguage } from "@/contexts/LanguageContext";
 import { 
   Building2, 
   Clock, 
@@ -14,50 +17,53 @@ import {
   AlertTriangle
 } from "lucide-react";
 
-const benefits = [
-  {
-    icon: Shield,
-    title: "Atomare Reservierungsgarantie",
-    description: "Ihre Ware wird im Moment der Bestellung verbindlich aus dem Bestand ausgebucht. Kein Überverkauf mehr. Händler sehen nur, was sie garantiert bekommen.",
-  },
-  {
-    icon: Clock,
-    title: "Echtzeit-Verfügbarkeit",
-    description: "Bestand wird im Moment der Bestellung verbindlich reserviert. Sofort sichtbar, was verfügbar ist – keine Rückfragen mehr nötig.",
-  },
-  {
-    icon: Users,
-    title: "Marktplatz-Erlebnis",
-    description: "Präsentieren Sie Ihr Sortiment wie auf einem digitalen Markt. Händler wählen selbst aus, was und wie viel sie kaufen wollen – wer zuerst kommt, mahlt zuerst.",
-  },
-  {
-    icon: Building2,
-    title: "Flexible Rechnungsstellung",
-    description: "Beliefern Sie erst, stellen Sie die Rechnung später. LiveDealz sammelt alle Bestellungen und Sie entscheiden, wann abgerechnet wird.",
-  },
-  {
-    icon: ShieldCheck,
-    title: "Zukunftssichere B2B-Plattform",
-    description: "Wir nutzen Shopify als Backbone, da es die größte Schnittstellenabdeckung zu allen ERP-Systemen bietet. Nutzen Sie die bewährte und mobile Technologie für Ihren Großhandel.",
-  },
-  {
-    icon: Smartphone,
-    title: "Volle Flexibilität",
-    description: "Bestellungen können jederzeit und von überall aufgegeben werden. Durch die Shopify-Basis erhalten Ihre Händler ein natives, mobiles Kauferlebnis – ob am PC, Tablet oder Handy.",
-  },
-];
-
-const useCases = [
-  "Großhändler mit regelmäßigen Orderrunden",
-  "Hersteller mit Direktvertrieb an Händler",
-  "Showroom-Verkäufe mit Live-Präsentation",
-  "Saisonale Kollektionsvorstellungen",
-  "B2B-Marktplätze und Messen",
-];
-
 const B2B = () => {
+  const { t } = useLanguage();
+
+  const benefits = [
+    {
+      icon: Shield,
+      titleKey: "b2b.benefit1.title",
+      descKey: "b2b.benefit1.description",
+    },
+    {
+      icon: Clock,
+      titleKey: "b2b.benefit2.title",
+      descKey: "b2b.benefit2.description",
+    },
+    {
+      icon: Users,
+      titleKey: "b2b.benefit3.title",
+      descKey: "b2b.benefit3.description",
+    },
+    {
+      icon: Building2,
+      titleKey: "b2b.benefit4.title",
+      descKey: "b2b.benefit4.description",
+    },
+    {
+      icon: ShieldCheck,
+      titleKey: "b2b.benefit5.title",
+      descKey: "b2b.benefit5.description",
+    },
+    {
+      icon: Smartphone,
+      titleKey: "b2b.benefit6.title",
+      descKey: "b2b.benefit6.description",
+    },
+  ];
+
+  const useCases = [
+    "b2b.useCase1",
+    "b2b.useCase2",
+    "b2b.useCase3",
+    "b2b.useCase4",
+    "b2b.useCase5",
+  ];
+
   return (
     <div className="min-h-screen bg-background">
+      <SEOHead path="/b2b" />
       <Navbar />
       
       {/* Hero Section */}
@@ -70,25 +76,23 @@ const B2B = () => {
             className="max-w-4xl mx-auto text-center"
           >
             <span className="inline-block text-sm font-semibold text-primary uppercase tracking-wide mb-4 px-4 py-1.5 bg-primary/10 rounded-full">
-              LiveDealz für B2B
+              {t("b2b.badge")}
             </span>
             
-            {/* Pain Point Above H1 */}
             <p className="text-muted-foreground text-lg mb-6 max-w-2xl mx-auto">
-              Schluss mit Überverkaufs-Risiko und manueller Bestell-Bremse. <span className="text-primary font-semibold">Geld liebt Speed.</span>
+              {t("b2b.painPoint")} <span className="text-primary font-semibold">{t("b2b.painPointHighlight")}</span>
             </p>
             
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
-              Endlich Großhandel ohne Risiko:{" "}
-              <span className="text-gradient">Gesicherte Ware durch Echtzeit-Reservierung</span>
+              {t("b2b.headline")}{" "}
+              <span className="text-gradient">{t("b2b.headlineHighlight")}</span>
             </h1>
             <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-              Garantierte Bestandsreservierung im Moment der Bestellung. 
-              Keine Überverkäufe, keine Rückfragen, keine verlorenen Aufträge.
+              {t("b2b.subheadline")}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button variant="hero" size="lg">
-                Demo buchen: Warensicherheit in Echtzeit erleben
+                {t("b2b.cta")}
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
             </div>
@@ -109,15 +113,13 @@ const B2B = () => {
             <div className="flex items-center gap-3 mb-6 justify-center">
               <AlertTriangle className="h-8 w-8 text-destructive" />
               <h2 className="text-2xl md:text-3xl font-bold">
-                Das Risiko kennen Sie
+                {t("b2b.problemTitle")}
               </h2>
             </div>
             <p className="text-muted-foreground leading-relaxed text-lg text-center">
-              Ihre Händler bestellen per E-Mail oder Excel. Ständige Rückfragen zu Verfügbarkeiten, 
-              manuelle Bestandsprüfungen und chaotische Kommunikation kosten Zeit und Geld. 
+              {t("b2b.problemDescription")}
               <span className="text-foreground font-semibold block mt-4">
-                Und das Schlimmste: Wenn mehrere Händler gleichzeitig zuschlagen, verkaufen Sie über – 
-                und müssen stornieren. Verlorenes Vertrauen, verlorener Umsatz.
+                {t("b2b.problemConclusion")}
               </span>
             </p>
           </motion.div>
@@ -135,21 +137,20 @@ const B2B = () => {
             className="text-center mb-12 md:mb-16"
           >
             <span className="text-sm font-semibold text-primary uppercase tracking-wide mb-3 block">
-              Die Lösung
+              {t("b2b.solutionBadge")}
             </span>
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Garantierte Warensicherheit mit <span className="text-primary">LiveDealz</span>
+              {t("b2b.solutionTitle")} <span className="text-primary">LiveDealz</span>
             </h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              Atomare Reservierungen im Moment der Bestellung. Ihre Händler sehen nur, 
-              was verfügbar ist – und bekommen garantiert, was sie bestellen.
+              {t("b2b.solutionDescription")}
             </p>
           </motion.div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {benefits.map((benefit, index) => (
               <motion.div
-                key={benefit.title}
+                key={benefit.titleKey}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.05 }}
@@ -159,9 +160,9 @@ const B2B = () => {
                 <div className="flex items-center justify-center w-12 h-12 rounded-xl bg-primary/10 text-primary mb-4">
                   <benefit.icon size={24} />
                 </div>
-                <h3 className="text-lg font-semibold mb-2">{benefit.title}</h3>
+                <h3 className="text-lg font-semibold mb-2">{t(benefit.titleKey)}</h3>
                 <p className="text-muted-foreground text-sm leading-relaxed">
-                  {benefit.description}
+                  {t(benefit.descKey)}
                 </p>
               </motion.div>
             ))}
@@ -180,15 +181,13 @@ const B2B = () => {
             className="bg-gradient-to-br from-primary/10 via-primary/5 to-transparent border border-primary/20 rounded-2xl p-8 md:p-12 max-w-4xl mx-auto text-center"
           >
             <h2 className="text-2xl md:text-3xl font-bold mb-6">
-              Der Speed-Gewinn zählt
+              {t("b2b.speedTitle")}
             </h2>
             <p className="text-muted-foreground text-lg leading-relaxed mb-6">
-              Ja, Shopify kostet ca. 30–40 €/Monat. Aber wie viel Geld verlieren Sie 
-              pro Monat durch manuelles Chaos, ineffiziente Rückfragen und stornierte Überverkäufe?
+              {t("b2b.speedDescription")}
             </p>
             <p className="text-foreground font-semibold text-xl">
-              LiveDealz nutzt Shopify, um Ihnen den Speed und die Sicherheit zu geben, 
-              die Ihr Großhandel braucht.
+              {t("b2b.speedConclusion")}
             </p>
           </motion.div>
         </div>
@@ -205,14 +204,13 @@ const B2B = () => {
               viewport={{ once: true }}
             >
               <span className="text-sm font-semibold text-primary uppercase tracking-wide mb-3 block">
-                Anwendungsfälle
+                {t("b2b.useCasesBadge")}
               </span>
               <h2 className="text-3xl md:text-4xl font-bold mb-6">
-                Perfekt für Ihren <span className="text-primary">B2B-Vertrieb</span>
+                {t("b2b.useCasesTitle")} <span className="text-primary">{t("b2b.useCasesTitleHighlight")}</span>
               </h2>
               <p className="text-muted-foreground mb-8">
-                Egal ob Großhandel, Hersteller oder Importeur – LiveDealz passt sich 
-                Ihrem Geschäftsmodell an und macht B2B-Bestellungen sicher und effizient.
+                {t("b2b.useCasesDescription")}
               </p>
               <ul className="space-y-4">
                 {useCases.map((useCase, index) => (
@@ -225,7 +223,7 @@ const B2B = () => {
                     className="flex items-center gap-3"
                   >
                     <CheckCircle2 className="h-5 w-5 text-primary shrink-0" />
-                    <span>{useCase}</span>
+                    <span>{t(useCase)}</span>
                   </motion.li>
                 ))}
               </ul>
@@ -238,34 +236,34 @@ const B2B = () => {
               viewport={{ once: true }}
               className="bg-card border border-border rounded-2xl p-8 md:p-12"
             >
-              <h3 className="text-2xl font-bold mb-4">So funktioniert's</h3>
+              <h3 className="text-2xl font-bold mb-4">{t("b2b.howItWorksTitle")}</h3>
               <ol className="space-y-6">
                 <li className="flex gap-4">
                   <span className="flex items-center justify-center w-8 h-8 rounded-full bg-primary text-primary-foreground text-sm font-bold shrink-0">1</span>
                   <div>
-                    <p className="font-semibold">Produkte präsentieren</p>
-                    <p className="text-muted-foreground text-sm">Zeigen Sie Ihr Sortiment live oder auf einer permanenten Bestellseite.</p>
+                    <p className="font-semibold">{t("b2b.step1.title")}</p>
+                    <p className="text-muted-foreground text-sm">{t("b2b.step1.description")}</p>
                   </div>
                 </li>
                 <li className="flex gap-4">
                   <span className="flex items-center justify-center w-8 h-8 rounded-full bg-primary text-primary-foreground text-sm font-bold shrink-0">2</span>
                   <div>
-                    <p className="font-semibold">Händler bestellen selbst</p>
-                    <p className="text-muted-foreground text-sm">Ihre Händler wählen Produkte und Mengen – in Echtzeit und selbstständig.</p>
+                    <p className="font-semibold">{t("b2b.step2.title")}</p>
+                    <p className="text-muted-foreground text-sm">{t("b2b.step2.description")}</p>
                   </div>
                 </li>
                 <li className="flex gap-4">
                   <span className="flex items-center justify-center w-8 h-8 rounded-full bg-primary text-primary-foreground text-sm font-bold shrink-0">3</span>
                   <div>
-                    <p className="font-semibold">Bestand wird garantiert reserviert</p>
-                    <p className="text-muted-foreground text-sm">Im Moment der Bestellung wird die Ware verbindlich ausgebucht – keine Doppelverkäufe möglich.</p>
+                    <p className="font-semibold">{t("b2b.step3.title")}</p>
+                    <p className="text-muted-foreground text-sm">{t("b2b.step3.description")}</p>
                   </div>
                 </li>
                 <li className="flex gap-4">
                   <span className="flex items-center justify-center w-8 h-8 rounded-full bg-primary text-primary-foreground text-sm font-bold shrink-0">4</span>
                   <div>
-                    <p className="font-semibold">Rechnung nach Lieferung</p>
-                    <p className="text-muted-foreground text-sm">Sie entscheiden, wann die Bestellung abgerechnet wird.</p>
+                    <p className="font-semibold">{t("b2b.step4.title")}</p>
+                    <p className="text-muted-foreground text-sm">{t("b2b.step4.description")}</p>
                   </div>
                 </li>
               </ol>
@@ -274,30 +272,32 @@ const B2B = () => {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-16 md:py-24 bg-gradient-to-br from-primary/10 via-background to-background">
+      {/* Contact Section */}
+      <section id="contact" className="py-16 md:py-24">
         <div className="container">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            viewport={{ once: true }}
-            className="max-w-3xl mx-auto text-center"
-          >
-            <h2 className="text-3xl md:text-4xl font-bold mb-6">
-              Bereit für risikofreien B2B-Vertrieb?
-            </h2>
-            <p className="text-muted-foreground text-lg mb-8">
-              Erleben Sie, wie LiveDealz Überverkäufe eliminiert und Ihren 
-              Großhandel mit garantierter Echtzeit-Reservierung revolutioniert.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button variant="hero" size="lg">
-                Demo buchen: Warensicherheit jetzt in Echtzeit erleben
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Button>
-            </div>
-          </motion.div>
+          <div className="grid lg:grid-cols-2 gap-12 items-start">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              viewport={{ once: true }}
+            >
+              <h2 className="text-3xl md:text-4xl font-bold mb-6">
+                {t("b2b.ctaTitle")}
+              </h2>
+              <p className="text-muted-foreground text-lg mb-8">
+                {t("b2b.ctaDescription")}
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Button variant="hero" size="lg">
+                  {t("b2b.cta")}
+                  <ArrowRight className="ml-2 h-5 w-5" />
+                </Button>
+              </div>
+            </motion.div>
+
+            <ContactForm />
+          </div>
         </div>
       </section>
 
