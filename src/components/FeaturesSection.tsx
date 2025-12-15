@@ -9,67 +9,62 @@ import {
   RefreshCw,
   Smartphone
 } from "lucide-react";
-
-const features = [
-  {
-    icon: ShoppingCart,
-    title: "Echtzeit-Reservierungen",
-    description:
-      "Kunden reservieren Produkte live während deines Streams. Über den integrierten Shopify-Checkout wird später bezahlt.",
-    color: "text-primary",
-  },
-  {
-    icon: Users,
-    title: "Individuelle Kundennummern",
-    description:
-      "Jeder Kunde erhält automatisch eine eigene Nummer. Reservierungen werden eindeutig zugeordnet – ohne Verwechslungen.",
-    color: "text-amber-500",
-  },
-  {
-    icon: RefreshCw,
-    title: "Intelligente Bestandsreservierung",
-    description:
-      "Produkte werden bei Reservierung automatisch gesperrt. Zahlt ein Kunde nicht, wird der Bestand wieder freigegeben.",
-    color: "text-emerald-500",
-  },
-  {
-    icon: Smartphone,
-    title: "Einfache Bedienung",
-    description:
-      "Scanne Produkte per Barcode und ordne sie der Kundennummer zu. Reservierung in Sekunden – direkt vom Smartphone.",
-    color: "text-primary",
-  },
-  {
-    icon: Bell,
-    title: "Automatische Erinnerungen",
-    description:
-      "Kunden werden an offene Bestellungen erinnert. Bei Bedarf werden Nichtzahler automatisch für künftige Reservierungen gesperrt.",
-    color: "text-violet-500",
-  },
-  {
-    icon: BarChart3,
-    title: "Sonderpreise im Livestream",
-    description:
-      "Vergib individuelle Preise während des Streams. Flexibel und ohne Einschränkungen – perfekt für Live-Aktionen.",
-    color: "text-sky-500",
-  },
-  {
-    icon: Zap,
-    title: "Nahtlose Integration",
-    description:
-      "Dein bestehender Shop läuft weiter wie gewohnt. Verkaufe gleichzeitig im Onlineshop und im Livestream – alles synchron.",
-    color: "text-rose-500",
-  },
-  {
-    icon: ShieldCheck,
-    title: "DSGVO-konform & sicher",
-    description:
-      "Deine Daten sind bei uns sicher. Server in Deutschland, höchste Sicherheitsstandards und vollständige DSGVO-Konformität.",
-    color: "text-teal-500",
-  },
-];
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export const FeaturesSection = () => {
+  const { t } = useLanguage();
+
+  const features = [
+    {
+      icon: ShoppingCart,
+      title: t("features.item1.title"),
+      description: t("features.item1.description"),
+      color: "text-primary",
+    },
+    {
+      icon: Users,
+      title: t("features.item2.title"),
+      description: t("features.item2.description"),
+      color: "text-amber-500",
+    },
+    {
+      icon: RefreshCw,
+      title: t("features.item3.title"),
+      description: t("features.item3.description"),
+      color: "text-emerald-500",
+    },
+    {
+      icon: Smartphone,
+      title: t("features.item4.title"),
+      description: t("features.item4.description"),
+      color: "text-primary",
+    },
+    {
+      icon: Bell,
+      title: t("features.item5.title"),
+      description: t("features.item5.description"),
+      color: "text-violet-500",
+    },
+    {
+      icon: BarChart3,
+      title: t("features.item6.title"),
+      description: t("features.item6.description"),
+      color: "text-sky-500",
+    },
+    {
+      icon: Zap,
+      title: t("features.item7.title"),
+      description: t("features.item7.description"),
+      color: "text-rose-500",
+    },
+    {
+      icon: ShieldCheck,
+      title: t("features.item8.title"),
+      description: t("features.item8.description"),
+      color: "text-teal-500",
+    },
+  ];
+
   return (
     <section id="features" className="py-16 md:py-24 bg-background">
       <div className="container">
@@ -81,14 +76,15 @@ export const FeaturesSection = () => {
           className="text-center mb-12 md:mb-16"
         >
           <span className="text-sm font-semibold text-primary uppercase tracking-wide mb-3 block">
-            Funktionen
+            {t("features.badge")}
           </span>
           <h2 className="text-3xl md:text-4xl font-bold">
-            Alles was du für erfolgreichen{" "}
-            <span className="text-primary">Live-Verkauf</span> brauchst
+            {t("features.headline")}{" "}
+            <span className="text-primary">{t("features.headlineBold")}</span>
+            {t("features.headlineEnd") && ` ${t("features.headlineEnd")}`}
           </h2>
           <p className="text-muted-foreground mt-4 max-w-2xl mx-auto">
-            Von der Reservierung bis zur Zahlung – LiveDealz automatisiert deinen gesamten Verkaufsprozess.
+            {t("features.description")}
           </p>
         </motion.div>
 

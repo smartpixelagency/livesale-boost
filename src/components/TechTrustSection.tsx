@@ -1,30 +1,33 @@
 import { motion } from "framer-motion";
 import { Server, Zap, Shield, Globe } from "lucide-react";
-
-const techPoints = [
-  {
-    icon: Zap,
-    title: "Event-getriebene Architektur",
-    description: "Webhooks von Shopify werden in Echtzeit verarbeitet. Jede Bestandsänderung wird sofort synchronisiert."
-  },
-  {
-    icon: Server,
-    title: "Skalierbare Queue-Verarbeitung",
-    description: "Verarbeitung über Queues ermöglicht hohe Last bei niedrigen Fixkosten für Händler."
-  },
-  {
-    icon: Shield,
-    title: "Privacy by Design",
-    description: "Speicherung nur minimaler IDs. Keine personenbezogenen Daten in unserem System."
-  },
-  {
-    icon: Globe,
-    title: "Server in der EU",
-    description: "DSGVO-konform. Alle Daten werden auf Servern in der Europäischen Union verarbeitet."
-  }
-];
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export const TechTrustSection = () => {
+  const { t } = useLanguage();
+
+  const techPoints = [
+    {
+      icon: Zap,
+      title: t("tech.item1.title"),
+      description: t("tech.item1.description"),
+    },
+    {
+      icon: Server,
+      title: t("tech.item2.title"),
+      description: t("tech.item2.description"),
+    },
+    {
+      icon: Shield,
+      title: t("tech.item3.title"),
+      description: t("tech.item3.description"),
+    },
+    {
+      icon: Globe,
+      title: t("tech.item4.title"),
+      description: t("tech.item4.description"),
+    },
+  ];
+
   return (
     <section className="py-16 bg-background border-t border-border">
       <div className="container">
@@ -36,10 +39,10 @@ export const TechTrustSection = () => {
           className="text-center max-w-2xl mx-auto mb-12"
         >
           <h2 className="text-2xl font-bold mb-4">
-            Technologie, der du vertrauen kannst
+            {t("tech.headline")}
           </h2>
           <p className="text-muted-foreground">
-            Moderne Infrastruktur für zuverlässige Performance – auch bei hoher Last.
+            {t("tech.description")}
           </p>
         </motion.div>
 
