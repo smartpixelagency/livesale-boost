@@ -71,7 +71,7 @@ export const Navbar = () => {
     <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border/50">
       <nav className="container flex items-center justify-between h-16 md:h-20">
         <Link to={`/${language}`} className="flex items-center">
-          <img src={Logo} alt="LiveDealz" className="h-8 md:h-10 w-auto" />
+          <img src={Logo} alt="LiveDealz" className="h-8 md:h-10 w-auto" width={258} height={56} />
         </Link>
 
         {/* Desktop Navigation */}

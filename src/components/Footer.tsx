@@ -40,7 +40,7 @@ export const Footer = () => {
           {/* Brand */}
           <div className="lg:col-span-2">
             <Link to={`/${language}`} className="inline-block mb-4">
-              <img src={LogoWhite} alt="LiveDealz" className="h-8 w-auto" />
+              <img src={LogoWhite} alt="LiveDealz" className="h-8 w-auto" width={206} height={45} />
             </Link>
             <p className="text-background/70 text-sm leading-relaxed mb-4 max-w-sm">
               {t("footer.tagline")}
