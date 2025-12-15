@@ -1,16 +1,26 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Menu, X, Globe } from "lucide-react";
+import { Menu, X, ChevronDown } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import Logo from "@/assets/logo.png";
-import { useLanguage } from "@/contexts/LanguageContext";
+import { useLanguage, Language } from "@/contexts/LanguageContext";
+
+const languages: { code: Language; label: string; flag: string }[] = [
+  { code: "de", label: "Deutsch", flag: "🇩🇪" },
+  { code: "en", label: "English", flag: "🇬🇧" },
+  { code: "no", label: "Norsk", flag: "🇳🇴" },
+];
 
 export const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [langOpen, setLangOpen] = useState(false);
+  const langRef = useRef<HTMLDivElement>(null);
   const location = useLocation();
   const isHomePage = location.pathname === "/";
   const { language, setLanguage, t } = useLanguage();
+
+  const currentLang = languages.find((l) => l.code === language) || languages[0];
 
   const navLinks = [
     { label: t("nav.features"), href: "#features", isRoute: false },
@@ -26,9 +36,15 @@ export const Navbar = () => {
     }
   };
 
-  const toggleLanguage = () => {
-    setLanguage(language === "de" ? "en" : "de");
-  };
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (langRef.current && !langRef.current.contains(e.target as Node)) {
+        setLangOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border/50">
@@ -62,13 +78,45 @@ export const Navbar = () => {
         </div>
 
         <div className="hidden md:flex items-center gap-4">
-          <button
-            onClick={toggleLanguage}
-            className="flex items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
-          >
-            <Globe size={16} />
-            {language.toUpperCase()}
-          </button>
+          {/* Language Dropdown */}
+          <div className="relative" ref={langRef}>
+            <button
+              onClick={() => setLangOpen(!langOpen)}
+              className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors rounded-lg hover:bg-accent"
+            >
+              <span className="text-lg">{currentLang.flag}</span>
+              <span>{currentLang.code.toUpperCase()}</span>
+              <ChevronDown size={14} className={`transition-transform ${langOpen ? "rotate-180" : ""}`} />
+            </button>
+            <AnimatePresence>
+              {langOpen && (
+                <motion.div
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{ duration: 0.15 }}
+                  className="absolute right-0 top-full mt-2 w-40 bg-card border border-border rounded-xl shadow-lg overflow-hidden z-50"
+                >
+                  {languages.map((lang) => (
+                    <button
+                      key={lang.code}
+                      onClick={() => {
+                        setLanguage(lang.code);
+                        setLangOpen(false);
+                      }}
+                      className={`w-full flex items-center gap-3 px-4 py-3 text-sm hover:bg-accent transition-colors ${
+                        language === lang.code ? "bg-accent font-medium" : ""
+                      }`}
+                    >
+                      <span className="text-lg">{lang.flag}</span>
+                      <span>{lang.label}</span>
+                    </button>
+                  ))}
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+          
           <a 
             href={isHomePage ? "#contact" : "/#contact"} 
             className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
@@ -82,12 +130,43 @@ export const Navbar = () => {
 
         {/* Mobile Menu Button */}
         <div className="md:hidden flex items-center gap-2">
-          <button
-            onClick={toggleLanguage}
-            className="p-2 text-muted-foreground hover:text-foreground"
-          >
-            <Globe size={20} />
-          </button>
+          {/* Mobile Language Dropdown */}
+          <div className="relative" ref={langRef}>
+            <button
+              onClick={() => setLangOpen(!langOpen)}
+              className="flex items-center gap-1 p-2 text-muted-foreground hover:text-foreground"
+            >
+              <span className="text-lg">{currentLang.flag}</span>
+              <ChevronDown size={14} />
+            </button>
+            <AnimatePresence>
+              {langOpen && (
+                <motion.div
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{ duration: 0.15 }}
+                  className="absolute right-0 top-full mt-2 w-36 bg-card border border-border rounded-xl shadow-lg overflow-hidden z-50"
+                >
+                  {languages.map((lang) => (
+                    <button
+                      key={lang.code}
+                      onClick={() => {
+                        setLanguage(lang.code);
+                        setLangOpen(false);
+                      }}
+                      className={`w-full flex items-center gap-3 px-4 py-3 text-sm hover:bg-accent transition-colors ${
+                        language === lang.code ? "bg-accent font-medium" : ""
+                      }`}
+                    >
+                      <span className="text-lg">{lang.flag}</span>
+                      <span>{lang.label}</span>
+                    </button>
+                  ))}
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
           <button
             className="p-2"
             onClick={() => setIsOpen(!isOpen)}
