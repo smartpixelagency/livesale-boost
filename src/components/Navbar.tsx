@@ -1,27 +1,33 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Globe } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import Logo from "@/assets/logo.png";
-
-const navLinks = [
-  { label: "Funktionen", href: "#features", isRoute: false },
-  { label: "Vorteile", href: "#stats", isRoute: false },
-  { label: "Preise", href: "#pricing", isRoute: false },
-  { label: "B2B", href: "/b2b", isRoute: true },
-  { label: "FAQ", href: "#faq", isRoute: false },
-];
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
   const isHomePage = location.pathname === "/";
+  const { language, setLanguage, t } = useLanguage();
+
+  const navLinks = [
+    { label: t("nav.features"), href: "#features", isRoute: false },
+    { label: t("nav.benefits"), href: "#stats", isRoute: false },
+    { label: t("nav.pricing"), href: "#pricing", isRoute: false },
+    { label: t("nav.b2b"), href: "/b2b", isRoute: true },
+    { label: t("nav.faq"), href: "#faq", isRoute: false },
+  ];
 
   const handleAnchorClick = (href: string) => {
     if (!isHomePage && href.startsWith("#")) {
       window.location.href = "/" + href;
     }
+  };
+
+  const toggleLanguage = () => {
+    setLanguage(language === "de" ? "en" : "de");
   };
 
   return (
@@ -56,25 +62,40 @@ export const Navbar = () => {
         </div>
 
         <div className="hidden md:flex items-center gap-4">
+          <button
+            onClick={toggleLanguage}
+            className="flex items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+          >
+            <Globe size={16} />
+            {language.toUpperCase()}
+          </button>
           <a 
             href={isHomePage ? "#contact" : "/#contact"} 
             className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
           >
-            Kontakt
+            {t("nav.contact")}
           </a>
           <Button variant="hero" size="default">
-            Demo buchen
+            {t("nav.bookDemo")}
           </Button>
         </div>
 
         {/* Mobile Menu Button */}
-        <button
-          className="md:hidden p-2"
-          onClick={() => setIsOpen(!isOpen)}
-          aria-label="Toggle menu"
-        >
-          {isOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
+        <div className="md:hidden flex items-center gap-2">
+          <button
+            onClick={toggleLanguage}
+            className="p-2 text-muted-foreground hover:text-foreground"
+          >
+            <Globe size={20} />
+          </button>
+          <button
+            className="p-2"
+            onClick={() => setIsOpen(!isOpen)}
+            aria-label="Toggle menu"
+          >
+            {isOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
       </nav>
 
       {/* Mobile Navigation */}
@@ -113,10 +134,10 @@ export const Navbar = () => {
                 className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors py-2"
                 onClick={() => setIsOpen(false)}
               >
-                Kontakt
+                {t("nav.contact")}
               </a>
               <Button variant="hero" size="lg" className="mt-2">
-                Demo buchen
+                {t("nav.bookDemo")}
               </Button>
             </div>
           </motion.div>
