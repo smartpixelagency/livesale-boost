@@ -13,7 +13,9 @@ export const PricingSection = () => {
     {
       name: t("pricing.starter.name"),
       monthlyPrice: "79",
+      originalMonthlyPrice: "99",
       yearlyPrice: "66",
+      originalYearlyPrice: "79",
       yearlyTotal: "790",
       description: t("pricing.starter.description"),
       cta: t("pricing.starter.cta"),
@@ -38,7 +40,9 @@ export const PricingSection = () => {
     {
       name: t("pricing.pro.name"),
       monthlyPrice: "349",
+      originalMonthlyPrice: "399",
       yearlyPrice: "291",
+      originalYearlyPrice: "349",
       yearlyTotal: "3.490",
       description: t("pricing.pro.description"),
       cta: t("pricing.pro.cta"),
@@ -65,7 +69,9 @@ export const PricingSection = () => {
     {
       name: t("pricing.enterprise.name"),
       monthlyPrice: "899",
+      originalMonthlyPrice: null,
       yearlyPrice: null,
+      originalYearlyPrice: null,
       yearlyTotal: null,
       description: t("pricing.enterprise.description"),
       cta: t("pricing.enterprise.cta"),
@@ -207,14 +213,14 @@ export const PricingSection = () => {
                 ) : (
                   <div>
                     <span className="text-sm text-muted-foreground">{t("pricing.startingFrom")}</span>
-                    <div className="flex items-baseline gap-2">
-                      <span className={`text-4xl font-bold ${isYearly ? "text-primary" : ""}`}>
+                    <div className="flex items-baseline gap-2 flex-wrap">
+                      <span className="text-4xl font-bold text-primary">
                         €{isYearly ? plan.yearlyPrice : plan.monthlyPrice}
                       </span>
                       <span className="text-muted-foreground">{t("pricing.perMonth")}</span>
-                      {isYearly && (
+                      {(isYearly ? plan.originalYearlyPrice : plan.originalMonthlyPrice) && (
                         <span className="text-lg text-muted-foreground line-through">
-                          {plan.monthlyPrice} €*
+                          {isYearly ? plan.originalYearlyPrice : plan.originalMonthlyPrice} €*
                         </span>
                       )}
                     </div>
