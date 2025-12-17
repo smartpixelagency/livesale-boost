@@ -24,6 +24,7 @@ export const PricingSection = () => {
         t("pricing.starter.features.1"),
         t("pricing.starter.features.2"),
         t("pricing.starter.features.3"),
+        t("pricing.starter.features.4"),
       ],
       scope: [
         t("pricing.starter.scope.1"),
@@ -52,9 +53,9 @@ export const PricingSection = () => {
         t("pricing.pro.features.5"),
       ],
       scope: [
-        t("pricing.starter.scope.1"),
-        t("pricing.starter.scope.2"),
-        t("pricing.starter.scope.3"),
+        t("pricing.pro.scope.1"),
+        t("pricing.pro.scope.2"),
+        t("pricing.pro.scope.3"),
       ],
       support: [
         t("pricing.pro.support.1"),
@@ -79,9 +80,9 @@ export const PricingSection = () => {
         t("pricing.enterprise.features.5"),
       ],
       scope: [
-        t("pricing.starter.scope.1"),
-        t("pricing.starter.scope.2"),
-        t("pricing.starter.scope.3"),
+        t("pricing.enterprise.scope.1"),
+        t("pricing.enterprise.scope.2"),
+        t("pricing.enterprise.scope.3"),
       ],
       support: [
         t("pricing.enterprise.support.1"),
@@ -141,13 +142,13 @@ export const PricingSection = () => {
             </span>
             <button
               onClick={() => setIsYearly(!isYearly)}
-              className={`relative w-14 h-7 rounded-full transition-colors ${
+              className={`relative w-12 h-6 rounded-full transition-colors ${
                 isYearly ? "bg-primary" : "bg-muted-foreground/30"
               }`}
             >
               <span
-                className={`absolute top-1 w-5 h-5 bg-white rounded-full shadow transition-transform ${
-                  isYearly ? "translate-x-8" : "translate-x-1"
+                className={`absolute top-0.5 left-0.5 w-5 h-5 bg-white rounded-full shadow transition-transform duration-200 ${
+                  isYearly ? "translate-x-6" : "translate-x-0"
                 }`}
               />
             </button>
