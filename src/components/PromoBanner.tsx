@@ -22,7 +22,7 @@ export const PromoBanner = () => {
   if (!isVisible) return null;
 
   return (
-    <div className="w-full bg-[#EA580C] text-white py-3 px-4 relative" style={{ zIndex: 9999 }}>
+    <div className="w-full bg-[#EA580C] text-white py-3 px-4 relative z-50">
       <div className="container mx-auto flex items-center justify-center gap-2 text-sm md:text-base pr-10">
         <Sparkles className="h-4 w-4 shrink-0 text-white" />
         <span className="font-medium text-center text-white">
