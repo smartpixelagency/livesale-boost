@@ -275,6 +275,11 @@ export const PricingSection = () => {
           ))}
         </div>
 
+        {/* Disclaimer */}
+        <p className="text-xs text-muted-foreground text-center mb-12">
+          {t("pricing.savingsDisclaimer")}
+        </p>
+
         {/* Testimonial */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}

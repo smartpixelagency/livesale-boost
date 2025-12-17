@@ -10,6 +10,9 @@ interface LanguageContextType {
 
 const translations = {
   de: {
+    // Promo Banner
+    "promo.starterOffer": "🎉 Starter-Plan für nur €79/Monat – Angebot gültig bis 31.12.2025!",
+
     // Navbar
     "nav.features": "Funktionen",
     "nav.benefits": "Vorteile",
@@ -158,7 +161,8 @@ const translations = {
     "pricing.description": "Wähle den passenden Plan für dein Live-Shopping-Business. Keine versteckten Kosten.",
     "pricing.monthly": "Monatlich",
     "pricing.yearly": "Jahresvertrag",
-    "pricing.savingsNote": "Spare mindestens 10% mit einem Jahresvertrag",
+    "pricing.savingsNote": "Spare 10% mit einem Jahresvertrag*",
+    "pricing.savingsDisclaimer": "(*) Der Rabatt ist 12 Monate für anfänglich bestellte Nutzer gültig.",
     "pricing.popular": "Beliebteste Wahl",
     "pricing.limitedTime": "Begrenzt",
     "pricing.startingFrom": "Ab",
@@ -317,6 +321,9 @@ const translations = {
     "b2b.ctaDescription": "Erleben Sie, wie LiveDealz Überverkäufe eliminiert und Ihren Großhandel mit garantierter Echtzeit-Reservierung revolutioniert.",
   },
   en: {
+    // Promo Banner
+    "promo.starterOffer": "🎉 Starter plan for only €79/month – Offer valid until 31.12.2025!",
+
     // Navbar
     "nav.features": "Features",
     "nav.benefits": "Benefits",
@@ -465,7 +472,8 @@ const translations = {
     "pricing.description": "Choose the right plan for your live shopping business. No hidden costs.",
     "pricing.monthly": "Monthly",
     "pricing.yearly": "Annual",
-    "pricing.savingsNote": "Save at least 10% with an annual contract",
+    "pricing.savingsNote": "Save 10% with an annual contract*",
+    "pricing.savingsDisclaimer": "(*) The discount is valid for 12 months for initially ordered users.",
     "pricing.popular": "Most Popular",
     "pricing.limitedTime": "Limited",
     "pricing.startingFrom": "From",
@@ -624,6 +632,9 @@ const translations = {
     "b2b.ctaDescription": "Experience how LiveDealz eliminates overselling and revolutionizes your wholesale with guaranteed real-time reservation.",
   },
   no: {
+    // Promo Banner
+    "promo.starterOffer": "🎉 Starter-plan for kun €79/måned – Tilbudet gjelder til 31.12.2025!",
+
     // Navbar
     "nav.features": "Funksjoner",
     "nav.benefits": "Fordeler",
@@ -772,7 +783,8 @@ const translations = {
     "pricing.description": "Velg riktig plan for din live-shopping-bedrift. Ingen skjulte kostnader.",
     "pricing.monthly": "Månedlig",
     "pricing.yearly": "Årskontrakt",
-    "pricing.savingsNote": "Spar minst 10% med en årskontrakt",
+    "pricing.savingsNote": "Spar 10% med en årskontrakt*",
+    "pricing.savingsDisclaimer": "(*) Rabatten gjelder i 12 måneder for opprinnelig bestilte brukere.",
     "pricing.popular": "Mest populær",
     "pricing.limitedTime": "Begrenset",
     "pricing.startingFrom": "Fra",
