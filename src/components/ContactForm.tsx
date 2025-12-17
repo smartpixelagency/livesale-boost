@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -12,8 +12,8 @@ import { z } from "zod";
 import { Link } from "react-router-dom";
 
 // Webhook URL - set this to your webhook endpoint
-const WEBHOOK_URL = ""; // Add your webhook URL here
-const RECAPTCHA_SITE_KEY = ""; // Add your reCAPTCHA site key here (v2 or v3)
+const WEBHOOK_URL = "https://webhook.site/25329316-57ee-4f97-ac84-c8644b6ed348"; // Add your webhook URL here
+const RECAPTCHA_SITE_KEY = "6LeYzy4sAAAAACZ93EuboXSph6sHAemQrYPR_193"; // Add your reCAPTCHA site key here (v2 or v3)
 
 const contactSchema = z.object({
   name: z.string().trim().min(1, "Name is required").max(100, "Name too long"),
@@ -30,19 +30,16 @@ declare global {
     grecaptcha?: {
       ready: (callback: () => void) => void;
       execute: (siteKey: string, options: { action: string }) => Promise<string>;
-      render: (container: HTMLElement, options: { sitekey: string; callback: (token: string) => void }) => number;
-      reset: (widgetId?: number) => void;
     };
   }
 }
+
 
 export const ContactForm = () => {
   const { t, language } = useLanguage();
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const [recaptchaToken, setRecaptchaToken] = useState<string | null>(null);
-  const recaptchaRef = useRef<HTMLDivElement>(null);
   const [formData, setFormData] = useState<ContactFormData>({
     name: "",
     email: "",
@@ -52,24 +49,25 @@ export const ContactForm = () => {
   });
   const [errors, setErrors] = useState<Partial<Record<keyof ContactFormData, string>>>({});
 
-  // Load reCAPTCHA script if site key is provided
   useEffect(() => {
-    if (RECAPTCHA_SITE_KEY && !window.grecaptcha) {
-      const script = document.createElement("script");
-      script.src = `https://www.google.com/recaptcha/api.js?render=explicit`;
-      script.async = true;
-      script.defer = true;
-      script.onload = () => {
-        if (window.grecaptcha && recaptchaRef.current) {
-          window.grecaptcha.render(recaptchaRef.current, {
-            sitekey: RECAPTCHA_SITE_KEY,
-            callback: (token: string) => setRecaptchaToken(token),
-          });
-        }
-      };
-      document.head.appendChild(script);
-    }
-  }, []);
+    if (!RECAPTCHA_SITE_KEY) return;
+
+    // Script nur einmal laden
+    const existing = document.querySelector('script[data-recaptcha="v3"]');
+    if (existing) return;
+
+    const script = document.createElement("script");
+    script.src = `https://www.google.com/recaptcha/api.js?render=${encodeURIComponent(
+        RECAPTCHA_SITE_KEY
+    )}`;
+    script.async = true;
+    script.defer = true;
+    script.setAttribute("data-recaptcha", "v3");
+
+    document.head.appendChild(script);
+  }, [RECAPTCHA_SITE_KEY]);
+
+
 
   const labels = {
     de: {
@@ -179,13 +177,30 @@ export const ContactForm = () => {
       return;
     }
 
-    // Check reCAPTCHA if enabled
-    if (RECAPTCHA_SITE_KEY && !recaptchaToken) {
-      toast({
-        title: language === "de" ? "reCAPTCHA erforderlich" : language === "no" ? "reCAPTCHA påkrevd" : "reCAPTCHA required",
-        description: language === "de" ? "Bitte bestätigen Sie das reCAPTCHA." : language === "no" ? "Vennligst bekreft reCAPTCHA." : "Please complete the reCAPTCHA.",
-        variant: "destructive",
+    let tokenToSend: string | undefined = undefined;
+
+    if (RECAPTCHA_SITE_KEY) {
+      if (!window.grecaptcha) {
+        toast({
+          title: language === "de" ? "reCAPTCHA lädt noch" : language === "no" ? "reCAPTCHA laster" : "reCAPTCHA still loading",
+          description: language === "de" ? "Bitte in 1–2 Sekunden nochmal senden." : language === "no" ? "Prøv igjen om et øyeblikk." : "Please try again in a moment.",
+          variant: "destructive",
+        });
+        return;
+      }
+
+      tokenToSend = await new Promise<string>((resolve, reject) => {
+        window.grecaptcha!.ready(() => {
+          window.grecaptcha!
+              .execute(RECAPTCHA_SITE_KEY, { action: "contact_form_submit" })
+              .then(resolve)
+              .catch(reject);
+        });
       });
+    }
+
+    if (RECAPTCHA_SITE_KEY && !tokenToSend) {
+      toast({ title: "reCAPTCHA error", description: l.error, variant: "destructive" });
       return;
     }
 
@@ -203,7 +218,8 @@ export const ContactForm = () => {
           company: result.data.company,
           message: result.data.message,
           language,
-          recaptchaToken: recaptchaToken || undefined,
+          recaptchaToken: tokenToSend,
+          recaptchaAction: "contact_form_submit",
           timestamp: new Date().toISOString(),
           source: "livedealz-website",
         }),
@@ -224,11 +240,7 @@ export const ContactForm = () => {
         description: l.error,
         variant: "destructive",
       });
-      // Reset reCAPTCHA on error
-      if (window.grecaptcha) {
-        window.grecaptcha.reset();
-        setRecaptchaToken(null);
-      }
+
     } finally {
       setIsSubmitting(false);
     }
@@ -338,10 +350,7 @@ export const ContactForm = () => {
           <p className="text-destructive text-sm -mt-2">{errors.privacyAccepted}</p>
         )}
 
-        {/* reCAPTCHA widget container - only shows if site key is configured */}
-        {RECAPTCHA_SITE_KEY && (
-          <div ref={recaptchaRef} className="flex justify-center" />
-        )}
+
 
         <Button type="submit" variant="hero" size="lg" className="w-full" disabled={isSubmitting}>
           {isSubmitting ? (
