@@ -1,88 +1,94 @@
 import { motion } from "framer-motion";
-import { Check, Sparkles, X } from "lucide-react";
+import { Check, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { ContactDialog } from "./ContactDialog";
+import { useState } from "react";
 
 export const PricingSection = () => {
   const { t } = useLanguage();
+  const [isYearly, setIsYearly] = useState(false);
 
   const plans = [
     {
       name: t("pricing.starter.name"),
-      price: "79",
-      yearlyPrice: "790",
+      monthlyPrice: "79",
+      yearlyPrice: "66",
+      yearlyTotal: "790",
       description: t("pricing.starter.description"),
-      features: [
-        t("pricing.starter.feature1"),
-        t("pricing.starter.feature2"),
-        t("pricing.starter.feature3"),
-        t("pricing.starter.feature4"),
-        t("pricing.starter.feature5"),
-        t("pricing.starter.feature6"),
-      ],
       cta: t("pricing.starter.cta"),
       popular: false,
-      discount: null,
+      limitedTime: true,
       isEnterprise: false,
+      features: [
+        t("pricing.starter.features.1"),
+        t("pricing.starter.features.2"),
+        t("pricing.starter.features.3"),
+      ],
+      scope: [
+        t("pricing.starter.scope.1"),
+        t("pricing.starter.scope.2"),
+        t("pricing.starter.scope.3"),
+      ],
+      support: [
+        t("pricing.starter.support.1"),
+      ],
     },
     {
       name: t("pricing.pro.name"),
-      price: "349",
-      yearlyPrice: "3.490",
+      monthlyPrice: "349",
+      yearlyPrice: "291",
+      yearlyTotal: "3.490",
       description: t("pricing.pro.description"),
-      features: [
-        t("pricing.pro.feature1"),
-        t("pricing.pro.feature2"),
-        t("pricing.pro.feature3"),
-        t("pricing.pro.feature4"),
-        t("pricing.pro.feature5"),
-        t("pricing.pro.feature6"),
-        t("pricing.pro.feature7"),
-      ],
       cta: t("pricing.pro.cta"),
       popular: true,
-      discount: t("pricing.pro.discount"),
+      limitedTime: false,
       isEnterprise: false,
+      features: [
+        t("pricing.pro.features.1"),
+        t("pricing.pro.features.2"),
+        t("pricing.pro.features.3"),
+        t("pricing.pro.features.4"),
+        t("pricing.pro.features.5"),
+      ],
+      scope: [
+        t("pricing.starter.scope.1"),
+        t("pricing.starter.scope.2"),
+        t("pricing.starter.scope.3"),
+      ],
+      support: [
+        t("pricing.pro.support.1"),
+        t("pricing.pro.support.2"),
+      ],
     },
     {
       name: t("pricing.enterprise.name"),
-      price: "899",
+      monthlyPrice: "899",
       yearlyPrice: null,
+      yearlyTotal: null,
       description: t("pricing.enterprise.description"),
-      features: [
-        t("pricing.enterprise.feature1"),
-        t("pricing.enterprise.feature2"),
-        t("pricing.enterprise.feature3"),
-        t("pricing.enterprise.feature4"),
-        t("pricing.enterprise.feature5"),
-        t("pricing.enterprise.feature6"),
-      ],
       cta: t("pricing.enterprise.cta"),
       popular: false,
-      discount: null,
+      limitedTime: false,
       isEnterprise: true,
+      features: [
+        t("pricing.enterprise.features.1"),
+        t("pricing.enterprise.features.2"),
+        t("pricing.enterprise.features.3"),
+        t("pricing.enterprise.features.4"),
+        t("pricing.enterprise.features.5"),
+      ],
+      scope: [
+        t("pricing.starter.scope.1"),
+        t("pricing.starter.scope.2"),
+        t("pricing.starter.scope.3"),
+      ],
+      support: [
+        t("pricing.enterprise.support.1"),
+        t("pricing.enterprise.support.2"),
+        t("pricing.enterprise.support.3"),
+      ],
     },
-  ];
-
-  const comparisonFeatures = [
-    { name: t("pricing.comparison.realtime"), starter: true, pro: true, enterprise: true },
-    { name: t("pricing.comparison.unlimited"), starter: true, pro: true, enterprise: true },
-    { name: t("pricing.comparison.shopify"), starter: true, pro: true, enterprise: true },
-    { name: t("pricing.comparison.checkout"), starter: true, pro: true, enterprise: true },
-    { name: t("pricing.comparison.reservationLimit"), starter: "300", pro: t("pricing.comparison.unlimitedText"), enterprise: t("pricing.comparison.unlimitedText") },
-    { name: t("pricing.comparison.users"), starter: "1", pro: "3", enterprise: t("pricing.comparison.unlimitedText") },
-    { name: t("pricing.comparison.shops"), starter: "1", pro: t("pricing.comparison.multiple"), enterprise: t("pricing.comparison.unlimitedText") },
-    { name: t("pricing.comparison.specialPrices"), starter: false, pro: true, enterprise: true },
-    { name: t("pricing.comparison.reminders"), starter: false, pro: true, enterprise: true },
-    { name: t("pricing.comparison.blocking"), starter: false, pro: true, enterprise: true },
-    { name: t("pricing.comparison.invoices"), starter: false, pro: true, enterprise: true },
-    { name: t("pricing.comparison.dashboards"), starter: false, pro: true, enterprise: true },
-    { name: t("pricing.comparison.prioritySupport"), starter: false, pro: true, enterprise: true },
-    { name: t("pricing.comparison.customIntegrations"), starter: false, pro: false, enterprise: true },
-    { name: t("pricing.comparison.accountManager"), starter: false, pro: false, enterprise: true },
-    { name: t("pricing.comparison.whiteLabel"), starter: false, pro: false, enterprise: true },
-    { name: t("pricing.comparison.sla"), starter: false, pro: false, enterprise: true },
   ];
 
   return (
@@ -116,7 +122,7 @@ export const PricingSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
           viewport={{ once: true }}
-          className="text-center mb-12 md:mb-16"
+          className="text-center mb-8"
         >
           <span className="text-sm font-semibold text-primary uppercase tracking-wide mb-3 block">
             {t("pricing.badge")}
@@ -124,8 +130,33 @@ export const PricingSection = () => {
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
             {t("pricing.headline")}
           </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-muted-foreground max-w-2xl mx-auto mb-8">
             {t("pricing.description")}
+          </p>
+
+          {/* Billing Toggle */}
+          <div className="flex items-center justify-center gap-2 mb-4">
+            <span className={`text-sm font-medium ${!isYearly ? "text-foreground" : "text-muted-foreground"}`}>
+              {t("pricing.monthly")}
+            </span>
+            <button
+              onClick={() => setIsYearly(!isYearly)}
+              className={`relative w-14 h-7 rounded-full transition-colors ${
+                isYearly ? "bg-primary" : "bg-muted-foreground/30"
+              }`}
+            >
+              <span
+                className={`absolute top-1 w-5 h-5 bg-white rounded-full shadow transition-transform ${
+                  isYearly ? "translate-x-8" : "translate-x-1"
+                }`}
+              />
+            </button>
+            <span className={`text-sm font-medium ${isYearly ? "text-foreground" : "text-muted-foreground"}`}>
+              {t("pricing.yearly")}
+            </span>
+          </div>
+          <p className="text-sm text-muted-foreground">
+            {t("pricing.savingsNote")}
           </p>
         </motion.div>
 
@@ -144,41 +175,52 @@ export const PricingSection = () => {
                   : "border-border"
               }`}
             >
-              {plan.popular && (
-                <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-                  <span className="bg-primary text-primary-foreground text-xs font-semibold px-3 py-1 rounded-full whitespace-nowrap">
+              {/* Badges */}
+              <div className="flex items-center gap-2 mb-4">
+                <h3 className="text-xl font-bold">{plan.name}</h3>
+                {plan.popular && (
+                  <span className="bg-primary text-primary-foreground text-xs font-semibold px-2 py-0.5 rounded-full">
                     {t("pricing.popular")}
                   </span>
-                </div>
-              )}
-              <div className="mb-6">
-                <h3 className="text-xl font-bold mb-2">{plan.name}</h3>
-                <p className="text-muted-foreground text-sm">{plan.description}</p>
+                )}
+                {plan.limitedTime && (
+                  <span className="bg-amber-500 text-white text-xs font-semibold px-2 py-0.5 rounded-full">
+                    {t("pricing.limitedTime")}
+                  </span>
+                )}
               </div>
+
+              <p className="text-muted-foreground text-sm mb-4 min-h-[40px]">{plan.description}</p>
+
+              {/* Price */}
               <div className="mb-6">
                 {plan.isEnterprise ? (
                   <div>
                     <span className="text-sm text-muted-foreground">{t("pricing.startingFrom")}</span>
                     <div className="flex items-baseline gap-1">
-                      <span className="text-4xl font-bold">€{plan.price}</span>
+                      <span className="text-4xl font-bold">€{plan.monthlyPrice}</span>
                       <span className="text-muted-foreground">{t("pricing.perMonth")}</span>
                     </div>
                     <span className="text-sm text-muted-foreground">{t("pricing.custom")}</span>
                   </div>
                 ) : (
                   <div>
+                    <span className="text-sm text-muted-foreground">{t("pricing.startingFrom")}</span>
                     <div className="flex items-baseline gap-1">
-                      <span className="text-4xl font-bold">€{plan.price}</span>
+                      <span className="text-4xl font-bold">
+                        €{isYearly ? plan.yearlyPrice : plan.monthlyPrice}
+                      </span>
                       <span className="text-muted-foreground">{t("pricing.perMonth")}</span>
                     </div>
-                    {plan.yearlyPrice && (
+                    {isYearly && plan.yearlyTotal && (
                       <span className="text-sm text-muted-foreground">
-                        {t("pricing.orYearly")} €{plan.yearlyPrice}
+                        {t("pricing.billedYearly")} €{plan.yearlyTotal}
                       </span>
                     )}
                   </div>
                 )}
               </div>
+
               <ContactDialog
                 trigger={
                   <Button
@@ -189,14 +231,45 @@ export const PricingSection = () => {
                   </Button>
                 }
               />
-              <ul className="space-y-3">
-                {plan.features.map((feature) => (
-                  <li key={feature} className="flex items-start gap-3 text-sm">
-                    <Check className="h-5 w-5 text-primary shrink-0" />
-                    <span>{feature}</span>
-                  </li>
-                ))}
-              </ul>
+
+              {/* Features Section */}
+              <div className="mb-6">
+                <h4 className="font-semibold text-sm mb-3 text-foreground">Features</h4>
+                <ul className="space-y-2">
+                  {plan.features.map((feature) => (
+                    <li key={feature} className="flex items-start gap-2 text-sm">
+                      <Check className="h-4 w-4 text-primary shrink-0 mt-0.5" />
+                      <span className="text-muted-foreground">{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Scope Section */}
+              <div className="mb-6">
+                <h4 className="font-semibold text-sm mb-3 text-foreground">{t("pricing.scopeTitle")}</h4>
+                <ul className="space-y-2">
+                  {plan.scope.map((item) => (
+                    <li key={item} className="flex items-start gap-2 text-sm">
+                      <Check className="h-4 w-4 text-primary shrink-0 mt-0.5" />
+                      <span className="text-muted-foreground">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Support Section */}
+              <div>
+                <h4 className="font-semibold text-sm mb-3 text-foreground">{t("pricing.supportTitle")}</h4>
+                <ul className="space-y-2">
+                  {plan.support.map((item) => (
+                    <li key={item} className="flex items-start gap-2 text-sm">
+                      <Check className="h-4 w-4 text-primary shrink-0 mt-0.5" />
+                      <span className="text-muted-foreground">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </motion.div>
           ))}
         </div>
@@ -207,7 +280,7 @@ export const PricingSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
           viewport={{ once: true }}
-          className="bg-card border border-border rounded-2xl p-8 md:p-12 text-center mb-16"
+          className="bg-card border border-border rounded-2xl p-8 md:p-12 text-center"
         >
           <blockquote className="text-lg md:text-xl italic text-foreground max-w-3xl mx-auto mb-6">
             {t("pricing.testimonial")}
@@ -215,62 +288,6 @@ export const PricingSection = () => {
           <div>
             <p className="font-semibold">{t("pricing.testimonialAuthor")}</p>
             <p className="text-muted-foreground text-sm">{t("pricing.testimonialRole")}</p>
-          </div>
-        </motion.div>
-
-        {/* Comparison Table */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          viewport={{ once: true }}
-        >
-          <h3 className="text-2xl font-bold text-center mb-8">{t("pricing.comparisonTitle")}</h3>
-          <div className="overflow-x-auto max-w-5xl mx-auto">
-            <table className="w-full">
-              <thead>
-                <tr className="border-b border-border">
-                  <th className="text-left py-4 px-4 font-medium text-muted-foreground">{t("pricing.feature")}</th>
-                  <th className="text-center py-4 px-4 font-semibold">Starter</th>
-                  <th className="text-center py-4 px-4 font-semibold text-primary">Pro</th>
-                  <th className="text-center py-4 px-4 font-semibold">Enterprise</th>
-                </tr>
-              </thead>
-              <tbody>
-                {comparisonFeatures.map((feature, index) => (
-                  <tr key={feature.name} className={index % 2 === 0 ? "bg-muted/30" : ""}>
-                    <td className="py-3 px-4 text-sm">{feature.name}</td>
-                    <td className="py-3 px-4 text-center">
-                      {typeof feature.starter === "string" ? (
-                        <span className="text-sm">{feature.starter}</span>
-                      ) : feature.starter ? (
-                        <Check className="h-5 w-5 text-primary mx-auto" />
-                      ) : (
-                        <X className="h-5 w-5 text-muted-foreground mx-auto" />
-                      )}
-                    </td>
-                    <td className="py-3 px-4 text-center">
-                      {typeof feature.pro === "string" ? (
-                        <span className="text-sm">{feature.pro}</span>
-                      ) : feature.pro ? (
-                        <Check className="h-5 w-5 text-primary mx-auto" />
-                      ) : (
-                        <X className="h-5 w-5 text-muted-foreground mx-auto" />
-                      )}
-                    </td>
-                    <td className="py-3 px-4 text-center">
-                      {typeof feature.enterprise === "string" ? (
-                        <span className="text-sm">{feature.enterprise}</span>
-                      ) : feature.enterprise ? (
-                        <Check className="h-5 w-5 text-primary mx-auto" />
-                      ) : (
-                        <X className="h-5 w-5 text-muted-foreground mx-auto" />
-                      )}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
           </div>
         </motion.div>
       </div>
