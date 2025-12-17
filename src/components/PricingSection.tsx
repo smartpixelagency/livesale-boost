@@ -1,7 +1,8 @@
 import { motion } from "framer-motion";
-import { Check, Sparkles } from "lucide-react";
+import { Check, Sparkles, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { ContactDialog } from "./ContactDialog";
 
 export const PricingSection = () => {
   const { t } = useLanguage();
@@ -9,7 +10,8 @@ export const PricingSection = () => {
   const plans = [
     {
       name: t("pricing.starter.name"),
-      price: "99",
+      price: "79",
+      yearlyPrice: "790",
       description: t("pricing.starter.description"),
       features: [
         t("pricing.starter.feature1"),
@@ -18,16 +20,16 @@ export const PricingSection = () => {
         t("pricing.starter.feature4"),
         t("pricing.starter.feature5"),
         t("pricing.starter.feature6"),
-        t("pricing.starter.feature7"),
       ],
       cta: t("pricing.starter.cta"),
       popular: false,
       discount: null,
+      isEnterprise: false,
     },
     {
       name: t("pricing.pro.name"),
-      price: "899",
-      discountedPrice: "449",
+      price: "349",
+      yearlyPrice: "3.490",
       description: t("pricing.pro.description"),
       features: [
         t("pricing.pro.feature1"),
@@ -41,21 +43,46 @@ export const PricingSection = () => {
       cta: t("pricing.pro.cta"),
       popular: true,
       discount: t("pricing.pro.discount"),
+      isEnterprise: false,
+    },
+    {
+      name: t("pricing.enterprise.name"),
+      price: "899",
+      yearlyPrice: null,
+      description: t("pricing.enterprise.description"),
+      features: [
+        t("pricing.enterprise.feature1"),
+        t("pricing.enterprise.feature2"),
+        t("pricing.enterprise.feature3"),
+        t("pricing.enterprise.feature4"),
+        t("pricing.enterprise.feature5"),
+        t("pricing.enterprise.feature6"),
+      ],
+      cta: t("pricing.enterprise.cta"),
+      popular: false,
+      discount: null,
+      isEnterprise: true,
     },
   ];
 
   const comparisonFeatures = [
-    { name: t("pricing.comparison.realtime"), starter: true, pro: true },
-    { name: t("pricing.comparison.unlimited"), starter: true, pro: true },
-    { name: t("pricing.comparison.customerNumbers"), starter: true, pro: true },
-    { name: t("pricing.comparison.shopify"), starter: true, pro: true },
-    { name: t("pricing.comparison.checkout"), starter: true, pro: true },
-    { name: t("pricing.comparison.unlimitedOrders"), starter: false, pro: true },
-    { name: t("pricing.comparison.specialPrices"), starter: false, pro: true },
-    { name: t("pricing.comparison.reminders"), starter: false, pro: true },
-    { name: t("pricing.comparison.blocking"), starter: false, pro: true },
-    { name: t("pricing.comparison.dashboards"), starter: false, pro: true },
-    { name: t("pricing.comparison.chatSupport"), starter: false, pro: true },
+    { name: t("pricing.comparison.realtime"), starter: true, pro: true, enterprise: true },
+    { name: t("pricing.comparison.unlimited"), starter: true, pro: true, enterprise: true },
+    { name: t("pricing.comparison.shopify"), starter: true, pro: true, enterprise: true },
+    { name: t("pricing.comparison.checkout"), starter: true, pro: true, enterprise: true },
+    { name: t("pricing.comparison.reservationLimit"), starter: "300", pro: t("pricing.comparison.unlimitedText"), enterprise: t("pricing.comparison.unlimitedText") },
+    { name: t("pricing.comparison.users"), starter: "1", pro: "3", enterprise: t("pricing.comparison.unlimitedText") },
+    { name: t("pricing.comparison.shops"), starter: "1", pro: t("pricing.comparison.multiple"), enterprise: t("pricing.comparison.unlimitedText") },
+    { name: t("pricing.comparison.specialPrices"), starter: false, pro: true, enterprise: true },
+    { name: t("pricing.comparison.reminders"), starter: false, pro: true, enterprise: true },
+    { name: t("pricing.comparison.blocking"), starter: false, pro: true, enterprise: true },
+    { name: t("pricing.comparison.invoices"), starter: false, pro: true, enterprise: true },
+    { name: t("pricing.comparison.dashboards"), starter: false, pro: true, enterprise: true },
+    { name: t("pricing.comparison.prioritySupport"), starter: false, pro: true, enterprise: true },
+    { name: t("pricing.comparison.customIntegrations"), starter: false, pro: false, enterprise: true },
+    { name: t("pricing.comparison.accountManager"), starter: false, pro: false, enterprise: true },
+    { name: t("pricing.comparison.whiteLabel"), starter: false, pro: false, enterprise: true },
+    { name: t("pricing.comparison.sla"), starter: false, pro: false, enterprise: true },
   ];
 
   return (
@@ -80,9 +107,7 @@ export const PricingSection = () => {
             {t("pricing.pioneerTitle")}
           </h3>
           <p className="text-muted-foreground max-w-xl mx-auto">
-            {t("pricing.pioneerDescription")}{" "}
-            <span className="text-primary font-semibold">{t("pricing.pioneerDiscount")}</span>{" "}
-            {t("pricing.pioneerDescriptionEnd")}
+            {t("pricing.pioneerDescription")}
           </p>
         </motion.div>
 
@@ -105,7 +130,7 @@ export const PricingSection = () => {
         </motion.div>
 
         {/* Pricing Cards */}
-        <div className="grid md:grid-cols-2 gap-6 md:gap-8 max-w-4xl mx-auto mb-16">
+        <div className="grid md:grid-cols-3 gap-6 md:gap-8 max-w-6xl mx-auto mb-16">
           {plans.map((plan, index) => (
             <motion.div
               key={plan.name}
@@ -119,10 +144,10 @@ export const PricingSection = () => {
                   : "border-border"
               }`}
             >
-              {plan.discount && (
+              {plan.popular && (
                 <div className="absolute -top-3 left-1/2 -translate-x-1/2">
                   <span className="bg-primary text-primary-foreground text-xs font-semibold px-3 py-1 rounded-full whitespace-nowrap">
-                    {plan.discount}
+                    {t("pricing.popular")}
                   </span>
                 </div>
               )}
@@ -131,25 +156,39 @@ export const PricingSection = () => {
                 <p className="text-muted-foreground text-sm">{plan.description}</p>
               </div>
               <div className="mb-6">
-                {plan.discountedPrice ? (
-                  <div className="flex items-baseline gap-2">
-                    <span className="text-4xl font-bold">€{plan.discountedPrice}</span>
-                    <span className="text-xl text-muted-foreground line-through">€{plan.price}</span>
-                    <span className="text-muted-foreground">{t("pricing.perMonth")}</span>
+                {plan.isEnterprise ? (
+                  <div>
+                    <span className="text-sm text-muted-foreground">{t("pricing.startingFrom")}</span>
+                    <div className="flex items-baseline gap-1">
+                      <span className="text-4xl font-bold">€{plan.price}</span>
+                      <span className="text-muted-foreground">{t("pricing.perMonth")}</span>
+                    </div>
+                    <span className="text-sm text-muted-foreground">{t("pricing.custom")}</span>
                   </div>
                 ) : (
-                  <>
-                    <span className="text-4xl font-bold">€{plan.price}</span>
-                    <span className="text-muted-foreground"> {t("pricing.perMonth")}</span>
-                  </>
+                  <div>
+                    <div className="flex items-baseline gap-1">
+                      <span className="text-4xl font-bold">€{plan.price}</span>
+                      <span className="text-muted-foreground">{t("pricing.perMonth")}</span>
+                    </div>
+                    {plan.yearlyPrice && (
+                      <span className="text-sm text-muted-foreground">
+                        {t("pricing.orYearly")} €{plan.yearlyPrice}
+                      </span>
+                    )}
+                  </div>
                 )}
               </div>
-              <Button
-                variant={plan.popular ? "hero" : "outline"}
-                className="w-full mb-6"
-              >
-                {plan.cta}
-              </Button>
+              <ContactDialog
+                trigger={
+                  <Button
+                    variant={plan.popular ? "hero" : "outline"}
+                    className="w-full mb-6"
+                  >
+                    {plan.cta}
+                  </Button>
+                }
+              />
               <ul className="space-y-3">
                 {plan.features.map((feature) => (
                   <li key={feature} className="flex items-start gap-3 text-sm">
@@ -187,13 +226,14 @@ export const PricingSection = () => {
           viewport={{ once: true }}
         >
           <h3 className="text-2xl font-bold text-center mb-8">{t("pricing.comparisonTitle")}</h3>
-          <div className="overflow-x-auto max-w-3xl mx-auto">
+          <div className="overflow-x-auto max-w-5xl mx-auto">
             <table className="w-full">
               <thead>
                 <tr className="border-b border-border">
                   <th className="text-left py-4 px-4 font-medium text-muted-foreground">{t("pricing.feature")}</th>
                   <th className="text-center py-4 px-4 font-semibold">Starter</th>
                   <th className="text-center py-4 px-4 font-semibold text-primary">Pro</th>
+                  <th className="text-center py-4 px-4 font-semibold">Enterprise</th>
                 </tr>
               </thead>
               <tbody>
@@ -201,17 +241,30 @@ export const PricingSection = () => {
                   <tr key={feature.name} className={index % 2 === 0 ? "bg-muted/30" : ""}>
                     <td className="py-3 px-4 text-sm">{feature.name}</td>
                     <td className="py-3 px-4 text-center">
-                      {feature.starter ? (
+                      {typeof feature.starter === "string" ? (
+                        <span className="text-sm">{feature.starter}</span>
+                      ) : feature.starter ? (
                         <Check className="h-5 w-5 text-primary mx-auto" />
                       ) : (
-                        <span className="text-muted-foreground">—</span>
+                        <X className="h-5 w-5 text-muted-foreground mx-auto" />
                       )}
                     </td>
                     <td className="py-3 px-4 text-center">
-                      {feature.pro ? (
+                      {typeof feature.pro === "string" ? (
+                        <span className="text-sm">{feature.pro}</span>
+                      ) : feature.pro ? (
                         <Check className="h-5 w-5 text-primary mx-auto" />
                       ) : (
-                        <span className="text-muted-foreground">—</span>
+                        <X className="h-5 w-5 text-muted-foreground mx-auto" />
+                      )}
+                    </td>
+                    <td className="py-3 px-4 text-center">
+                      {typeof feature.enterprise === "string" ? (
+                        <span className="text-sm">{feature.enterprise}</span>
+                      ) : feature.enterprise ? (
+                        <Check className="h-5 w-5 text-primary mx-auto" />
+                      ) : (
+                        <X className="h-5 w-5 text-muted-foreground mx-auto" />
                       )}
                     </td>
                   </tr>
