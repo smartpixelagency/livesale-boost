@@ -198,7 +198,7 @@ export const PricingSection = () => {
                 {plan.isEnterprise ? (
                   <div>
                     <span className="text-sm text-muted-foreground">{t("pricing.startingFrom")}</span>
-                    <div className="flex items-baseline gap-1">
+                    <div className="flex items-baseline gap-2">
                       <span className="text-4xl font-bold">€{plan.monthlyPrice}</span>
                       <span className="text-muted-foreground">{t("pricing.perMonth")}</span>
                     </div>
@@ -207,11 +207,16 @@ export const PricingSection = () => {
                 ) : (
                   <div>
                     <span className="text-sm text-muted-foreground">{t("pricing.startingFrom")}</span>
-                    <div className="flex items-baseline gap-1">
-                      <span className="text-4xl font-bold">
+                    <div className="flex items-baseline gap-2">
+                      <span className={`text-4xl font-bold ${isYearly ? "text-primary" : ""}`}>
                         €{isYearly ? plan.yearlyPrice : plan.monthlyPrice}
                       </span>
                       <span className="text-muted-foreground">{t("pricing.perMonth")}</span>
+                      {isYearly && (
+                        <span className="text-lg text-muted-foreground line-through">
+                          {plan.monthlyPrice} €*
+                        </span>
+                      )}
                     </div>
                     {isYearly && plan.yearlyTotal && (
                       <span className="text-sm text-muted-foreground">
