@@ -11,11 +11,13 @@ import { TechTrustSection } from "@/components/TechTrustSection";
 import { CTASection } from "@/components/CTASection";
 import { Footer } from "@/components/Footer";
 import { SEOHead } from "@/components/SEOHead";
+import { PromoBanner } from "@/components/PromoBanner";
 
 const Index = () => {
   return (
     <div className="min-h-screen">
       <SEOHead />
+      <PromoBanner />
       <Navbar />
       <main>
         <HeroSection />
