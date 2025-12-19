@@ -12,7 +12,9 @@ import { z } from "zod";
 import { Link } from "react-router-dom";
 
 // Webhook URL - set this to your webhook endpoint
-const WEBHOOK_URL = "https://webhook.site/25329316-57ee-4f97-ac84-c8644b6ed348"; // Add your webhook URL here
+// Use proxy endpoint in both dev and production to avoid CORS issues
+// The nginx server will proxy /api/webhook to the actual webhook URL
+const WEBHOOK_URL = "/api/webhook";
 const RECAPTCHA_SITE_KEY = "6LeYzy4sAAAAACZ93EuboXSph6sHAemQrYPR_193"; // Add your reCAPTCHA site key here (v2 or v3)
 
 const contactSchema = z.object({
@@ -35,7 +37,11 @@ declare global {
 }
 
 
-export const ContactForm = () => {
+interface ContactFormProps {
+  resetTrigger?: number;
+}
+
+export const ContactForm = ({ resetTrigger }: ContactFormProps = {}) => {
   const { t, language } = useLanguage();
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -48,6 +54,22 @@ export const ContactForm = () => {
     privacyAccepted: false,
   });
   const [errors, setErrors] = useState<Partial<Record<keyof ContactFormData, string>>>({});
+
+  // Reset form when resetTrigger changes
+  useEffect(() => {
+    if (resetTrigger !== undefined && resetTrigger > 0) {
+      setFormData({
+        name: "",
+        email: "",
+        company: "",
+        message: "",
+        privacyAccepted: false,
+      });
+      setErrors({});
+      setIsSubmitted(false);
+      setIsSubmitting(false);
+    }
+  }, [resetTrigger]);
 
   useEffect(() => {
     if (!RECAPTCHA_SITE_KEY) return;
@@ -189,14 +211,23 @@ export const ContactForm = () => {
         return;
       }
 
-      tokenToSend = await new Promise<string>((resolve, reject) => {
-        window.grecaptcha!.ready(() => {
-          window.grecaptcha!
-              .execute(RECAPTCHA_SITE_KEY, { action: "contact_form_submit" })
-              .then(resolve)
-              .catch(reject);
+      try {
+        tokenToSend = await new Promise<string>((resolve, reject) => {
+          window.grecaptcha!.ready(() => {
+            window.grecaptcha!
+                .execute(RECAPTCHA_SITE_KEY, { action: "contact_form_submit" })
+                .then(resolve)
+                .catch(reject);
+          });
         });
-      });
+      } catch (error) {
+        toast({ 
+          title: "reCAPTCHA error", 
+          description: l.error, 
+          variant: "destructive" 
+        });
+        return;
+      }
     }
 
     if (RECAPTCHA_SITE_KEY && !tokenToSend) {
@@ -230,6 +261,15 @@ export const ContactForm = () => {
       }
 
       setIsSubmitted(true);
+      // Reset form data after successful submission
+      setFormData({
+        name: "",
+        email: "",
+        company: "",
+        message: "",
+        privacyAccepted: false,
+      });
+      setErrors({});
       toast({
         title: "✓",
         description: l.success,

@@ -13,10 +13,19 @@ interface ContactDialogProps {
 export const ContactDialog = forwardRef<HTMLButtonElement, ContactDialogProps>(
   ({ trigger, variant = "hero", size = "default" }, ref) => {
     const [open, setOpen] = useState(false);
+    const [resetKey, setResetKey] = useState(0);
     const { t } = useLanguage();
 
+    const handleOpenChange = (newOpen: boolean) => {
+      setOpen(newOpen);
+      if (!newOpen) {
+        // Reset form when dialog closes
+        setResetKey(prev => prev + 1);
+      }
+    };
+
     return (
-      <Dialog open={open} onOpenChange={setOpen}>
+      <Dialog open={open} onOpenChange={handleOpenChange}>
         <DialogTrigger asChild>
           {trigger || (
             <Button ref={ref} variant={variant} size={size}>
@@ -25,7 +34,7 @@ export const ContactDialog = forwardRef<HTMLButtonElement, ContactDialogProps>(
           )}
         </DialogTrigger>
         <DialogContent className="sm:max-w-[500px] p-0 overflow-hidden bg-transparent border-none">
-          <ContactForm />
+          <ContactForm resetTrigger={resetKey} />
         </DialogContent>
       </Dialog>
     );
