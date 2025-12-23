@@ -87,7 +87,7 @@ export const ContactForm = ({ resetTrigger }: ContactFormProps = {}) => {
     script.setAttribute("data-recaptcha", "v3");
 
     document.head.appendChild(script);
-  }, [RECAPTCHA_SITE_KEY]);
+  }, []);
 
 
 
