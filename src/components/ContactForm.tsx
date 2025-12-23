@@ -15,7 +15,6 @@ import { Link } from "react-router-dom";
 // Use proxy endpoint in both dev and production to avoid CORS issues
 // The nginx server will proxy /api/webhook to the actual webhook URL
 const WEBHOOK_URL = "/api/webhook";
-const RECAPTCHA_SITE_KEY = "6LeYzy4sAAAAACZ93EuboXSph6sHAemQrYPR_193"; // Add your reCAPTCHA site key here (v2 or v3)
 
 const contactSchema = z.object({
   name: z.string().trim().min(1, "Name is required").max(100, "Name too long"),
@@ -26,16 +25,6 @@ const contactSchema = z.object({
 });
 
 type ContactFormData = z.infer<typeof contactSchema>;
-
-declare global {
-  interface Window {
-    grecaptcha?: {
-      ready: (callback: () => void) => void;
-      execute: (siteKey: string, options: { action: string }) => Promise<string>;
-    };
-  }
-}
-
 
 interface ContactFormProps {
   resetTrigger?: number;
@@ -70,24 +59,6 @@ export const ContactForm = ({ resetTrigger }: ContactFormProps = {}) => {
       setIsSubmitting(false);
     }
   }, [resetTrigger]);
-
-  useEffect(() => {
-    if (!RECAPTCHA_SITE_KEY) return;
-
-    // Script nur einmal laden
-    const existing = document.querySelector('script[data-recaptcha="v3"]');
-    if (existing) return;
-
-    const script = document.createElement("script");
-    script.src = `https://www.google.com/recaptcha/api.js?render=${encodeURIComponent(
-        RECAPTCHA_SITE_KEY
-    )}`;
-    script.async = true;
-    script.defer = true;
-    script.setAttribute("data-recaptcha", "v3");
-
-    document.head.appendChild(script);
-  }, []);
 
 
 
@@ -199,42 +170,6 @@ export const ContactForm = ({ resetTrigger }: ContactFormProps = {}) => {
       return;
     }
 
-    let tokenToSend: string | undefined = undefined;
-
-    if (RECAPTCHA_SITE_KEY) {
-      if (!window.grecaptcha) {
-        toast({
-          title: language === "de" ? "reCAPTCHA lädt noch" : language === "no" ? "reCAPTCHA laster" : "reCAPTCHA still loading",
-          description: language === "de" ? "Bitte in 1–2 Sekunden nochmal senden." : language === "no" ? "Prøv igjen om et øyeblikk." : "Please try again in a moment.",
-          variant: "destructive",
-        });
-        return;
-      }
-
-      try {
-        tokenToSend = await new Promise<string>((resolve, reject) => {
-          window.grecaptcha!.ready(() => {
-            window.grecaptcha!
-                .execute(RECAPTCHA_SITE_KEY, { action: "contact_form_submit" })
-                .then(resolve)
-                .catch(reject);
-          });
-        });
-      } catch (error) {
-        toast({ 
-          title: "reCAPTCHA error", 
-          description: l.error, 
-          variant: "destructive" 
-        });
-        return;
-      }
-    }
-
-    if (RECAPTCHA_SITE_KEY && !tokenToSend) {
-      toast({ title: "reCAPTCHA error", description: l.error, variant: "destructive" });
-      return;
-    }
-
     setIsSubmitting(true);
 
     try {
@@ -249,8 +184,6 @@ export const ContactForm = ({ resetTrigger }: ContactFormProps = {}) => {
           company: result.data.company,
           message: result.data.message,
           language,
-          recaptchaToken: tokenToSend,
-          recaptchaAction: "contact_form_submit",
           timestamp: new Date().toISOString(),
           source: "livedealz-website",
         }),
@@ -411,7 +344,6 @@ export const ContactForm = ({ resetTrigger }: ContactFormProps = {}) => {
       {!WEBHOOK_URL && (
         <p className="text-xs text-muted-foreground mt-4 p-2 bg-muted rounded">
           ⚠️ Developer: Set WEBHOOK_URL in ContactForm.tsx to enable form submission.
-          {RECAPTCHA_SITE_KEY ? "" : " Set RECAPTCHA_SITE_KEY for spam protection."}
         </p>
       )}
     </motion.div>
