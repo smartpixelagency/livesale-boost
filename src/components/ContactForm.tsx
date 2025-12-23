@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -12,9 +12,8 @@ import { z } from "zod";
 import { Link } from "react-router-dom";
 
 // Webhook URL - set this to your webhook endpoint
-// Use proxy endpoint in both dev and production to avoid CORS issues
-// The nginx server will proxy /api/webhook to the actual webhook URL
-const WEBHOOK_URL = "/api/webhook";
+const WEBHOOK_URL = ""; // Add your webhook URL here
+const RECAPTCHA_SITE_KEY = ""; // Add your reCAPTCHA site key here (v2 or v3)
 
 const contactSchema = z.object({
   name: z.string().trim().min(1, "Name is required").max(100, "Name too long"),
@@ -26,15 +25,24 @@ const contactSchema = z.object({
 
 type ContactFormData = z.infer<typeof contactSchema>;
 
-interface ContactFormProps {
-  resetTrigger?: number;
+declare global {
+  interface Window {
+    grecaptcha?: {
+      ready: (callback: () => void) => void;
+      execute: (siteKey: string, options: { action: string }) => Promise<string>;
+      render: (container: HTMLElement, options: { sitekey: string; callback: (token: string) => void }) => number;
+      reset: (widgetId?: number) => void;
+    };
+  }
 }
 
-export const ContactForm = ({ resetTrigger }: ContactFormProps = {}) => {
+export const ContactForm = () => {
   const { t, language } = useLanguage();
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [recaptchaToken, setRecaptchaToken] = useState<string | null>(null);
+  const recaptchaRef = useRef<HTMLDivElement>(null);
   const [formData, setFormData] = useState<ContactFormData>({
     name: "",
     email: "",
@@ -44,23 +52,24 @@ export const ContactForm = ({ resetTrigger }: ContactFormProps = {}) => {
   });
   const [errors, setErrors] = useState<Partial<Record<keyof ContactFormData, string>>>({});
 
-  // Reset form when resetTrigger changes
+  // Load reCAPTCHA script if site key is provided
   useEffect(() => {
-    if (resetTrigger !== undefined && resetTrigger > 0) {
-      setFormData({
-        name: "",
-        email: "",
-        company: "",
-        message: "",
-        privacyAccepted: false,
-      });
-      setErrors({});
-      setIsSubmitted(false);
-      setIsSubmitting(false);
+    if (RECAPTCHA_SITE_KEY && !window.grecaptcha) {
+      const script = document.createElement("script");
+      script.src = `https://www.google.com/recaptcha/api.js?render=explicit`;
+      script.async = true;
+      script.defer = true;
+      script.onload = () => {
+        if (window.grecaptcha && recaptchaRef.current) {
+          window.grecaptcha.render(recaptchaRef.current, {
+            sitekey: RECAPTCHA_SITE_KEY,
+            callback: (token: string) => setRecaptchaToken(token),
+          });
+        }
+      };
+      document.head.appendChild(script);
     }
-  }, [resetTrigger]);
-
-
+  }, []);
 
   const labels = {
     de: {
@@ -170,6 +179,16 @@ export const ContactForm = ({ resetTrigger }: ContactFormProps = {}) => {
       return;
     }
 
+    // Check reCAPTCHA if enabled
+    if (RECAPTCHA_SITE_KEY && !recaptchaToken) {
+      toast({
+        title: language === "de" ? "reCAPTCHA erforderlich" : language === "no" ? "reCAPTCHA påkrevd" : "reCAPTCHA required",
+        description: language === "de" ? "Bitte bestätigen Sie das reCAPTCHA." : language === "no" ? "Vennligst bekreft reCAPTCHA." : "Please complete the reCAPTCHA.",
+        variant: "destructive",
+      });
+      return;
+    }
+
     setIsSubmitting(true);
 
     try {
@@ -184,6 +203,7 @@ export const ContactForm = ({ resetTrigger }: ContactFormProps = {}) => {
           company: result.data.company,
           message: result.data.message,
           language,
+          recaptchaToken: recaptchaToken || undefined,
           timestamp: new Date().toISOString(),
           source: "livedealz-website",
         }),
@@ -194,15 +214,6 @@ export const ContactForm = ({ resetTrigger }: ContactFormProps = {}) => {
       }
 
       setIsSubmitted(true);
-      // Reset form data after successful submission
-      setFormData({
-        name: "",
-        email: "",
-        company: "",
-        message: "",
-        privacyAccepted: false,
-      });
-      setErrors({});
       toast({
         title: "✓",
         description: l.success,
@@ -213,7 +224,11 @@ export const ContactForm = ({ resetTrigger }: ContactFormProps = {}) => {
         description: l.error,
         variant: "destructive",
       });
-
+      // Reset reCAPTCHA on error
+      if (window.grecaptcha) {
+        window.grecaptcha.reset();
+        setRecaptchaToken(null);
+      }
     } finally {
       setIsSubmitting(false);
     }
@@ -323,7 +338,10 @@ export const ContactForm = ({ resetTrigger }: ContactFormProps = {}) => {
           <p className="text-destructive text-sm -mt-2">{errors.privacyAccepted}</p>
         )}
 
-
+        {/* reCAPTCHA widget container - only shows if site key is configured */}
+        {RECAPTCHA_SITE_KEY && (
+          <div ref={recaptchaRef} className="flex justify-center" />
+        )}
 
         <Button type="submit" variant="hero" size="lg" className="w-full" disabled={isSubmitting}>
           {isSubmitting ? (
@@ -344,6 +362,7 @@ export const ContactForm = ({ resetTrigger }: ContactFormProps = {}) => {
       {!WEBHOOK_URL && (
         <p className="text-xs text-muted-foreground mt-4 p-2 bg-muted rounded">
           ⚠️ Developer: Set WEBHOOK_URL in ContactForm.tsx to enable form submission.
+          {RECAPTCHA_SITE_KEY ? "" : " Set RECAPTCHA_SITE_KEY for spam protection."}
         </p>
       )}
     </motion.div>
