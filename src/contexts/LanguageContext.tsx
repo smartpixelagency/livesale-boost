@@ -388,6 +388,19 @@ const translations = {
     "draftOrders.related3.description": "So nutzt du Draft Orders in deinen Livestreams.",
     "draftOrders.ctaTitle": "Bereit für sichere Live-Verkäufe?",
     "draftOrders.ctaDescription": "Erlebe, wie Draft Orders dein Live-Shopping revolutionieren – ohne Überverkäufe, ohne Stress.",
+    
+    // Draft Orders - Merchant Editing Features
+    "draftOrders.editingBadge": "Volle Kontrolle",
+    "draftOrders.editingTitle": "Bearbeite jeden Draft Order nach deinen Wünschen",
+    "draftOrders.editingDescription": "Als Händler hast du die volle Kontrolle über jeden Bestellentwurf. Passe Positionen an, füge Notizen hinzu und vergib individuelle Preise.",
+    "draftOrders.editing1.title": "Positionen sortieren",
+    "draftOrders.editing1.description": "Ordne die Artikel im Draft Order nach Belieben an. Per Drag & Drop oder manuell – für perfekte Übersicht bei der Kommissionierung.",
+    "draftOrders.editing2.title": "Individuelle Notizen",
+    "draftOrders.editing2.description": "Füge zu jeder Position oder zum gesamten Draft Order Notizen hinzu. Ideal für Sonderwünsche, Größenhinweise oder interne Anmerkungen.",
+    "draftOrders.editing3.title": "Exakte Zeitstempel",
+    "draftOrders.editing3.description": "Jede Reservierung wird mit präzisem Zeitstempel erfasst. Perfekt für 'Wer zuerst kommt, mahlt zuerst' – mit voller Transparenz.",
+    "draftOrders.editing4.title": "Angebotspreise & Streichpreise",
+    "draftOrders.editing4.description": "Vergib individuelle Aktionspreise während des Livestreams. Kunden sehen den ursprünglichen Preis durchgestrichen und den Sonderpreis daneben.",
   },
   en: {
     // Promo Banner
@@ -768,6 +781,19 @@ const translations = {
     "draftOrders.related3.description": "How to use Draft Orders in your livestreams.",
     "draftOrders.ctaTitle": "Ready for Secure Live Sales?",
     "draftOrders.ctaDescription": "Experience how Draft Orders revolutionize your live shopping – without overselling, without stress.",
+    
+    // Draft Orders - Merchant Editing Features
+    "draftOrders.editingBadge": "Full Control",
+    "draftOrders.editingTitle": "Edit Every Draft Order to Your Needs",
+    "draftOrders.editingDescription": "As a merchant, you have full control over every order draft. Adjust line items, add notes, and assign individual prices.",
+    "draftOrders.editing1.title": "Reorder Line Items",
+    "draftOrders.editing1.description": "Arrange items in the Draft Order as you like. Drag & drop or manual – for perfect overview during picking.",
+    "draftOrders.editing2.title": "Individual Notes",
+    "draftOrders.editing2.description": "Add notes to each line item or the entire Draft Order. Ideal for special requests, size hints, or internal remarks.",
+    "draftOrders.editing3.title": "Precise Timestamps",
+    "draftOrders.editing3.description": "Every reservation is recorded with precise timestamps. Perfect for 'first come, first served' – with full transparency.",
+    "draftOrders.editing4.title": "Offer Prices & Strikethrough",
+    "draftOrders.editing4.description": "Assign individual promotional prices during livestreams. Customers see the original price crossed out with the special price beside it.",
   },
   no: {
     // Promo Banner
@@ -1148,6 +1174,19 @@ const translations = {
     "draftOrders.related3.description": "Hvordan bruke Draft Orders i livestreamene dine.",
     "draftOrders.ctaTitle": "Klar for sikre live-salg?",
     "draftOrders.ctaDescription": "Opplev hvordan Draft Orders revolusjonerer live-shoppingen din – uten oversalg, uten stress.",
+    
+    // Draft Orders - Merchant Editing Features
+    "draftOrders.editingBadge": "Full kontroll",
+    "draftOrders.editingTitle": "Rediger hver Draft Order etter dine behov",
+    "draftOrders.editingDescription": "Som forhandler har du full kontroll over hvert bestillingsutkast. Juster linjer, legg til notater og tildel individuelle priser.",
+    "draftOrders.editing1.title": "Omorganiser linjer",
+    "draftOrders.editing1.description": "Ordne varer i Draft Order som du vil. Dra og slipp eller manuelt – for perfekt oversikt under plukking.",
+    "draftOrders.editing2.title": "Individuelle notater",
+    "draftOrders.editing2.description": "Legg til notater på hver linje eller hele Draft Order. Ideelt for spesialforespørsler, størrelseshint eller interne merknader.",
+    "draftOrders.editing3.title": "Presise tidsstempler",
+    "draftOrders.editing3.description": "Hver reservasjon registreres med presise tidsstempler. Perfekt for 'først til mølla' – med full transparens.",
+    "draftOrders.editing4.title": "Tilbudspriser & gjennomstreking",
+    "draftOrders.editing4.description": "Tildel individuelle kampanjepriser under livestreamer. Kunder ser originalprisen gjennomstreket med spesialprisen ved siden av.",
   },
 };
 
