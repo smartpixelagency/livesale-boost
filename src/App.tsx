@@ -11,6 +11,9 @@ import Impressum from "./pages/Impressum";
 import Datenschutz from "./pages/Datenschutz";
 import NotFound from "./pages/NotFound";
 
+// Feature Pages
+import DraftOrders from "./pages/features/DraftOrders";
+
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -27,6 +30,9 @@ const App = () => (
             {/* Language-specific routes */}
             <Route path="/:lang" element={<LanguageRedirect><Index /></LanguageRedirect>} />
             <Route path="/:lang/b2b" element={<LanguageRedirect><B2B /></LanguageRedirect>} />
+            
+            {/* Feature Pages */}
+            <Route path="/:lang/features/draft-orders" element={<LanguageRedirect><DraftOrders /></LanguageRedirect>} />
             
             {/* Legal pages (German only) */}
             <Route path="/impressum" element={<Impressum />} />

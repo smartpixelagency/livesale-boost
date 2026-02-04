@@ -21,9 +21,27 @@ Basierend auf dem LinkedIn-Artikel bauen wir ein zusammenhangendes Website-Syste
 
 ---
 
+## Status: In Arbeit
+
+### ✅ Erledigt
+- [x] Wiederverwendbare Komponenten erstellt (PageHero, CTABanner, StepByStep, ComparisonTable, FeatureCard)
+- [x] Draft Orders Feature-Seite (`/:lang/features/draft-orders`)
+- [x] Routing in App.tsx aktualisiert
+- [x] Navbar mit Dropdown-Menü für Features
+- [x] Übersetzungen für DE, EN, NO
+
+### 🔄 Nächste Schritte (Priorität)
+- [ ] Vergleichsseite: LiveDealz vs. Manuelle Prozesse (`/:lang/compare/manual-processes`)
+- [ ] Use-Case: TikTok/Instagram Live (`/:lang/use-cases/tiktok-instagram-live`)
+- [ ] Use-Case: WhatsApp Story (`/:lang/use-cases/whatsapp-story`)
+- [ ] Feature: Shopify Integration (`/:lang/features/shopify-integration`)
+- [ ] Success Stories (`/:lang/success-stories`)
+
+---
+
 ## Phase 1: Kernseiten (Consideration)
 
-### 1.1 Feature-Seite: "Wie Draft Orders funktionieren"
+### 1.1 Feature-Seite: "Wie Draft Orders funktionieren" ✅
 
 **Route:** `/:lang/features/draft-orders`
 
@@ -36,35 +54,17 @@ Basierend auf dem LinkedIn-Artikel bauen wir ein zusammenhangendes Website-Syste
 - Automatische Bestandsfreigabe bei Nichtzahlung
 - Vergleich: Manuelle Prozesse vs. Draft Orders
 
-**Verknüpfungen:**
-- Link zur Shopify-Integration-Seite
-- CTA: "Demo buchen" / "Jetzt testen"
-- Weiter zu: Preise, Use Cases
-
 ### 1.2 Feature-Seite: "Shopify Integration"
 
 **Route:** `/:lang/features/shopify-integration`
 
 **Zweck:** Zeigt die nahtlose Integration ohne Stoerung bestehender Systeme.
 
-**Inhalte:**
-- Native Shopify-Integration (keine Drittanbieter)
-- Synchronisation mit bestehendem Bestand
-- Parallelbetrieb: Onlineshop + Livestream
-- ERP-Kompatibilitoet
-- Technische Vorteile (Webhooks, Echtzeit-Sync)
-
 ### 1.3 Feature-Seite: "Barcode Scanning"
 
 **Route:** `/:lang/features/barcode-scanning`
 
 **Zweck:** Zeigt die einfache Bedienung wahrend des Streams.
-
-**Inhalte:**
-- Smartphone-basiertes Scanning
-- Kundennummer + Produkt-Scan = Reservierung
-- Live-Demo-Video
-- Unterstuetzte Barcode-Formate
 
 ---
 
@@ -74,39 +74,13 @@ Basierend auf dem LinkedIn-Artikel bauen wir ein zusammenhangendes Website-Syste
 
 **Route:** `/:lang/use-cases/tiktok-instagram-live`
 
-**Zweck:** Rollenbasierte Seite fuer die groesste Zielgruppe.
-
-**Inhalte:**
-- Hero: "Verkaufe live auf TikTok & Instagram - ohne Chaos"
-- Problem: Kommentar-Chaos, manuelle Zuordnung
-- Loesung: LiveDealz Dashboard waehrend Stream
-- Workflow: Stream -> Kundennummer -> Scan -> Reservierung
-- Testimonial von Live-Sellern
-- CTA: Demo buchen
-
 ### 2.2 WhatsApp Story Haendler
 
 **Route:** `/:lang/use-cases/whatsapp-story`
 
-**Zweck:** Seite fuer WhatsApp-basierte Verkoeufer.
-
-**Inhalte:**
-- Produkte in Stories zeigen
-- "Ich will" Antworten verarbeiten
-- Sammelaktionen ueber mehrere Tage
-- Checkout-Links am Ende versenden
-
 ### 2.3 Community Sammelaktionen
 
 **Route:** `/:lang/use-cases/community-campaigns`
-
-**Zweck:** Discord, Telegram, WhatsApp-Gruppen.
-
-**Inhalte:**
-- Multi-Tag-Sammelperioden
-- Aggregation aller Reservierungen
-- Batch-Checkout am Ende
-- Ideal fuer Limited Drops, Vorbestellungen
 
 ---
 
@@ -116,38 +90,9 @@ Basierend auf dem LinkedIn-Artikel bauen wir ein zusammenhangendes Website-Syste
 
 **Route:** `/:lang/compare/manual-processes`
 
-**Zweck:** Behandelt Einwaende und zeigt konkreten Mehrwert.
-
-**Aufbau:**
-```text
-┌────────────────────────┬────────────────────────┐
-│   MANUELLER PROZESS    │      LIVEDEALZ         │
-├────────────────────────┼────────────────────────┤
-│ Excel-Tabellen         │ Automatische Zuordnung │
-│ WhatsApp-Screenshots   │ Kundennummern-System   │
-│ Doppelverkäufe         │ Atomare Reservierung   │
-│ Stundenlange Nacharbeit│ Sofortige Draft Orders │
-│ Nichtzahler blockieren │ Auto-Freigabe          │
-└────────────────────────┴────────────────────────┘
-```
-
-**Inhalte:**
-- Feature-fuer-Feature Vergleichstabelle
-- Zeitersparnis-Kalkulator (optional)
-- "Wir waren dort" - Origin Story Link
-- CTA: "Schluss mit dem Chaos - Demo buchen"
-
 ### 3.2 Warum Shopify?
 
 **Route:** `/:lang/compare/why-shopify`
-
-**Zweck:** Erkloert die strategische Entscheidung fuer Shopify.
-
-**Inhalte:**
-- Breiteste ERP-Integration
-- Native Mobile App
-- Zukunftssicher und skalierbar
-- Keine Vendor-Lock-In-Risiken
 
 ---
 
@@ -157,27 +102,29 @@ Basierend auf dem LinkedIn-Artikel bauen wir ein zusammenhangendes Website-Syste
 
 **Route:** `/:lang/success-stories`
 
-**Zweck:** Soziale Beweise, echte Ergebnisse.
-
-**Aufbau pro Case Study:**
-- Haendler-Profil (Name, Branche, Groesse)
-- Ausgangssituation (Probleme vor LiveDealz)
-- Loesung (wie LiveDealz geholfen hat)
-- Ergebnisse (Zeitersparnis, Umsatzsteigerung)
-- Zitat des Haendlers
-
-**Erste Case Study:** LSQ24 (bereits als Origin Story vorhanden)
-
 ---
 
 ## Technische Umsetzung
 
-### Neue Dateien
+### Erstellte Dateien
+
+```text
+src/components/
+├── PageHero.tsx          ✅
+├── CTABanner.tsx         ✅
+├── StepByStep.tsx        ✅
+├── ComparisonTable.tsx   ✅
+├── FeatureCard.tsx       ✅
+
+src/pages/features/
+├── DraftOrders.tsx       ✅
+```
+
+### Noch zu erstellen
 
 ```text
 src/pages/
 ├── features/
-│   ├── DraftOrders.tsx
 │   ├── ShopifyIntegration.tsx
 │   └── BarcodeScanning.tsx
 ├── use-cases/
@@ -190,87 +137,16 @@ src/pages/
 └── SuccessStories.tsx
 ```
 
-### Routing Updates (App.tsx)
-
-```text
-/:lang/features/draft-orders
-/:lang/features/shopify-integration
-/:lang/features/barcode-scanning
-/:lang/use-cases/tiktok-instagram-live
-/:lang/use-cases/whatsapp-story
-/:lang/use-cases/community-campaigns
-/:lang/compare/manual-processes
-/:lang/compare/why-shopify
-/:lang/success-stories
-```
-
-### Navigation Updates
-
-Dropdown-Menu in der Navbar:
-- Funktionen (Dropdown)
-  - Draft Orders
-  - Shopify Integration
-  - Barcode Scanning
-- Anwendungsfaelle (Dropdown)
-  - TikTok/Instagram Live
-  - WhatsApp Stories
-  - Community Sammelaktionen
-  - B2B Wholesale
-- Vergleich
-- Erfolgsgeschichten
-
-### Wiederverwendbare Komponenten
-
-```text
-src/components/
-├── PageHero.tsx          (konsistenter Hero fuer alle Seiten)
-├── ComparisonTable.tsx   (Vergleichstabellen)
-├── FeatureCard.tsx       (Feature-Karten)
-├── StepByStep.tsx        (Workflow-Darstellung)
-├── TestimonialCard.tsx   (Testimonial-Komponente)
-└── CTABanner.tsx         (konsistente Call-to-Actions)
-```
-
-### Uebersetzungen
-
-Erweiterung von `LanguageContext.tsx` mit allen neuen Seiteninhalten (DE, EN, NO).
-
 ---
 
 ## Priorisierte Reihenfolge
 
-| Priorität | Seite | Grund |
-|-----------|-------|-------|
-| 1 | Draft Orders Feature | Kernthema, differenziert von Wettbewerbern |
-| 2 | LiveDealz vs. Manuell | Behandelt Haupteinwoende |
-| 3 | TikTok/Instagram Live | Groesste Zielgruppe |
-| 4 | WhatsApp Story | Zweite Kernzielgruppe |
-| 5 | Shopify Integration | Technische Glaubwuerdigkeit |
-| 6 | Success Stories | Soziale Beweise |
-| 7 | Restliche Seiten | Vollstaendigkeit |
-
----
-
-## Verknuepfungsmatrix
-
-Jede Seite verlinkt strategisch zu anderen Seiten:
-
-| Von Seite | Verlinkt zu |
-|-----------|-------------|
-| Draft Orders | Shopify Integration, Preise, Demo |
-| Vergleich | Draft Orders, Success Stories, Preise |
-| Use Case Pages | Features, Vergleich, Preise |
-| Success Stories | Features, Demo buchen |
-| Preise | Features, Demo, FAQ |
-
----
-
-## Zusammenfassung der Vorteile
-
-- Konsistente Messaging ueber alle Seiten
-- Klare Buyer Journey von Awareness zu Conversion
-- Kernthema "Draft Orders" wird prominent erklaert
-- Rollenbasierte Seiten fuer verschiedene Zielgruppen
-- Vergleichsseiten behandeln Einwaende proaktiv
-- Wiederverwendbare Komponenten fuer schnelle Entwicklung
-- Vollstaendige Mehrsprachigkeit (DE, EN, NO)
+| Priorität | Seite | Status |
+|-----------|-------|--------|
+| 1 | Draft Orders Feature | ✅ Erledigt |
+| 2 | LiveDealz vs. Manuell | 🔄 Nächster Schritt |
+| 3 | TikTok/Instagram Live | ⏳ Ausstehend |
+| 4 | WhatsApp Story | ⏳ Ausstehend |
+| 5 | Shopify Integration | ⏳ Ausstehend |
+| 6 | Success Stories | ⏳ Ausstehend |
+| 7 | Restliche Seiten | ⏳ Ausstehend |

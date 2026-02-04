@@ -16,7 +16,9 @@ const languages: { code: Language; label: string; flag: string }[] = [
 export const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [langOpen, setLangOpen] = useState(false);
+  const [featuresOpen, setFeaturesOpen] = useState(false);
   const langRef = useRef<HTMLDivElement>(null);
+  const featuresRef = useRef<HTMLDivElement>(null);
   const location = useLocation();
   const navigate = useNavigate();
   const { language, setLanguage, t } = useLanguage();
@@ -25,8 +27,11 @@ export const Navbar = () => {
   const isHomePage = location.pathname === `/${language}` || location.pathname === "/" || location.pathname === `/${language}/`;
   const currentLang = languages.find((l) => l.code === language) || languages[0];
 
+  const featureLinks = [
+    { label: t("nav.draftOrders") || "Draft Orders", href: `/${language}/features/draft-orders` },
+  ];
+
   const navLinks = [
-    { label: t("nav.features"), href: "#features", isRoute: false },
     { label: t("nav.benefits"), href: "#stats", isRoute: false },
     { label: t("nav.pricing"), href: "#pricing", isRoute: false },
     { label: t("nav.b2b"), href: `/${language}/b2b`, isRoute: true },
@@ -62,6 +67,9 @@ export const Navbar = () => {
       if (langRef.current && !langRef.current.contains(e.target as Node)) {
         setLangOpen(false);
       }
+      if (featuresRef.current && !featuresRef.current.contains(e.target as Node)) {
+        setFeaturesOpen(false);
+      }
     };
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
@@ -76,6 +84,39 @@ export const Navbar = () => {
 
         {/* Desktop Navigation */}
         <div className="hidden md:flex items-center gap-8">
+          {/* Features Dropdown */}
+          <div className="relative" ref={featuresRef}>
+            <button
+              onClick={() => setFeaturesOpen(!featuresOpen)}
+              className="flex items-center gap-1 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+            >
+              {t("nav.features")}
+              <ChevronDown size={14} className={`transition-transform ${featuresOpen ? "rotate-180" : ""}`} />
+            </button>
+            <AnimatePresence>
+              {featuresOpen && (
+                <motion.div
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{ duration: 0.15 }}
+                  className="absolute left-0 top-full mt-2 w-56 bg-card border border-border rounded-xl shadow-lg overflow-hidden z-50"
+                >
+                  {featureLinks.map((link) => (
+                    <Link
+                      key={link.href}
+                      to={link.href}
+                      onClick={() => setFeaturesOpen(false)}
+                      className="block px-4 py-3 text-sm hover:bg-accent transition-colors"
+                    >
+                      {link.label}
+                    </Link>
+                  ))}
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+
           {navLinks.map((link) => (
             link.isRoute ? (
               <Link
@@ -200,6 +241,23 @@ export const Navbar = () => {
             className="md:hidden bg-background border-b border-border"
           >
             <div className="container py-4 flex flex-col gap-4">
+              {/* Mobile Features Section */}
+              <div className="border-b border-border pb-4">
+                <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2 block">
+                  {t("nav.features")}
+                </span>
+                {featureLinks.map((link) => (
+                  <Link
+                    key={link.href}
+                    to={link.href}
+                    className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors py-2 block pl-2"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    {link.label}
+                  </Link>
+                ))}
+              </div>
+
               {navLinks.map((link) => (
                 link.isRoute ? (
                   <Link
