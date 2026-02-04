@@ -22,7 +22,11 @@ import {
   Store,
   FileText,
   Lock,
-  Unlock
+  Unlock,
+  GripVertical,
+  MessageSquare,
+  Timer,
+  Tag
 } from "lucide-react";
 
 const DraftOrders = () => {
@@ -265,8 +269,116 @@ const DraftOrders = () => {
           </div>
         </section>
 
-        {/* Comparison Table */}
+        {/* Merchant Editing Features */}
         <section className="py-16 md:py-24 bg-muted/30">
+          <div className="container">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="max-w-4xl mx-auto"
+            >
+              <div className="text-center mb-12">
+                <span className="inline-block px-4 py-1.5 mb-4 text-sm font-medium text-primary bg-accent rounded-full">
+                  {t("draftOrders.editingBadge")}
+                </span>
+                <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+                  {t("draftOrders.editingTitle")}
+                </h2>
+                <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                  {t("draftOrders.editingDescription")}
+                </p>
+              </div>
+
+              <div className="grid md:grid-cols-2 gap-6">
+                <motion.div
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.1 }}
+                  className="bg-card border border-border rounded-2xl p-6"
+                >
+                  <div className="w-12 h-12 mb-4 bg-accent rounded-xl flex items-center justify-center">
+                    <GripVertical className="w-6 h-6 text-primary" />
+                  </div>
+                  <h3 className="font-semibold text-foreground mb-2">
+                    {t("draftOrders.editing1.title")}
+                  </h3>
+                  <p className="text-muted-foreground">
+                    {t("draftOrders.editing1.description")}
+                  </p>
+                </motion.div>
+
+                <motion.div
+                  initial={{ opacity: 0, x: 20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.2 }}
+                  className="bg-card border border-border rounded-2xl p-6"
+                >
+                  <div className="w-12 h-12 mb-4 bg-accent rounded-xl flex items-center justify-center">
+                    <MessageSquare className="w-6 h-6 text-primary" />
+                  </div>
+                  <h3 className="font-semibold text-foreground mb-2">
+                    {t("draftOrders.editing2.title")}
+                  </h3>
+                  <p className="text-muted-foreground">
+                    {t("draftOrders.editing2.description")}
+                  </p>
+                </motion.div>
+
+                <motion.div
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.3 }}
+                  className="bg-card border border-border rounded-2xl p-6"
+                >
+                  <div className="w-12 h-12 mb-4 bg-accent rounded-xl flex items-center justify-center">
+                    <Timer className="w-6 h-6 text-primary" />
+                  </div>
+                  <h3 className="font-semibold text-foreground mb-2">
+                    {t("draftOrders.editing3.title")}
+                  </h3>
+                  <p className="text-muted-foreground">
+                    {t("draftOrders.editing3.description")}
+                  </p>
+                </motion.div>
+
+                <motion.div
+                  initial={{ opacity: 0, x: 20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.4 }}
+                  className="bg-card border border-border rounded-2xl p-6 relative overflow-hidden"
+                >
+                  <div className="w-12 h-12 mb-4 bg-accent rounded-xl flex items-center justify-center">
+                    <Tag className="w-6 h-6 text-primary" />
+                  </div>
+                  <h3 className="font-semibold text-foreground mb-2">
+                    {t("draftOrders.editing4.title")}
+                  </h3>
+                  <p className="text-muted-foreground mb-4">
+                    {t("draftOrders.editing4.description")}
+                  </p>
+                  {/* Visual Example of Strikethrough Price */}
+                  <div className="bg-muted/50 rounded-lg p-4 border border-border/50">
+                    <div className="flex items-center justify-between">
+                      <span className="text-sm text-muted-foreground">Beispiel:</span>
+                      <div className="flex items-center gap-2">
+                        <span className="text-muted-foreground line-through text-sm">€49,99</span>
+                        <span className="text-primary font-bold text-lg">€39,99</span>
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+              </div>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* Comparison Table */}
+        <section className="py-16 md:py-24 bg-background">
           <div className="container">
             <ComparisonTable
               title={t("draftOrders.compareTitle")}
