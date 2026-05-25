@@ -11,12 +11,33 @@ import { TechTrustSection } from "@/components/TechTrustSection";
 import { CTASection } from "@/components/CTASection";
 import { Footer } from "@/components/Footer";
 import { SEOHead } from "@/components/SEOHead";
+import { JsonLd } from "@/components/JsonLd";
 import { PromoBanner } from "@/components/PromoBanner";
 
 const Index = () => {
   return (
     <div className="min-h-screen">
       <SEOHead />
+      <JsonLd
+        id="organization"
+        data={{
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          name: "LiveDealz",
+          url: "https://livedealz.de",
+          logo: "https://livedealz.de/og-image.png",
+          sameAs: ["https://www.linkedin.com/company/livedealz"],
+        }}
+      />
+      <JsonLd
+        id="website"
+        data={{
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          name: "LiveDealz",
+          url: "https://livedealz.de",
+        }}
+      />
       <PromoBanner />
       <Navbar />
       <main>

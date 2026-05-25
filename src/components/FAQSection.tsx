@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { JsonLd } from "@/components/JsonLd";
 
 export const FAQSection = () => {
   const { t } = useLanguage();
@@ -15,6 +16,18 @@ export const FAQSection = () => {
 
   return (
     <section id="faq" className="py-16 md:py-24 bg-background">
+      <JsonLd
+        id="faq"
+        data={{
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: faqs.map((f) => ({
+            "@type": "Question",
+            name: f.q,
+            acceptedAnswer: { "@type": "Answer", text: f.a },
+          })),
+        }}
+      />
       <div className="container max-w-3xl">
         <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} viewport={{ once: true }} className="text-3xl md:text-4xl font-bold text-center mb-12">
           {t("faq.headline")}
