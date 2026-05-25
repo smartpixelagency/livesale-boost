@@ -78,7 +78,8 @@ const B2B = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <SEOHead path="/b2b" />
+      <SEOHead path="/b2b" title={seo.title} description={seo.description} />
+
       <Navbar />
       
       {/* Hero Section */}
