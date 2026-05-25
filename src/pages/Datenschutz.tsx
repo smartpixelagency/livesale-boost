@@ -1,9 +1,15 @@
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
+import { SEOHead } from "@/components/SEOHead";
 
 const Datenschutz = () => {
   return (
     <div className="min-h-screen">
+      <SEOHead
+        path="/datenschutz"
+        title="Datenschutzerklärung | LiveDealz"
+        description="Erfahre, wie LiveDealz personenbezogene Daten gemäß DSGVO verarbeitet, speichert und schützt."
+      />
       <Navbar />
       <main className="pt-24 md:pt-32 pb-16 md:pb-24">
         <div className="container max-w-4xl">

@@ -1,0 +1,22 @@
+# LiveDealz
+
+> Live-Shopping & Social Selling Software für Shopify. Reservierungen in Echtzeit über Shopify Draft Orders – Kunden reservieren im Stream, sammeln über mehrere Tage und bezahlen später.
+
+LiveDealz verbindet Live-Shopping auf TikTok, Instagram und im Web mit der nativen Reservierungslogik von Shopify Draft Orders. Keine Bestandsmanipulation, keine Überverkäufe, keine ERP-Integration.
+
+## Pages
+
+- [Startseite (DE)](/de): Produktübersicht, Features, Preise und Demo.
+- [Home (EN)](/en): Product overview, features, pricing and demo.
+- [Hjem (NO)](/no): Produktoversikt, funksjoner, priser og demo.
+- [B2B Live-Shopping (DE)](/de/b2b): Lösung für Großhändler, Marken und Wiederverkäufer.
+- [B2B Live Shopping (EN)](/en/b2b): Solution for wholesalers, brands and resellers.
+- [B2B Live-shopping (NO)](/no/b2b): Løsning for grossister, merker og forhandlere.
+- [Shopify Draft Orders (DE)](/de/features/draft-orders): Wie LiveDealz native Shopify-Reservierungen nutzt.
+- [Shopify Draft Orders (EN)](/en/features/draft-orders): How LiveDealz uses native Shopify reservations.
+- [Shopify Draft Orders (NO)](/no/features/draft-orders): Hvordan LiveDealz bruker native Shopify-reservasjoner.
+
+## Optional
+
+- [Impressum](/impressum): Rechtliche Angaben.
+- [Datenschutzerklärung](/datenschutz): DSGVO-Informationen.

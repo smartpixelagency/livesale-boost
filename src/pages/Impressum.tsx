@@ -1,9 +1,34 @@
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
+import { SEOHead } from "@/components/SEOHead";
+import { JsonLd } from "@/components/JsonLd";
 
 const Impressum = () => {
   return (
     <div className="min-h-screen">
+      <SEOHead
+        path="/impressum"
+        title="Impressum | LiveDealz"
+        description="Rechtliche Angaben gemäß § 5 TMG zur LiveDealz Live-Shopping Software – Smartpixel Webagentur, Hagen."
+      />
+      <JsonLd
+        id="localbusiness"
+        data={{
+          "@context": "https://schema.org",
+          "@type": "LocalBusiness",
+          name: "Smartpixel Webagentur Inh. Salh Isso",
+          email: "info@smartpixel-agentur.de",
+          telephone: "+49-2331-7889100",
+          vatID: "DE366314315",
+          address: {
+            "@type": "PostalAddress",
+            streetAddress: "Grünstr. 18",
+            postalCode: "58095",
+            addressLocality: "Hagen",
+            addressCountry: "DE",
+          },
+        }}
+      />
       <Navbar />
       <main className="pt-24 md:pt-32 pb-16 md:pb-24">
         <div className="container max-w-4xl">
