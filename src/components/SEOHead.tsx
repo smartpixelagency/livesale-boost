@@ -10,16 +10,16 @@ interface SEOHeadProps {
 
 const seoContent: Record<Language, { title: string; description: string }> = {
   de: {
-    title: "LiveDealz – Echtzeit-Reservierungen für Live-Shopping & Social Selling",
-    description: "LiveDealz verbindet Live-Shopping, Stories und Sammelaktionen. Kunden reservieren Produkte während des Streams, sammeln über mehrere Tage und bezahlen später. Keine Überverkäufe, kein Chaos.",
+    title: "LiveDealz – Live-Shopping & Social Selling Software",
+    description: "Reservierungen in Echtzeit für Live-Shopping & Social Selling. Kunden reservieren im Stream, sammeln über Tage und bezahlen später. Keine Überverkäufe.",
   },
   en: {
-    title: "LiveDealz – Real-time Reservations for Live Shopping & Social Selling",
-    description: "LiveDealz connects live shopping, stories, and collection campaigns. Customers reserve products during streams, collect over days, and pay later. No overselling, no chaos.",
+    title: "LiveDealz – Live Shopping & Social Selling Software",
+    description: "Real-time reservations for live shopping & social selling. Customers reserve during streams, collect over days and pay later. No overselling.",
   },
   no: {
-    title: "LiveDealz – Sanntidsreservasjoner for Live Shopping & Social Selling",
-    description: "LiveDealz kobler live-shopping, stories og samleaksjoner. Kunder reserverer produkter under streams, samler over flere dager og betaler senere. Ingen oversalg, ingen kaos.",
+    title: "LiveDealz – Live-shopping & Social Selling-programvare",
+    description: "Sanntidsreservasjoner for live-shopping & social selling. Kunder reserverer i streams, samler over dager og betaler senere. Ingen oversalg.",
   },
 };
 
