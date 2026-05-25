@@ -18,7 +18,22 @@ import {
 } from "lucide-react";
 
 const B2B = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
+
+  const seo = {
+    de: {
+      title: "B2B Live-Shopping für Großhändler & Marken | LiveDealz",
+      description: "B2B Live-Shopping mit LiveDealz: Echtzeit-Reservierungen, Sammelbestellungen und Rechnungskauf für Großhändler, Marken und Wiederverkäufer.",
+    },
+    en: {
+      title: "B2B Live Shopping for Wholesalers & Brands | LiveDealz",
+      description: "B2B live shopping with LiveDealz: real-time reservations, bulk orders and invoice purchases for wholesalers, brands and resellers.",
+    },
+    no: {
+      title: "B2B live-shopping for grossister & merker | LiveDealz",
+      description: "B2B live-shopping med LiveDealz: sanntidsreservasjoner, samleordrer og fakturakjøp for grossister, merker og forhandlere.",
+    },
+  }[language];
 
   const benefits = [
     {
