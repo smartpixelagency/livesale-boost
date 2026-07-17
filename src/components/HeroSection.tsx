@@ -1,122 +1,108 @@
-import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
+import { ArrowRight } from "lucide-react";
 import heroImage from "@/assets/hero-livestream.jpg";
-import { ArrowRight, Play } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { ContactDialog } from "@/components/ContactDialog";
 
 export const HeroSection = () => {
   const { t } = useLanguage();
-  
+
   return (
-    <section className="pt-24 md:pt-32 pb-16 md:pb-24 bg-gradient-hero overflow-hidden">
-      <div className="container">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+    <section className="relative bg-paper text-ink">
+      {/* Section marker rail */}
+      <div className="container pt-12 md:pt-16 flex items-baseline justify-between">
+        <span className="section-marker">01 — Warensicherheit</span>
+        <span className="section-marker hidden md:inline">Shopify · Draft Orders</span>
+      </div>
+
+      <div className="container pt-10 md:pt-16 pb-20 md:pb-28">
+        <motion.h1
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, ease: [0.2, 0.8, 0.2, 1] }}
+          className="display-xl uppercase max-w-6xl"
+        >
+          {t("hero.headline1")}
+          <br />
+          {t("hero.headline2")}
+          <br />
+          <span className="text-ember">{t("hero.headline3")}</span>
+        </motion.h1>
+
+        <div className="mt-12 md:mt-16 grid md:grid-cols-12 gap-10 items-end">
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="order-2 lg:order-1"
+            transition={{ duration: 0.6, delay: 0.15 }}
+            className="md:col-span-6"
           >
-            <motion.div 
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.4, delay: 0.1 }}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent border border-primary/20 mb-6"
-            >
-              <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-              <span className="text-sm font-medium text-accent-foreground">{t("hero.badge")}</span>
-            </motion.div>
-            
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.1] mb-4">
-              <span className="text-gradient">{t("hero.headline1")}</span>{" "}
-              <span className="text-gradient">{t("hero.headline2")}</span>{" "}
-              <span className="text-gradient">{t("hero.headline3")}</span>
-            </h1>
-            
-            <p className="text-2xl md:text-3xl font-semibold text-foreground mb-4">{t("hero.subheadline")}</p>
-            
-            <p className="text-lg text-muted-foreground mb-4 max-w-xl leading-relaxed">
-              {t("hero.description1")}
-              <span className="font-semibold text-foreground">{t("hero.description1Bold")}</span>
+            <p className="text-xl md:text-2xl leading-relaxed text-ink">
+              {t("hero.subheadline")}
             </p>
-            
-            <p className="text-base text-muted-foreground mb-8 max-w-xl">{t("hero.description2")}</p>
-            
-            <div className="flex flex-col sm:flex-row gap-4">
-              <ContactDialog 
-                trigger={
-                  <Button variant="hero" size="xl" className="group">
-                    {t("hero.cta1")}
-                    <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
-                  </Button>
-                }
-              />
-              <Button variant="heroOutline" size="xl" className="group" asChild>
-                <a href="#features">
-                  <Play className="mr-2 h-5 w-5" />
-                  {t("hero.cta2")}
-                </a>
-              </Button>
-            </div>
-            
+            <p className="mt-5 text-base md:text-lg text-ink-soft leading-relaxed max-w-xl">
+              {t("hero.description1")}
+              <span className="text-ink font-semibold">{t("hero.description1Bold")}</span>{" "}
+              {t("hero.description2")}
+            </p>
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="order-1 lg:order-2"
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.25 }}
+            className="md:col-span-6 flex flex-col items-start md:items-end gap-4"
           >
-            <div className="relative">
-              <div className="absolute -top-4 -right-4 w-24 h-24 bg-primary/20 rounded-full blur-2xl" />
-              <div className="absolute -bottom-4 -left-4 w-32 h-32 bg-primary/10 rounded-full blur-3xl" />
-              
-              <div className="relative rounded-2xl overflow-hidden shadow-card-hover">
-                <img 
-                  src={heroImage} 
-                  alt={t("hero.imageAlt")} 
-                  className="w-full object-cover aspect-[4/3]"
-                  width={1024}
-                  height={768}
-                  fetchPriority="high"
-                  loading="eager"
-                />
-                
-                <motion.div 
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.6, duration: 0.4 }}
-                  className="absolute bottom-4 left-4 bg-card/95 backdrop-blur-sm rounded-xl p-3 shadow-lg border border-border"
-                >
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full bg-green-500/20 flex items-center justify-center">
-                      <svg className="w-5 h-5 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                      </svg>
-                    </div>
-                    <div>
-                      <p className="text-xs text-muted-foreground">{t("hero.reservationConfirmed")}</p>
-                      <p className="text-sm font-semibold">{t("hero.stockSecured")}</p>
-                    </div>
-                  </div>
-                </motion.div>
-                
-                <motion.div 
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.8, duration: 0.4 }}
-                  className="absolute top-4 right-4 bg-card/95 backdrop-blur-sm rounded-xl p-3 shadow-lg border border-border"
-                >
-                  <div className="flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
-                    <span className="text-sm font-medium">LIVE</span>
-                    <span className="text-xs text-muted-foreground">• 1.247 {t("hero.viewers")}</span>
-                  </div>
-                </motion.div>
-              </div>
-            </div>
+            <ContactDialog
+              trigger={
+                <button className="group inline-flex items-center gap-4 bg-ink text-paper hover:bg-ember transition-colors duration-300 px-8 py-6 font-display font-semibold uppercase tracking-wider text-sm text-left">
+                  <span className="max-w-xs leading-tight">{t("hero.cta1")}</span>
+                  <ArrowRight className="h-5 w-5 shrink-0 transition-transform group-hover:translate-x-1" />
+                </button>
+              }
+            />
+            <a
+              href="#features"
+              className="section-marker hover:text-ember transition-colors"
+            >
+              ↓ {t("hero.cta2")}
+            </a>
           </motion.div>
+        </div>
+      </div>
+
+      {/* Wide hairline + image band */}
+      <div className="hairline-t">
+        <div className="container py-10 md:py-14">
+          <div className="grid md:grid-cols-12 gap-8 items-center">
+            <div className="md:col-span-4">
+              <span className="section-marker block mb-4">Live · in Aktion</span>
+              <p className="font-display text-2xl md:text-3xl leading-tight text-ink">
+                {t("hero.reservationConfirmed")}
+                <br />
+                <span className="text-ember">{t("hero.stockSecured")}</span>
+              </p>
+            </div>
+            <motion.div
+              initial={{ opacity: 0, scale: 0.98 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.8, delay: 0.35 }}
+              className="md:col-span-8 relative overflow-hidden"
+            >
+              <img
+                src={heroImage}
+                alt={t("hero.imageAlt")}
+                width={1024}
+                height={640}
+                fetchPriority="high"
+                loading="eager"
+                className="w-full h-[280px] md:h-[420px] object-cover grayscale contrast-110"
+              />
+              <div className="absolute top-4 left-4 bg-paper text-ink px-3 py-1.5 flex items-center gap-2 font-display uppercase tracking-widest text-xs">
+                <span className="w-2 h-2 rounded-full bg-ember animate-pulse" />
+                Live · 1.247 {t("hero.viewers")}
+              </div>
+            </motion.div>
+          </div>
         </div>
       </div>
     </section>
