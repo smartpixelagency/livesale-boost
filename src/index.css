@@ -1,84 +1,86 @@
-/* Font loaded from index.html with optimized loading strategy */
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/*
+  LiveDealz — Paper & Ember design system
+  Palette: paper #faf8f5, ink #1a1a1a, muted #4a4a4a, ember #ea580c
+  Type: Space Grotesk (display) + DM Sans (body)
+*/
+
 @layer base {
   :root {
-    --background: 30 20% 99%;
-    --foreground: 20 10% 10%;
+    --background: 40 33% 97%;      /* paper #faf8f5 */
+    --foreground: 0 0% 10%;         /* ink #1a1a1a */
 
-    --card: 0 0% 100%;
-    --card-foreground: 20 10% 10%;
+    --card: 40 33% 97%;
+    --card-foreground: 0 0% 10%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 20 10% 10%;
+    --popover-foreground: 0 0% 10%;
 
-    --primary: 21 90% 48%;
-    --primary-foreground: 0 0% 100%;
+    --primary: 21 90% 48%;          /* ember #ea580c */
+    --primary-foreground: 40 33% 97%;
     --primary-hover: 21 90% 42%;
 
-    --secondary: 30 20% 96%;
-    --secondary-foreground: 20 10% 20%;
+    --secondary: 0 0% 10%;          /* ink block */
+    --secondary-foreground: 40 33% 97%;
 
-    --muted: 30 15% 95%;
-    --muted-foreground: 20 10% 45%;
+    --muted: 40 20% 93%;
+    --muted-foreground: 0 0% 29%;   /* #4a4a4a */
 
-    --accent: 21 90% 95%;
-    --accent-foreground: 21 90% 35%;
+    --accent: 21 90% 48%;
+    --accent-foreground: 40 33% 97%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 72% 40%;
+    --destructive-foreground: 40 33% 97%;
 
-    --border: 30 15% 90%;
-    --input: 30 15% 90%;
+    --border: 0 0% 10% / 0.1;
+    --input: 0 0% 10% / 0.15;
     --ring: 21 90% 48%;
 
-    --radius: 0.75rem;
+    --radius: 0;                    /* editorial: hard corners */
 
-    /* Custom tokens */
-    --gradient-primary: linear-gradient(135deg, hsl(21, 90%, 48%) 0%, hsl(30, 95%, 55%) 100%);
-    --gradient-hero: linear-gradient(180deg, hsl(30, 20%, 99%) 0%, hsl(30, 25%, 97%) 100%);
-    --shadow-card: 0 4px 20px -4px hsl(20 10% 10% / 0.08);
-    --shadow-card-hover: 0 8px 30px -4px hsl(20 10% 10% / 0.12);
-    --shadow-button: 0 4px 14px -3px hsl(21 90% 48% / 0.4);
+    /* Editorial tokens */
+    --paper: 40 33% 97%;
+    --ink: 0 0% 10%;
+    --ink-soft: 0 0% 29%;
+    --ember: 21 90% 48%;
+    --ember-soft: 21 90% 42%;
+
+    --hairline: 0 0% 10%;
+
+    --gradient-primary: linear-gradient(135deg, hsl(21 90% 48%) 0%, hsl(21 90% 42%) 100%);
+    --gradient-hero: linear-gradient(180deg, hsl(40 33% 97%) 0%, hsl(40 30% 95%) 100%);
+    --shadow-card: 0 1px 0 0 hsl(0 0% 10% / 0.08);
+    --shadow-card-hover: 0 8px 30px -12px hsl(0 0% 10% / 0.18);
+    --shadow-button: none;
   }
 
   .dark {
-    --background: 20 10% 8%;
-    --foreground: 30 20% 98%;
-
-    --card: 20 10% 12%;
-    --card-foreground: 30 20% 98%;
-
-    --popover: 20 10% 12%;
-    --popover-foreground: 30 20% 98%;
-
+    --background: 0 0% 10%;
+    --foreground: 40 33% 97%;
+    --card: 0 0% 12%;
+    --card-foreground: 40 33% 97%;
+    --popover: 0 0% 12%;
+    --popover-foreground: 40 33% 97%;
     --primary: 21 90% 52%;
-    --primary-foreground: 0 0% 100%;
-
-    --secondary: 20 10% 18%;
-    --secondary-foreground: 30 20% 98%;
-
-    --muted: 20 10% 20%;
-    --muted-foreground: 30 15% 60%;
-
-    --accent: 21 50% 20%;
-    --accent-foreground: 21 90% 70%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 20 10% 20%;
-    --input: 20 10% 20%;
+    --primary-foreground: 0 0% 10%;
+    --secondary: 40 33% 97%;
+    --secondary-foreground: 0 0% 10%;
+    --muted: 0 0% 16%;
+    --muted-foreground: 0 0% 65%;
+    --accent: 21 90% 52%;
+    --accent-foreground: 0 0% 10%;
+    --border: 40 33% 97% / 0.12;
+    --input: 40 33% 97% / 0.15;
     --ring: 21 90% 52%;
   }
 }
 
 @layer base {
   * {
-    @apply border-border;
+    border-color: hsl(0 0% 10% / 0.1);
   }
 
   html {
@@ -86,34 +88,63 @@
   }
 
   body {
-    @apply bg-background text-foreground font-sans antialiased;
-    font-family: 'Lexend', system-ui, sans-serif;
+    @apply bg-background text-foreground antialiased;
+    font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
+    font-feature-settings: 'ss01', 'cv11';
+  }
+
+  h1, h2, h3, h4, h5, h6, .font-display {
+    font-family: 'Space Grotesk', system-ui, sans-serif;
+    letter-spacing: -0.02em;
+  }
+
+  ::selection {
+    background-color: hsl(var(--ember));
+    color: hsl(var(--paper));
   }
 }
 
 @layer utilities {
+  .font-display { font-family: 'Space Grotesk', system-ui, sans-serif; }
+  .font-body    { font-family: 'DM Sans', system-ui, sans-serif; }
+
   .text-gradient {
     @apply bg-clip-text text-transparent;
     background-image: var(--gradient-primary);
   }
 
-  .bg-gradient-primary {
-    background-image: var(--gradient-primary);
+  .bg-gradient-primary { background-image: var(--gradient-primary); }
+  .bg-gradient-hero    { background-image: var(--gradient-hero); }
+
+  .shadow-card        { box-shadow: var(--shadow-card); }
+  .shadow-card-hover  { box-shadow: var(--shadow-card-hover); }
+  .shadow-button      { box-shadow: var(--shadow-button); }
+
+  .hairline-t { border-top: 1px solid hsl(0 0% 10% / 0.1); }
+  .hairline-b { border-bottom: 1px solid hsl(0 0% 10% / 0.1); }
+
+  .section-marker {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 500;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: hsl(var(--ink-soft));
   }
 
-  .bg-gradient-hero {
-    background-image: var(--gradient-hero);
+  .display-xl {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    line-height: 0.9;
+    font-size: clamp(3rem, 10vw, 9rem);
   }
 
-  .shadow-card {
-    box-shadow: var(--shadow-card);
-  }
-
-  .shadow-card-hover {
-    box-shadow: var(--shadow-card-hover);
-  }
-
-  .shadow-button {
-    box-shadow: var(--shadow-button);
+  .display-lg {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 0.95;
+    font-size: clamp(2.5rem, 6vw, 5rem);
   }
 }
