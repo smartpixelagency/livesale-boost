@@ -1,8 +1,8 @@
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
-import heroImage from "@/assets/hero-livestream.jpg";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { ContactDialog } from "@/components/ContactDialog";
+import { LiveVisualizer } from "@/components/LiveVisualizer";
 
 export const HeroSection = () => {
   const { t } = useLanguage();
