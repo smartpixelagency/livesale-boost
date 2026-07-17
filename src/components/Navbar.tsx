@@ -192,7 +192,7 @@ export const Navbar = () => {
               onClick={() => setLangOpen(!langOpen)}
               className="flex items-center gap-1 p-2 text-muted-foreground hover:text-foreground"
             >
-              <span className="text-lg">{currentLang.flag}</span>
+              <span className="font-display text-xs tracking-widest">{currentLang.code.toUpperCase()}</span>
               <ChevronDown size={14} />
             </button>
             <AnimatePresence>
