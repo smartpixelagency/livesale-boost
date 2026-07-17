@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
-import { Check, Sparkles } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { ArrowRight } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { ContactDialog } from "./ContactDialog";
 import { useState } from "react";
@@ -33,9 +32,7 @@ export const PricingSection = () => {
         t("pricing.starter.scope.2"),
         t("pricing.starter.scope.3"),
       ],
-      support: [
-        t("pricing.starter.support.1"),
-      ],
+      support: [t("pricing.starter.support.1")],
     },
     {
       name: t("pricing.pro.name"),
@@ -61,10 +58,7 @@ export const PricingSection = () => {
         t("pricing.pro.scope.2"),
         t("pricing.pro.scope.3"),
       ],
-      support: [
-        t("pricing.pro.support.1"),
-        t("pricing.pro.support.2"),
-      ],
+      support: [t("pricing.pro.support.1"), t("pricing.pro.support.2")],
     },
     {
       name: t("pricing.enterprise.name"),
@@ -98,215 +92,212 @@ export const PricingSection = () => {
     },
   ];
 
+  const renderList = (title: string, items: string[]) => (
+    <div>
+      <h4 className="section-marker mb-3">{title}</h4>
+      <ul className="space-y-0 border-t border-ink/10">
+        {items.map((item) => (
+          <li
+            key={item}
+            className="flex items-start gap-3 py-2.5 border-b border-ink/10 text-sm text-ink-soft"
+          >
+            <span className="font-display text-xs text-ember pt-1">→</span>
+            <span>{item}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+
   return (
-    <section id="pricing" className="py-16 md:py-24 bg-muted/30">
-      <div className="container">
-        {/* Pioneer Banner */}
-        <motion.div
-          initial={{ opacity: 0, y: -10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          viewport={{ once: true }}
-          className="bg-gradient-to-r from-primary/10 via-primary/5 to-primary/10 border border-primary/20 rounded-2xl p-6 md:p-8 text-center mb-12"
-        >
-          <div className="flex items-center justify-center gap-2 mb-2">
-            <Sparkles className="h-5 w-5 text-primary" />
-            <span className="text-sm font-semibold text-primary uppercase tracking-wide">
-              {t("pricing.pioneerBadge")}
-            </span>
-            <Sparkles className="h-5 w-5 text-primary" />
-          </div>
-          <h3 className="text-xl md:text-2xl font-bold mb-2">
-            {t("pricing.pioneerTitle")}
-          </h3>
-          <p className="text-muted-foreground max-w-xl mx-auto">
-            {t("pricing.pioneerDescription")}
-          </p>
-        </motion.div>
+    <section id="pricing" className="bg-paper text-ink">
+      <div className="container pt-20 md:pt-28 pb-24 md:pb-32">
+        <div className="flex items-baseline justify-between mb-12 md:mb-16">
+          <span className="section-marker">06 — {t("pricing.badge")}</span>
+          <span className="section-marker hidden md:inline">{t("pricing.pioneerBadge")}</span>
+        </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          viewport={{ once: true }}
-          className="text-center mb-8"
-        >
-          <span className="text-sm font-semibold text-primary uppercase tracking-wide mb-3 block">
-            {t("pricing.badge")}
-          </span>
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
+        <div className="grid md:grid-cols-12 gap-10 md:gap-16 mb-12">
+          <motion.h2
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="md:col-span-7 display-lg uppercase"
+          >
             {t("pricing.headline")}
-          </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto mb-8">
-            {t("pricing.description")}
-          </p>
+          </motion.h2>
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.15 }}
+            className="md:col-span-5 self-end space-y-4"
+          >
+            <p className="text-lg md:text-xl text-ink-soft leading-relaxed">
+              {t("pricing.description")}
+            </p>
+            <p className="text-base text-ink font-medium">
+              <span className="text-ember">◆</span> {t("pricing.pioneerTitle")} —{" "}
+              <span className="text-ink-soft">{t("pricing.pioneerDescription")}</span>
+            </p>
+          </motion.div>
+        </div>
 
-          {/* Billing Toggle */}
-          <div className="flex items-center justify-center gap-2 mb-4">
-            <span className={`text-sm font-medium ${!isYearly ? "text-foreground" : "text-muted-foreground"}`}>
-              {t("pricing.monthly")}
-            </span>
+        {/* Billing toggle */}
+        <div className="flex items-center gap-4 mb-12 border-t border-ink/15 pt-6">
+          <span className="section-marker">Abrechnung</span>
+          <div className="flex items-center gap-3">
             <button
-              onClick={() => setIsYearly(!isYearly)}
-              className={`relative w-12 h-6 rounded-full transition-colors ${
-                isYearly ? "bg-primary" : "bg-muted-foreground/30"
+              type="button"
+              onClick={() => setIsYearly(false)}
+              className={`font-display uppercase tracking-wider text-sm px-3 py-1 transition-colors ${
+                !isYearly ? "bg-ink text-paper" : "text-ink-soft hover:text-ink"
               }`}
+              aria-pressed={!isYearly}
             >
-              <span
-                className={`absolute top-0.5 left-0.5 w-5 h-5 bg-white rounded-full shadow transition-transform duration-200 ${
-                  isYearly ? "translate-x-6" : "translate-x-0"
-                }`}
-              />
+              {t("pricing.monthly")}
             </button>
-            <span className={`text-sm font-medium ${isYearly ? "text-foreground" : "text-muted-foreground"}`}>
-              {t("pricing.yearly")}
-            </span>
-          </div>
-          <p className="text-sm text-muted-foreground">
-            {t("pricing.savingsNote")}
-          </p>
-        </motion.div>
-
-        {/* Pricing Cards */}
-        <div className="grid md:grid-cols-3 gap-6 md:gap-8 max-w-6xl mx-auto mb-16">
-          {plans.map((plan, index) => (
-            <motion.div
-              key={plan.name}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              viewport={{ once: true }}
-              className={`relative bg-card border rounded-2xl p-6 md:p-8 ${
-                plan.popular
-                  ? "border-primary shadow-lg ring-1 ring-primary/20"
-                  : "border-border"
+            <button
+              type="button"
+              onClick={() => setIsYearly(true)}
+              className={`font-display uppercase tracking-wider text-sm px-3 py-1 transition-colors ${
+                isYearly ? "bg-ink text-paper" : "text-ink-soft hover:text-ink"
               }`}
+              aria-pressed={isYearly}
             >
-              {/* Badges */}
-              <div className="flex items-center gap-2 mb-4">
-                <h3 className="text-xl font-bold">{plan.name}</h3>
+              {t("pricing.yearly")}
+            </button>
+          </div>
+          <span className="text-xs text-ink-soft hidden md:inline">
+            {t("pricing.savingsNote")}
+          </span>
+        </div>
+
+        {/* Plans as editorial columns */}
+        <div className="grid md:grid-cols-3 gap-0 border-t border-ink/20">
+          {plans.map((plan, index) => (
+            <motion.article
+              key={plan.name}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: index * 0.08 }}
+              className={`relative p-8 md:p-10 border-b md:border-b-0 border-ink/15 ${
+                index < 2 ? "md:border-r border-ink/15" : ""
+              } ${plan.popular ? "bg-ink text-paper" : ""}`}
+            >
+              <div className="flex items-baseline justify-between mb-6">
+                <h3 className="font-display text-2xl md:text-3xl uppercase">{plan.name}</h3>
                 {plan.popular && (
-                  <span className="bg-primary text-primary-foreground text-xs font-semibold px-2 py-0.5 rounded-full">
-                    {t("pricing.popular")}
-                  </span>
+                  <span className="section-marker text-ember">★ {t("pricing.popular")}</span>
                 )}
-                {plan.limitedTime && (
-                  <span className="bg-amber-500 text-white text-xs font-semibold px-2 py-0.5 rounded-full">
-                    {t("pricing.limitedTime")}
-                  </span>
+                {plan.limitedTime && !plan.popular && (
+                  <span className="section-marker text-ember">◆ {t("pricing.limitedTime")}</span>
                 )}
               </div>
 
-              <p className="text-muted-foreground text-sm mb-4 min-h-[40px]">{plan.description}</p>
+              <p
+                className={`text-sm leading-relaxed mb-8 min-h-[48px] ${
+                  plan.popular ? "text-paper/70" : "text-ink-soft"
+                }`}
+              >
+                {plan.description}
+              </p>
 
-              {/* Price */}
-              <div className="mb-6">
-                {plan.isEnterprise ? (
-                  <div>
-                    <span className="text-sm text-muted-foreground">{t("pricing.startingFrom")}</span>
-                    <div className="flex items-baseline gap-2">
-                      <span className="text-4xl font-bold">€{plan.monthlyPrice}</span>
-                      <span className="text-muted-foreground">{t("pricing.perMonth")}</span>
-                    </div>
-                    <span className="text-sm text-muted-foreground">{t("pricing.custom")}</span>
-                  </div>
-                ) : (
-                  <div>
-                    <span className="text-sm text-muted-foreground">{t("pricing.startingFrom")}</span>
-                    <div className="flex items-baseline gap-2 flex-wrap">
-                      <span className="text-4xl font-bold text-primary">
-                        €{isYearly ? plan.yearlyPrice : plan.monthlyPrice}
-                      </span>
-                      <span className="text-muted-foreground">{t("pricing.perMonth")}</span>
-                      {(isYearly ? plan.originalYearlyPrice : plan.originalMonthlyPrice) && (
-                        <span className="text-lg text-muted-foreground line-through">
-                          {isYearly ? plan.originalYearlyPrice : plan.originalMonthlyPrice} €*
-                        </span>
-                      )}
-                    </div>
-                    {isYearly && plan.yearlyTotal && (
-                      <span className="text-sm text-muted-foreground">
-                        {t("pricing.billedYearly")} €{plan.yearlyTotal}
-                      </span>
-                    )}
-                  </div>
+              {/* Price block */}
+              <div className={`pb-8 mb-8 border-b ${plan.popular ? "border-paper/20" : "border-ink/15"}`}>
+                <span
+                  className={`section-marker block mb-2 ${plan.popular ? "text-paper/60" : ""}`}
+                >
+                  {t("pricing.startingFrom")}
+                </span>
+                <div className="flex items-baseline gap-3 flex-wrap">
+                  <span className="font-display text-5xl md:text-6xl font-bold text-ember tabular-nums">
+                    €{plan.isEnterprise ? plan.monthlyPrice : isYearly ? plan.yearlyPrice : plan.monthlyPrice}
+                  </span>
+                  <span
+                    className={`font-display text-sm uppercase ${
+                      plan.popular ? "text-paper/70" : "text-ink-soft"
+                    }`}
+                  >
+                    {t("pricing.perMonth")}
+                  </span>
+                </div>
+                {!plan.isEnterprise &&
+                  (isYearly ? plan.originalYearlyPrice : plan.originalMonthlyPrice) && (
+                    <span
+                      className={`text-sm line-through mt-1 inline-block ${
+                        plan.popular ? "text-paper/50" : "text-ink-soft"
+                      }`}
+                    >
+                      €{isYearly ? plan.originalYearlyPrice : plan.originalMonthlyPrice}*
+                    </span>
+                  )}
+                {!plan.isEnterprise && isYearly && plan.yearlyTotal && (
+                  <p
+                    className={`text-xs mt-2 ${plan.popular ? "text-paper/60" : "text-ink-soft"}`}
+                  >
+                    {t("pricing.billedYearly")} €{plan.yearlyTotal}
+                  </p>
+                )}
+                {plan.isEnterprise && (
+                  <p
+                    className={`text-xs mt-2 ${plan.popular ? "text-paper/60" : "text-ink-soft"}`}
+                  >
+                    {t("pricing.custom")}
+                  </p>
                 )}
               </div>
 
               <ContactDialog
                 trigger={
-                  <Button
-                    variant={plan.popular ? "hero" : "outline"}
-                    className="w-full mb-6"
+                  <button
+                    className={`group inline-flex items-center justify-between gap-4 w-full px-6 py-4 font-display font-semibold uppercase tracking-wider text-sm transition-colors duration-300 mb-8 ${
+                      plan.popular
+                        ? "bg-ember text-paper hover:bg-paper hover:text-ink"
+                        : "bg-ink text-paper hover:bg-ember"
+                    }`}
                   >
-                    {plan.cta}
-                  </Button>
+                    <span>{plan.cta}</span>
+                    <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                  </button>
                 }
               />
 
-              {/* Features Section */}
-              <div className="mb-6">
-                <h4 className="font-semibold text-sm mb-3 text-foreground">Features</h4>
-                <ul className="space-y-2">
-                  {plan.features.map((feature) => (
-                    <li key={feature} className="flex items-start gap-2 text-sm">
-                      <Check className="h-4 w-4 text-primary shrink-0 mt-0.5" />
-                      <span className="text-muted-foreground">{feature}</span>
-                    </li>
-                  ))}
-                </ul>
+              <div
+                className={`space-y-6 ${
+                  plan.popular ? "[&_.section-marker]:text-paper/60" : ""
+                }`}
+              >
+                {renderList("Features", plan.features)}
+                {renderList(t("pricing.scopeTitle"), plan.scope)}
+                {renderList(t("pricing.supportTitle"), plan.support)}
               </div>
-
-              {/* Scope Section */}
-              <div className="mb-6">
-                <h4 className="font-semibold text-sm mb-3 text-foreground">{t("pricing.scopeTitle")}</h4>
-                <ul className="space-y-2">
-                  {plan.scope.map((item) => (
-                    <li key={item} className="flex items-start gap-2 text-sm">
-                      <Check className="h-4 w-4 text-primary shrink-0 mt-0.5" />
-                      <span className="text-muted-foreground">{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              {/* Support Section */}
-              <div>
-                <h4 className="font-semibold text-sm mb-3 text-foreground">{t("pricing.supportTitle")}</h4>
-                <ul className="space-y-2">
-                  {plan.support.map((item) => (
-                    <li key={item} className="flex items-start gap-2 text-sm">
-                      <Check className="h-4 w-4 text-primary shrink-0 mt-0.5" />
-                      <span className="text-muted-foreground">{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </motion.div>
+            </motion.article>
           ))}
         </div>
 
-        {/* Disclaimer */}
-        <p className="text-xs text-muted-foreground text-center mb-12">
-          {t("pricing.savingsDisclaimer")}
-        </p>
+        <p className="text-xs text-ink-soft mt-8">{t("pricing.savingsDisclaimer")}</p>
 
-        {/* Testimonial */}
-        <motion.div
+        {/* Testimonial as pull quote */}
+        <motion.blockquote
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
           viewport={{ once: true }}
-          className="bg-card border border-border rounded-2xl p-8 md:p-12 text-center"
+          transition={{ duration: 0.6 }}
+          className="mt-20 md:mt-28 border-l-4 border-ember pl-6 md:pl-10 max-w-4xl"
         >
-          <blockquote className="text-lg md:text-xl italic text-foreground max-w-3xl mx-auto mb-6">
-            {t("pricing.testimonial")}
-          </blockquote>
-          <div>
-            <p className="font-semibold">{t("pricing.testimonialAuthor")}</p>
-            <p className="text-muted-foreground text-sm">{t("pricing.testimonialRole")}</p>
-          </div>
-        </motion.div>
+          <p className="font-display text-2xl md:text-4xl uppercase leading-tight text-ink mb-6">
+            "{t("pricing.testimonial")}"
+          </p>
+          <footer className="flex items-baseline gap-4">
+            <cite className="font-display uppercase tracking-wider text-sm not-italic">
+              {t("pricing.testimonialAuthor")}
+            </cite>
+            <span className="text-sm text-ink-soft">{t("pricing.testimonialRole")}</span>
+          </footer>
+        </motion.blockquote>
       </div>
     </section>
   );
