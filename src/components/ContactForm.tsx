@@ -255,8 +255,19 @@ export const ContactForm = () => {
         animate={{ opacity: 1, scale: 1 }}
         className="bg-card border border-border rounded-2xl p-8 text-center"
       >
-        <CheckCircle2 className="h-16 w-16 text-primary mx-auto mb-4" />
-        <h3 className="text-2xl font-bold mb-2">{l.success}</h3>
+        <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
+          <CheckCircle2 className="h-10 w-10 text-primary" />
+        </div>
+        <h3 className="text-2xl font-bold mb-3">{l.success}</h3>
+        <p className="text-muted-foreground mb-6 max-w-sm mx-auto">{l.successBody}</p>
+        <div className="flex flex-col sm:flex-row gap-3 justify-center">
+          <Button variant="hero" size="lg" asChild>
+            <Link to={`/${language}/features/draft-orders`}>{l.successCta}</Link>
+          </Button>
+          <Button variant="outline" size="lg" asChild>
+            <Link to={`/${language}`}>{l.successSecondary}</Link>
+          </Button>
+        </div>
       </motion.div>
     );
   }
