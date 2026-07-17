@@ -19,7 +19,8 @@ export const PromoBanner = () => {
     localStorage.setItem("promoBannerClosed", "true");
   };
 
-  if (!isVisible) return null;
+  const message = t("promo.starterOffer");
+  if (!isVisible || !message) return null;
 
   return (
     <div className="w-full bg-[#EA580C] text-white py-3 px-4 relative z-50">

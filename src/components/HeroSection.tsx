@@ -60,27 +60,6 @@ export const HeroSection = () => {
               </Button>
             </div>
             
-            <div className="flex items-center gap-6 mt-8 pt-6 border-t border-border">
-              <div className="flex items-center gap-2">
-                <div className="flex -space-x-2">
-                  {[1,2,3,4].map((i) => (
-                    <div key={i} className="w-8 h-8 rounded-full bg-gradient-primary border-2 border-background" />
-                  ))}
-                </div>
-                <span className="text-sm text-muted-foreground">{t("hero.merchants")}</span>
-              </div>
-              <div className="h-8 w-px bg-border" />
-              <div className="flex items-center gap-1">
-                <span className="text-sm font-semibold text-foreground">4.9</span>
-                <div className="flex">
-                  {[1,2,3,4,5].map((i) => (
-                    <svg key={i} className="w-4 h-4 text-primary fill-primary" viewBox="0 0 20 20">
-                      <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
-                    </svg>
-                  ))}
-                </div>
-              </div>
-            </div>
           </motion.div>
 
           <motion.div
