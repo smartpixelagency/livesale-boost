@@ -1,11 +1,4 @@
 import { motion } from "framer-motion";
-import { 
-  Video, 
-  MessageCircle, 
-  Users, 
-  Building2,
-  ArrowRight
-} from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 export const UseCasesSection = () => {
@@ -13,95 +6,115 @@ export const UseCasesSection = () => {
 
   const useCases = [
     {
-      icon: Video,
+      n: "01",
+      tag: "Live Commerce",
       title: t("useCases.case1.title"),
-      color: "from-pink-500 to-rose-500",
       story: [
         t("useCases.case1.step1"),
         t("useCases.case1.step2"),
         t("useCases.case1.step3"),
         t("useCases.case1.step4"),
-      ]
+      ],
     },
     {
-      icon: MessageCircle,
+      n: "02",
+      tag: "Messaging",
       title: t("useCases.case2.title"),
-      color: "from-green-500 to-emerald-500",
       story: [
         t("useCases.case2.step1"),
         t("useCases.case2.step2"),
         t("useCases.case2.step3"),
         t("useCases.case2.step4"),
-      ]
+      ],
     },
     {
-      icon: Users,
+      n: "03",
+      tag: "Community",
       title: t("useCases.case3.title"),
-      color: "from-blue-500 to-indigo-500",
       story: [
         t("useCases.case3.step1"),
         t("useCases.case3.step2"),
         t("useCases.case3.step3"),
         t("useCases.case3.step4"),
-      ]
+      ],
     },
     {
-      icon: Building2,
+      n: "04",
+      tag: "B2B · Wholesale",
       title: t("useCases.case4.title"),
-      color: "from-amber-500 to-orange-500",
       story: [
         t("useCases.case4.step1"),
         t("useCases.case4.step2"),
         t("useCases.case4.step3"),
         t("useCases.case4.step4"),
-      ]
-    }
+      ],
+    },
   ];
 
   return (
-    <section id="use-cases" className="py-20 bg-background">
-      <div className="container">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="text-center max-w-3xl mx-auto mb-16"
-        >
-          <span className="inline-block px-4 py-1.5 rounded-full bg-accent text-accent-foreground text-sm font-medium mb-4">
-            {t("useCases.badge")}
-          </span>
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">
-            {t("useCases.headline")}
-          </h2>
-          <p className="text-lg text-muted-foreground">
-            {t("useCases.description")}
-          </p>
-        </motion.div>
+    <section id="use-cases" className="bg-paper text-ink">
+      <div className="container pt-20 md:pt-28 pb-24 md:pb-32">
+        <div className="flex items-baseline justify-between mb-12 md:mb-16">
+          <span className="section-marker">05 — {t("useCases.badge")}</span>
+          <span className="section-marker hidden md:inline">Vier Szenarien</span>
+        </div>
 
-        <div className="grid md:grid-cols-2 gap-8">
-          {useCases.map((useCase, index) => (
-            <motion.div
-              key={useCase.title}
-              initial={{ opacity: 0, y: 20 }}
+        <div className="grid md:grid-cols-12 gap-10 md:gap-16 mb-16 md:mb-20">
+          <motion.h2
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="md:col-span-7 display-lg uppercase"
+          >
+            {t("useCases.headline")}
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.15 }}
+            className="md:col-span-5 text-lg md:text-xl text-ink-soft leading-relaxed self-end"
+          >
+            {t("useCases.description")}
+          </motion.p>
+        </div>
+
+        <div className="border-t border-ink/15">
+          {useCases.map((uc, i) => (
+            <motion.article
+              key={uc.title}
+              initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: index * 0.1 }}
-              className="bg-card rounded-2xl p-8 shadow-card border border-border hover:shadow-card-hover transition-shadow"
+              transition={{ duration: 0.5, delay: 0.05 }}
+              className="grid md:grid-cols-12 gap-6 md:gap-10 py-10 md:py-14 border-b border-ink/15"
             >
-              <div className={`w-14 h-14 rounded-xl bg-gradient-to-br ${useCase.color} flex items-center justify-center mb-6`}>
-                <useCase.icon className="w-7 h-7 text-white" />
+              <div className="md:col-span-3">
+                <span className="font-display text-5xl md:text-6xl text-ember block leading-none mb-3">
+                  {uc.n}
+                </span>
+                <span className="section-marker">{uc.tag}</span>
               </div>
-              <h3 className="text-xl font-bold mb-4">{useCase.title}</h3>
-              <ul className="space-y-3">
-                {useCase.story.map((step, i) => (
-                  <li key={i} className="flex items-start gap-3">
-                    <ArrowRight className="w-4 h-4 text-primary flex-shrink-0 mt-1" />
-                    <span className="text-muted-foreground text-sm">{step}</span>
+              <div className="md:col-span-4">
+                <h3 className="font-display text-2xl md:text-3xl uppercase leading-tight">
+                  {uc.title}
+                </h3>
+              </div>
+              <ol className="md:col-span-5 space-y-0 border-t border-ink/10">
+                {uc.story.map((step, idx) => (
+                  <li
+                    key={idx}
+                    className="flex items-start gap-4 py-3 border-b border-ink/10 text-ink-soft"
+                  >
+                    <span className="font-display text-xs text-ember pt-1 tabular-nums">
+                      {String(idx + 1).padStart(2, "0")}
+                    </span>
+                    <span className="text-sm md:text-base leading-relaxed">{step}</span>
                   </li>
                 ))}
-              </ul>
-            </motion.div>
+              </ol>
+            </motion.article>
           ))}
         </div>
       </div>
