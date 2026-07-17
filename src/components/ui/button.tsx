@@ -5,24 +5,24 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg text-sm font-medium ring-offset-background transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap font-display font-semibold uppercase tracking-wider text-sm ring-offset-background transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
   {
     variants: {
       variant: {
-        default: "bg-primary text-primary-foreground hover:bg-primary/90 shadow-button hover:shadow-lg",
+        default: "bg-ink text-paper hover:bg-ember",
         destructive: "bg-destructive text-destructive-foreground hover:bg-destructive/90",
-        outline: "border-2 border-foreground/20 bg-transparent hover:bg-secondary hover:border-foreground/30",
-        secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80",
-        ghost: "hover:bg-accent hover:text-accent-foreground",
-        link: "text-primary underline-offset-4 hover:underline",
-        hero: "bg-gradient-primary text-primary-foreground shadow-button hover:shadow-lg hover:scale-[1.02] active:scale-[0.98]",
-        heroOutline: "border-2 border-foreground/20 bg-card text-foreground hover:bg-secondary hover:border-foreground/30",
+        outline: "border border-ink bg-transparent text-ink hover:bg-ink hover:text-paper",
+        secondary: "bg-paper text-ink border border-ink hover:bg-ink hover:text-paper",
+        ghost: "text-ink hover:bg-ink/5",
+        link: "text-ember underline-offset-4 hover:underline p-0 h-auto",
+        hero: "bg-ember text-paper hover:bg-ink",
+        heroOutline: "border border-ink bg-paper text-ink hover:bg-ink hover:text-paper",
       },
       size: {
-        default: "h-10 px-5 py-2",
-        sm: "h-9 rounded-md px-4",
-        lg: "h-12 rounded-xl px-8 text-base",
-        xl: "h-14 rounded-xl px-10 text-base font-semibold",
+        default: "h-11 px-6",
+        sm: "h-9 px-4 text-xs",
+        lg: "h-14 px-8 text-sm",
+        xl: "h-16 px-10 text-base",
         icon: "h-10 w-10",
       },
     },
