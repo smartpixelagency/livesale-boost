@@ -11,7 +11,7 @@ interface LanguageContextType {
 const translations = {
   de: {
     // Promo Banner
-    "promo.starterOffer": "🎉 Starter-Plan für nur €79/Monat – Jetzt sichern!",
+    "promo.starterOffer": "Starter-Plan für nur €79/Monat – Jetzt sichern!",
 
     // Navbar
     "nav.features": "Funktionen",
@@ -404,7 +404,7 @@ const translations = {
   },
   en: {
     // Promo Banner
-    "promo.starterOffer": "🎉 Starter plan for only €79/month – Get it now!",
+    "promo.starterOffer": "Starter plan for only €79/month – Get it now!",
 
     // Navbar
     "nav.features": "Features",
