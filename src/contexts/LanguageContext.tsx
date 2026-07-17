@@ -11,7 +11,7 @@ interface LanguageContextType {
 const translations = {
   de: {
     // Promo Banner
-    "promo.starterOffer": "🎉 Starter-Plan für nur €79/Monat – Angebot gültig bis 31.12.2025!",
+    "promo.starterOffer": "🎉 Starter-Plan für nur €79/Monat – Jetzt sichern!",
 
     // Navbar
     "nav.features": "Funktionen",
