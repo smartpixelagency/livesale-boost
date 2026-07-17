@@ -228,7 +228,7 @@ export const PricingSection = () => {
                   (isYearly ? plan.originalYearlyPrice : plan.originalMonthlyPrice) && (
                     <span
                       className={`text-sm line-through mt-1 inline-block ${
-                        plan.popular ? "text-paper/50" : "text-ink-soft"
+                        plan.popular ? "text-paper/70" : "text-ink-soft"
                       }`}
                     >
                       €{isYearly ? plan.originalYearlyPrice : plan.originalMonthlyPrice}*
@@ -289,7 +289,7 @@ export const PricingSection = () => {
           className="mt-20 md:mt-28 border-l-4 border-ember pl-6 md:pl-10 max-w-4xl"
         >
           <p className="font-display text-2xl md:text-4xl uppercase leading-tight text-ink mb-6">
-            "{t("pricing.testimonial")}"
+            {t("pricing.testimonial")}
           </p>
           <footer className="flex items-baseline gap-4">
             <cite className="font-display uppercase tracking-wider text-sm not-italic">

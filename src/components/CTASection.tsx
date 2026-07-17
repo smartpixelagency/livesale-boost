@@ -11,7 +11,7 @@ export const CTASection = () => {
       <div className="container pt-24 md:pt-32 pb-24 md:pb-32">
         <div className="flex items-baseline justify-between mb-12">
           <span className="section-marker text-paper/60">— Jetzt starten</span>
-          <span className="section-marker text-paper/40 hidden md:inline">Demo · Kostenlos</span>
+          <span className="section-marker text-paper/70 hidden md:inline">Demo · Kostenlos</span>
         </div>
 
         <motion.h2

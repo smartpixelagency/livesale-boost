@@ -8,9 +8,9 @@ import { useLanguage, Language } from "@/contexts/LanguageContext";
 import { ContactDialog } from "@/components/ContactDialog";
 
 const languages: { code: Language; label: string; flag: string }[] = [
-  { code: "de", label: "Deutsch", flag: "🇩🇪" },
-  { code: "en", label: "English", flag: "🇬🇧" },
-  { code: "no", label: "Norsk", flag: "🇳🇴" },
+  { code: "de", label: "Deutsch", flag: "DE" },
+  { code: "en", label: "English", flag: "EN" },
+  { code: "no", label: "Norsk", flag: "NO" },
 ];
 
 export const Navbar = () => {
@@ -145,8 +145,7 @@ export const Navbar = () => {
               onClick={() => setLangOpen(!langOpen)}
               className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors rounded-lg hover:bg-accent"
             >
-              <span className="text-lg">{currentLang.flag}</span>
-              <span>{currentLang.code.toUpperCase()}</span>
+              <span className="font-display text-xs tracking-widest">{currentLang.code.toUpperCase()}</span>
               <ChevronDown size={14} className={`transition-transform ${langOpen ? "rotate-180" : ""}`} />
             </button>
             <AnimatePresence>
@@ -166,7 +165,7 @@ export const Navbar = () => {
                         language === lang.code ? "bg-accent font-medium" : ""
                       }`}
                     >
-                      <span className="text-lg">{lang.flag}</span>
+                      <span className="font-display text-xs tracking-widest w-6">{lang.code.toUpperCase()}</span>
                       <span>{lang.label}</span>
                     </button>
                   ))}
@@ -193,7 +192,7 @@ export const Navbar = () => {
               onClick={() => setLangOpen(!langOpen)}
               className="flex items-center gap-1 p-2 text-muted-foreground hover:text-foreground"
             >
-              <span className="text-lg">{currentLang.flag}</span>
+              <span className="font-display text-xs tracking-widest">{currentLang.code.toUpperCase()}</span>
               <ChevronDown size={14} />
             </button>
             <AnimatePresence>
@@ -213,7 +212,7 @@ export const Navbar = () => {
                         language === lang.code ? "bg-accent font-medium" : ""
                       }`}
                     >
-                      <span className="text-lg">{lang.flag}</span>
+                      <span className="font-display text-xs tracking-widest w-6">{lang.code.toUpperCase()}</span>
                       <span>{lang.label}</span>
                     </button>
                   ))}
