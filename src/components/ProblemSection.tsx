@@ -18,7 +18,7 @@ export const ProblemSection = () => {
       <div className="container pt-16 md:pt-24 pb-24 md:pb-32">
         <div className="flex items-baseline justify-between mb-14 md:mb-20">
           <span className="section-marker text-paper/60">02 — {t("problem.badge")}</span>
-          <span className="section-marker text-paper/40 hidden md:inline">Reality Check</span>
+          <span className="section-marker text-paper/70 hidden md:inline">Reality Check</span>
         </div>
 
         <div className="grid md:grid-cols-12 gap-10 md:gap-16">
@@ -55,7 +55,7 @@ export const ProblemSection = () => {
               className="group grid md:grid-cols-12 gap-6 md:gap-10 py-8 md:py-10 border-b border-paper/15 hover:bg-paper/5 transition-colors"
             >
               <div className="md:col-span-2">
-                <span className="font-display text-4xl md:text-5xl text-paper/30 group-hover:text-ember transition-colors">
+                <span className="font-display text-4xl md:text-5xl text-paper/60 group-hover:text-ember transition-colors">
                   {p.n}
                 </span>
               </div>

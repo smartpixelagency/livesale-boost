@@ -228,7 +228,7 @@ export const PricingSection = () => {
                   (isYearly ? plan.originalYearlyPrice : plan.originalMonthlyPrice) && (
                     <span
                       className={`text-sm line-through mt-1 inline-block ${
-                        plan.popular ? "text-paper/50" : "text-ink-soft"
+                        plan.popular ? "text-paper/70" : "text-ink-soft"
                       }`}
                     >
                       €{isYearly ? plan.originalYearlyPrice : plan.originalMonthlyPrice}*
