@@ -404,7 +404,7 @@ const translations = {
   },
   en: {
     // Promo Banner
-    "promo.starterOffer": "🎉 Starter plan for only €79/month – Offer valid until 31.12.2025!",
+    "promo.starterOffer": "🎉 Starter plan for only €79/month – Get it now!",
 
     // Navbar
     "nav.features": "Features",
