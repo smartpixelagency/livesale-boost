@@ -165,7 +165,7 @@ export const Navbar = () => {
                         language === lang.code ? "bg-accent font-medium" : ""
                       }`}
                     >
-                      <span className="text-lg">{lang.flag}</span>
+                      <span className="font-display text-xs tracking-widest w-6">{lang.code.toUpperCase()}</span>
                       <span>{lang.label}</span>
                     </button>
                   ))}
