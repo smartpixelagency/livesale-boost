@@ -8,9 +8,9 @@ import { useLanguage, Language } from "@/contexts/LanguageContext";
 import { ContactDialog } from "@/components/ContactDialog";
 
 const languages: { code: Language; label: string; flag: string }[] = [
-  { code: "de", label: "Deutsch", flag: "🇩🇪" },
-  { code: "en", label: "English", flag: "🇬🇧" },
-  { code: "no", label: "Norsk", flag: "🇳🇴" },
+  { code: "de", label: "Deutsch", flag: "DE" },
+  { code: "en", label: "English", flag: "EN" },
+  { code: "no", label: "Norsk", flag: "NO" },
 ];
 
 export const Navbar = () => {
