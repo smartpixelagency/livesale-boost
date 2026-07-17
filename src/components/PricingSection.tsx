@@ -198,7 +198,7 @@ export const PricingSection = () => {
               transition={{ duration: 0.5, delay: index * 0.08 }}
               className={`relative p-8 md:p-10 border-b md:border-b-0 border-ink/15 ${
                 index < 2 ? "md:border-r border-ink/15" : ""
-              } ${plan.popular ? "bg-paper md:-mt-3 md:pt-13 border-t-4 border-t-ember shadow-[0_0_0_1px_hsl(var(--ember)/0.3)]" : ""}`}
+              } ${plan.popular ? "bg-paper md:-mt-3 md:pt-14 border-t-4 border-t-ember ring-1 ring-ember/30" : ""}`}
             >
               {plan.popular && (
                 <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-ember text-paper px-3 py-1 font-display uppercase tracking-widest text-[10px]">
