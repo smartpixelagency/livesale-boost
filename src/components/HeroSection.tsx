@@ -1,8 +1,8 @@
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
-import heroImage from "@/assets/hero-livestream.jpg";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { ContactDialog } from "@/components/ContactDialog";
+import { LiveVisualizer } from "@/components/LiveVisualizer";
 
 export const HeroSection = () => {
   const { t } = useLanguage();
@@ -86,21 +86,9 @@ export const HeroSection = () => {
               initial={{ opacity: 0, scale: 0.98 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.8, delay: 0.35 }}
-              className="md:col-span-8 relative overflow-hidden"
+              className="md:col-span-8 relative"
             >
-              <img
-                src={heroImage}
-                alt={t("hero.imageAlt")}
-                width={1024}
-                height={640}
-                fetchPriority="high"
-                loading="eager"
-                className="w-full h-[280px] md:h-[420px] object-cover grayscale contrast-110"
-              />
-              <div className="absolute top-4 left-4 bg-paper text-ink px-3 py-1.5 flex items-center gap-2 font-display uppercase tracking-widest text-xs">
-                <span className="w-2 h-2 rounded-full bg-ember animate-pulse" />
-                Live · 1.247 {t("hero.viewers")}
-              </div>
+              <LiveVisualizer viewersLabel={t("hero.viewers")} />
             </motion.div>
           </div>
         </div>
