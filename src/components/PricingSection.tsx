@@ -144,34 +144,47 @@ export const PricingSection = () => {
           </motion.div>
         </div>
 
-        {/* Billing toggle */}
-        <div className="flex items-center gap-4 mb-12 border-t border-ink/15 pt-6">
-          <span className="section-marker">Abrechnung</span>
-          <div className="flex items-center gap-3">
-            <button
-              type="button"
-              onClick={() => setIsYearly(false)}
-              className={`font-display uppercase tracking-wider text-sm px-3 py-1 transition-colors ${
-                !isYearly ? "bg-ink text-paper" : "text-ink-soft hover:text-ink"
-              }`}
-              aria-pressed={!isYearly}
+        {/* Billing toggle — segmented pill */}
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-10 border-t border-ink/15 pt-6">
+          <div className="flex items-center gap-4">
+            <span className="section-marker">Abrechnung</span>
+            <div
+              role="tablist"
+              aria-label="Abrechnungszeitraum"
+              className="inline-flex items-center border border-ink p-1 bg-paper"
             >
-              {t("pricing.monthly")}
-            </button>
-            <button
-              type="button"
-              onClick={() => setIsYearly(true)}
-              className={`font-display uppercase tracking-wider text-sm px-3 py-1 transition-colors ${
-                isYearly ? "bg-ink text-paper" : "text-ink-soft hover:text-ink"
-              }`}
-              aria-pressed={isYearly}
-            >
-              {t("pricing.yearly")}
-            </button>
+              <button
+                type="button"
+                role="tab"
+                aria-selected={!isYearly}
+                onClick={() => setIsYearly(false)}
+                className={`font-display uppercase tracking-wider text-xs md:text-sm px-4 py-2 transition-colors ${
+                  !isYearly ? "bg-ink text-paper" : "text-ink hover:bg-ink/5"
+                }`}
+              >
+                {t("pricing.monthly")}
+              </button>
+              <button
+                type="button"
+                role="tab"
+                aria-selected={isYearly}
+                onClick={() => setIsYearly(true)}
+                className={`font-display uppercase tracking-wider text-xs md:text-sm px-4 py-2 inline-flex items-center gap-2 transition-colors ${
+                  isYearly ? "bg-ink text-paper" : "text-ink hover:bg-ink/5"
+                }`}
+              >
+                {t("pricing.yearly")}
+                <span
+                  className={`inline-block text-[10px] px-1.5 py-0.5 border ${
+                    isYearly ? "border-paper/40 text-paper" : "border-ember text-ember"
+                  }`}
+                >
+                  −17%
+                </span>
+              </button>
+            </div>
           </div>
-          <span className="text-xs text-ink-soft hidden md:inline">
-            {t("pricing.savingsNote")}
-          </span>
+          <span className="text-xs text-ink-soft">{t("pricing.savingsNote")}</span>
         </div>
 
         {/* Plans as editorial columns */}
@@ -185,68 +198,51 @@ export const PricingSection = () => {
               transition={{ duration: 0.5, delay: index * 0.08 }}
               className={`relative p-8 md:p-10 border-b md:border-b-0 border-ink/15 ${
                 index < 2 ? "md:border-r border-ink/15" : ""
-              } ${plan.popular ? "bg-ink text-paper" : ""}`}
+              } ${plan.popular ? "bg-paper md:-mt-3 md:pt-13 border-t-4 border-t-ember shadow-[0_0_0_1px_hsl(var(--ember)/0.3)]" : ""}`}
             >
+              {plan.popular && (
+                <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-ember text-paper px-3 py-1 font-display uppercase tracking-widest text-[10px]">
+                  ★ {t("pricing.popular")}
+                </div>
+              )}
               <div className="flex items-baseline justify-between mb-6">
-                <h3 className="font-display text-2xl md:text-3xl uppercase">{plan.name}</h3>
-                {plan.popular && (
-                  <span className="section-marker text-ember">★ {t("pricing.popular")}</span>
-                )}
-                {plan.limitedTime && !plan.popular && (
+                <h3 className="font-display text-2xl md:text-3xl uppercase text-ink">
+                  {plan.name}
+                </h3>
+                {plan.limitedTime && (
                   <span className="section-marker text-ember">◆ {t("pricing.limitedTime")}</span>
                 )}
               </div>
 
-              <p
-                className={`text-sm leading-relaxed mb-8 min-h-[48px] ${
-                  plan.popular ? "text-paper/70" : "text-ink-soft"
-                }`}
-              >
+              <p className="text-sm leading-relaxed mb-8 min-h-[48px] text-ink-soft">
                 {plan.description}
               </p>
 
               {/* Price block */}
-              <div className={`pb-8 mb-8 border-b ${plan.popular ? "border-paper/20" : "border-ink/15"}`}>
-                <span
-                  className={`section-marker block mb-2 ${plan.popular ? "text-paper/60" : ""}`}
-                >
-                  {t("pricing.startingFrom")}
-                </span>
+              <div className="pb-8 mb-8 border-b border-ink/15">
+                <span className="section-marker block mb-2">{t("pricing.startingFrom")}</span>
                 <div className="flex items-baseline gap-3 flex-wrap">
-                  <span className="font-display text-5xl md:text-6xl font-bold text-ember tabular-nums">
-                    €{plan.isEnterprise ? plan.monthlyPrice : isYearly ? plan.yearlyPrice : plan.monthlyPrice}
+                  <span className="font-display text-5xl md:text-6xl font-bold text-ink tabular-nums">
+                    <span className="text-ember">€</span>
+                    {plan.isEnterprise ? plan.monthlyPrice : isYearly ? plan.yearlyPrice : plan.monthlyPrice}
                   </span>
-                  <span
-                    className={`font-display text-sm uppercase ${
-                      plan.popular ? "text-paper/70" : "text-ink-soft"
-                    }`}
-                  >
+                  <span className="font-display text-sm uppercase text-ink-soft">
                     {t("pricing.perMonth")}
                   </span>
                 </div>
                 {!plan.isEnterprise &&
                   (isYearly ? plan.originalYearlyPrice : plan.originalMonthlyPrice) && (
-                    <span
-                      className={`text-sm line-through mt-1 inline-block ${
-                        plan.popular ? "text-paper/70" : "text-ink-soft"
-                      }`}
-                    >
+                    <span className="text-sm line-through mt-1 inline-block text-ink-soft">
                       €{isYearly ? plan.originalYearlyPrice : plan.originalMonthlyPrice}*
                     </span>
                   )}
                 {!plan.isEnterprise && isYearly && plan.yearlyTotal && (
-                  <p
-                    className={`text-xs mt-2 ${plan.popular ? "text-paper/60" : "text-ink-soft"}`}
-                  >
+                  <p className="text-xs mt-2 text-ink-soft">
                     {t("pricing.billedYearly")} €{plan.yearlyTotal}
                   </p>
                 )}
                 {plan.isEnterprise && (
-                  <p
-                    className={`text-xs mt-2 ${plan.popular ? "text-paper/60" : "text-ink-soft"}`}
-                  >
-                    {t("pricing.custom")}
-                  </p>
+                  <p className="text-xs mt-2 text-ink-soft">{t("pricing.custom")}</p>
                 )}
               </div>
 
@@ -255,7 +251,7 @@ export const PricingSection = () => {
                   <button
                     className={`group inline-flex items-center justify-between gap-4 w-full px-6 py-4 font-display font-semibold uppercase tracking-wider text-sm transition-colors duration-300 mb-8 ${
                       plan.popular
-                        ? "bg-ember text-paper hover:bg-paper hover:text-ink"
+                        ? "bg-ember text-paper hover:bg-ink"
                         : "bg-ink text-paper hover:bg-ember"
                     }`}
                   >
@@ -265,11 +261,7 @@ export const PricingSection = () => {
                 }
               />
 
-              <div
-                className={`space-y-6 ${
-                  plan.popular ? "[&_.section-marker]:text-paper/60" : ""
-                }`}
-              >
+              <div className="space-y-6">
                 {renderList("Features", plan.features)}
                 {renderList(t("pricing.scopeTitle"), plan.scope)}
                 {renderList(t("pricing.supportTitle"), plan.support)}
@@ -277,6 +269,7 @@ export const PricingSection = () => {
             </motion.article>
           ))}
         </div>
+
 
         <p className="text-xs text-ink-soft mt-8">{t("pricing.savingsDisclaimer")}</p>
 
