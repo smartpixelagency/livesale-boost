@@ -81,7 +81,10 @@ export const ContactForm = () => {
       company: "Unternehmen (optional)",
       message: "Nachricht",
       submit: "Nachricht senden",
-      success: "Vielen Dank! Wir melden uns bald.",
+      success: "Vielen Dank für Ihre Nachricht!",
+      successBody: "Wir haben Ihre Anfrage erhalten und melden uns innerhalb von 24 Stunden bei Ihnen.",
+      successCta: "Warensicherheit live erleben",
+      successSecondary: "Zur Startseite",
       error: "Fehler beim Senden. Bitte versuchen Sie es erneut.",
       namePlaceholder: "Ihr Name",
       emailPlaceholder: "ihre@email.de",
@@ -100,7 +103,10 @@ export const ContactForm = () => {
       company: "Company (optional)",
       message: "Message",
       submit: "Send Message",
-      success: "Thank you! We'll get back to you soon.",
+      success: "Thank you for your message!",
+      successBody: "We received your request and will get back to you within 24 hours.",
+      successCta: "See stock protection live",
+      successSecondary: "Back to homepage",
       error: "Error sending message. Please try again.",
       namePlaceholder: "Your name",
       emailPlaceholder: "your@email.com",
@@ -119,7 +125,10 @@ export const ContactForm = () => {
       company: "Selskap (valgfritt)",
       message: "Melding",
       submit: "Send melding",
-      success: "Takk! Vi tar kontakt snart.",
+      success: "Takk for meldingen din!",
+      successBody: "Vi har mottatt forespørselen din og tar kontakt innen 24 timer.",
+      successCta: "Opplev varesikkerhet live",
+      successSecondary: "Tilbake til forsiden",
       error: "Feil ved sending. Vennligst prøv igjen.",
       namePlaceholder: "Ditt navn",
       emailPlaceholder: "din@epost.no",
@@ -246,8 +255,19 @@ export const ContactForm = () => {
         animate={{ opacity: 1, scale: 1 }}
         className="bg-card border border-border rounded-2xl p-8 text-center"
       >
-        <CheckCircle2 className="h-16 w-16 text-primary mx-auto mb-4" />
-        <h3 className="text-2xl font-bold mb-2">{l.success}</h3>
+        <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
+          <CheckCircle2 className="h-10 w-10 text-primary" />
+        </div>
+        <h3 className="text-2xl font-bold mb-3">{l.success}</h3>
+        <p className="text-muted-foreground mb-6 max-w-sm mx-auto">{l.successBody}</p>
+        <div className="flex flex-col sm:flex-row gap-3 justify-center">
+          <Button variant="hero" size="lg" asChild>
+            <Link to={`/${language}/features/draft-orders`}>{l.successCta}</Link>
+          </Button>
+          <Button variant="outline" size="lg" asChild>
+            <Link to={`/${language}`}>{l.successSecondary}</Link>
+          </Button>
+        </div>
       </motion.div>
     );
   }
