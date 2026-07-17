@@ -11,8 +11,9 @@ import { Send, Loader2, CheckCircle2 } from "lucide-react";
 import { z } from "zod";
 import { Link } from "react-router-dom";
 
-// Webhook URL - set this to your webhook endpoint
-const WEBHOOK_URL = ""; // Add your webhook URL here
+// Web3Forms endpoint + access key
+const WEBHOOK_URL = "https://api.web3forms.com/submit";
+const WEB3FORMS_ACCESS_KEY = "701914f8-741f-446b-870d-44229fd290a6";
 const RECAPTCHA_SITE_KEY = ""; // Add your reCAPTCHA site key here (v2 or v3)
 
 const contactSchema = z.object({
