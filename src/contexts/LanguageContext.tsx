@@ -797,7 +797,7 @@ const translations = {
   },
   no: {
     // Promo Banner
-    "promo.starterOffer": "🎉 Starter-plan for kun €79/måned – Tilbudet gjelder til 31.12.2025!",
+    "promo.starterOffer": "",
 
     // Navbar
     "nav.features": "Funksjoner",
